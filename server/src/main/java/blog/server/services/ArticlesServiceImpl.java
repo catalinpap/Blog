@@ -24,7 +24,7 @@ public class ArticlesServiceImpl implements ArticlesService {
 	public Article get(Long id) throws Exception {
 		Article article = articlesRepository.get(id);
 
-		if (article == null) throw new ArticleNotFoundException();
+		if (article == null) throw new ArticleNotFoundException(id.toString());
 
 		return article;
 	}
@@ -42,7 +42,7 @@ public class ArticlesServiceImpl implements ArticlesService {
 	@Override
 	public boolean delete(Long id) throws Exception {
 		Article article = articlesRepository.get(id);
-		if (article == null) throw new ArticleNotFoundException();
+		if (article == null) throw new ArticleNotFoundException(id.toString());
 
 		boolean isDeleted = articlesRepository.delete(id);
 		

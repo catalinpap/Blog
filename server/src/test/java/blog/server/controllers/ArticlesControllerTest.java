@@ -47,7 +47,6 @@ public class ArticlesControllerTest {
 		Long testId = 1L;
 
 		Article article = generateArticle(testId);
-	
 
 		when(articlesService.get(testId)).thenReturn(article);
 
@@ -66,7 +65,7 @@ public class ArticlesControllerTest {
 		Long testId = 1L;
 		
 		// Mock the ArticlesService.get(id) method
-		when(articlesService.get(testId)).thenThrow(new ArticleNotFoundException());
+		when(articlesService.get(testId)).thenThrow(new ArticleNotFoundException(testId.toString()));
 
 		// Perform the GET request
 		mockMvc.perform(get("/api/articles/1"))
