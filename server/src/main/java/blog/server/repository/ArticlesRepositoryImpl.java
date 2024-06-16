@@ -1,11 +1,12 @@
-package blog.server.repositories;
+package blog.server.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import blog.server.domains.Article;
+import blog.server.domain.Article;
 
 @Repository
 public class ArticlesRepositoryImpl implements ArticlesRepository {
@@ -13,11 +14,10 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
 	private List<Article> repository = new ArrayList<>();
 
 	@Override
-	public Article get(Long id) {
+	public Optional<Article> get(Long id) {
 		return repository.stream()
 		.filter(article -> article.getId() == id)
-		.findAny()
-		.orElse(null);
+		.findAny();
 	}
 
 	@Override

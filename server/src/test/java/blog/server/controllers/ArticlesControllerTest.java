@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -24,12 +25,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import blog.server.Exceptions.ArticleNotFoundException;
 import blog.server.controller.ArticlesController;
-import blog.server.domains.Article;
-import blog.server.services.ArticlesService;
+import blog.server.domain.Article;
+import blog.server.service.ArticlesService;
+import blog.server.utils.APIResponseBody;
+import blog.server.utils.JSON;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ArticlesController.class)
@@ -40,21 +41,18 @@ public class ArticlesControllerTest {
 	@Autowired
 	MockMvc mockMvc;
 
-    ObjectMapper objectMapper = new ObjectMapper();
-
 	@Test
 	public void test_getById() throws Exception {
 		Long testId = 1L;
 
 		Article article = generateArticle(testId);
+		String expectedResponse = new APIResponseBody().data(article).json();
 
 		when(articlesService.get(testId)).thenReturn(article);
 
 		mockMvc.perform(get("/api/articles/1"))
 		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.id").value(testId))
-		.andExpect(jsonPath("$.name").value(article.getName()))
-		.andExpect(jsonPath("$.author").value(article.getAuthor()));
+		.andExpect(content().json(expectedResponse));
 
 	
 		verify(articlesService).get(testId);
@@ -78,6 +76,7 @@ public class ArticlesControllerTest {
 	public void test_getAll_returnsListOfArticles() throws Exception {
 	
 		List<Article> articlesList = generateArticleList(2);
+		String expectedResponse = new APIResponseBody().data(articlesList).json();
 
 
 		// Mock the ArticlesService.getAll() method
@@ -86,7 +85,7 @@ public class ArticlesControllerTest {
 		// Perform the GET request
 		mockMvc.perform(get("/api/articles"))
 		.andExpect(status().isOk())
-		.andExpect(content().json(articlesList.toString()));
+		.andExpect(content().json(expectedResponse));
 
 		verify(articlesService).getAll();
 	}
@@ -94,6 +93,7 @@ public class ArticlesControllerTest {
 	@Test
 	public void test_getAll_emptyResponseWhenNoArticles() throws Exception {
 		List<Article> articlesList = generateArticleList(0);
+		APIResponseBody responseBody = new APIResponseBody().data(articlesList);
 
 		// Mock the ArticlesService.getAll() method
 		when(articlesService.getAll()).thenReturn(articlesList);
@@ -101,7 +101,7 @@ public class ArticlesControllerTest {
 		// Perform the GET request
 		mockMvc.perform(get("/api/articles"))
 		.andExpect(status().isOk())
-		.andExpect(content().json(articlesList.toString()));
+		.andExpect(content().json(JSON.write(responseBody)));
 
 		verify(articlesService).getAll();
 	}
@@ -121,8 +121,10 @@ public class ArticlesControllerTest {
 		.andReturn();
 
 		// Deserialize response
-		String res = result.getResponse().getContentAsString();
-		Article addedArticle = objectMapper.readValue(res, Article.class);
+		String response = result.getResponse().getContentAsString();
+		APIResponseBody responseBody = JSON.parse(response, APIResponseBody.class);
+		Object addedArticleObject = responseBody.getData();
+		Article  addedArticle = JSON.parse(JSON.write(addedArticleObject), Article.class);
 
 		//Assertions
 		assertNotNull(addedArticle.getId());
@@ -136,9 +138,16 @@ public class ArticlesControllerTest {
 		final long id = 404L;
 		final Article articleToDelete = generateArticle(id);
 
-		// when(articlesService.delete(id)).thenReturn(articleToDelete);
+		String expectedResponse = new APIResponseBody().data(articleToDelete).message("Article deleted").json();
 
-		//MvcResult result = mockMvc.perform(delete("/api/articles/{id}"))
+		when(articlesService.delete(id)).thenReturn(articleToDelete);
+
+		MvcResult result = mockMvc.perform(delete("/api/articles/{id}", id))
+			.andExpect(status().isOk())
+			.andExpect(content().json(expectedResponse))
+			.andReturn();
+
+		verify(articlesService).delete(id);
 	}
 
 	private Article generateArticle(Long id) {

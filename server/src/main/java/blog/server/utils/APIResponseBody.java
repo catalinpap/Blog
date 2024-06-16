@@ -1,7 +1,6 @@
 package blog.server.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class APIResponseBody {
     private Object data;
@@ -26,9 +25,8 @@ public class APIResponseBody {
     }
 
     public String json() {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.writeValueAsString(this);
+            return JSON.write(this);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return this.toString();

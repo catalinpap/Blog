@@ -1,8 +1,8 @@
-package blog.server.domains;
-import com.fasterxml.jackson.databind.ObjectMapper;
+package blog.server.domain;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
+import blog.server.utils.JSON;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -16,6 +16,8 @@ public class Article {
 	
 	private String author;
 
+	private String content;
+
 	public Long getId() {
 		return this.id;
 	}
@@ -26,6 +28,10 @@ public class Article {
 
 	public String getAuthor() {
 		return this.author;
+	}
+
+	public String getContent() {
+		return this.content;
 	}
 
 	public Article setId(final Long id) {
@@ -43,14 +49,18 @@ public class Article {
 		return this;
 	}
 
+	public Article setContent(final String content) {
+		this.content = content;
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			return objectMapper.writeValueAsString(this);
+			return JSON.write(this);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return String.format("{id:%d, name:'%s', author:'%s'}", this.id, this.name, this.author);
+			return String.format("{id:%d, name:'%s', author:'%s', content:'%s'}", this.id, this.name, this.author, this.content);
 		}
 		
 	}

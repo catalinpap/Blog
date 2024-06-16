@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +15,10 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import blog.server.Exceptions.ArticleNotFoundException;
-import blog.server.domains.Article;
-import blog.server.repositories.ArticlesRepository;
+import blog.server.domain.Article;
+import blog.server.repository.ArticlesRepository;
+import blog.server.service.ArticlesService;
+import blog.server.service.ArticlesServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 public class ArticlesServiceTest {
@@ -39,7 +43,7 @@ public class ArticlesServiceTest {
 			.setName(testName);
 		
 
-		when(articlesRepository.get(testId)).thenReturn(mockArticle);
+		when(articlesRepository.get(testId)).thenReturn(Optional.of(mockArticle));
 
 		Article foundArticle = articlesService.get(testId);
 

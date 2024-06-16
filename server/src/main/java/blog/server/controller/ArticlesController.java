@@ -1,12 +1,9 @@
 package blog.server.controller;
 
 import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import blog.server.domains.Article;
-import blog.server.services.ArticlesService;
+import blog.server.domain.Article;
+import blog.server.service.ArticlesService;
 import blog.server.utils.APIResponseBody;
 
 @RestController
@@ -68,21 +61,13 @@ public class ArticlesController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable long id) throws Exception {
-		boolean deleteResponse = articlesService.delete(id);
-		String responseBody = new APIResponseBody().data(deleteResponse).json();
+		Article deleteResponse = articlesService.delete(id);
+		String responseBody = new APIResponseBody()
+			.data(deleteResponse)
+			.message("Article deleted")
+			.json();
 		
 		return ResponseEntity.ok(responseBody);
 		
-	}
-
-	private String toJSON(Map object) {
-		ObjectMapper objectMapper = new ObjectMapper();
-
-		try {
-			return objectMapper.writeValueAsString(object);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			return object.get("message").toString();
-		}
 	}
 }

@@ -1,4 +1,4 @@
-package blog.server.services;
+package blog.server.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import blog.server.Exceptions.ArticleNotFoundException;
-import blog.server.domains.Article;
-import blog.server.repositories.ArticlesRepository;
+import blog.server.domain.Article;
+import blog.server.repository.ArticlesRepository;
 
 @Service
 public class ArticlesServiceImpl implements ArticlesService {
@@ -22,9 +22,9 @@ public class ArticlesServiceImpl implements ArticlesService {
 
 	@Override
 	public Article get(Long id) throws Exception {
-		Article article = articlesRepository.get(id);
-
-		if (article == null) throw new ArticleNotFoundException(id.toString());
+		Article article = articlesRepository
+			.get(id)
+			.orElseThrow(() -> new ArticleNotFoundException(id.toString()));
 
 		return article;
 	}
@@ -40,13 +40,16 @@ public class ArticlesServiceImpl implements ArticlesService {
 	}
 
 	@Override
-	public boolean delete(Long id) throws Exception {
-		Article article = articlesRepository.get(id);
-		if (article == null) throw new ArticleNotFoundException(id.toString());
+	public Article delete(Long id) throws Exception {
+		Article article = articlesRepository
+			.get(id)
+			.orElseThrow(() -> new ArticleNotFoundException(id.toString()));
 
 		boolean isDeleted = articlesRepository.delete(id);
 		
-		return isDeleted;
+		if(!isDeleted) throw new Exception(String.format("An error occured deleting article (ID = %d)", id));
+		
+		return article;
 	}
 	
 }
