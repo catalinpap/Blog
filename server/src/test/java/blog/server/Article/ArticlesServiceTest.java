@@ -14,12 +14,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import blog.server.Article.Article;
 import blog.server.Article.exceptions.ArticleNotFoundException;
 import blog.server.Article.repository.ArticlesRepository;
-import blog.server.Article.repository.ArticlesRepositoryJpa;
-import blog.server.Article.service.ArticlesService;
-import blog.server.Article.service.ArticlesServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 public class ArticlesServiceTest {
@@ -28,7 +24,7 @@ public class ArticlesServiceTest {
 	String testAuthor = "Demo Author";
 
 	@Mock
-	ArticlesRepositoryJpa articlesRepository;
+	ArticlesRepository articlesRepository;
 
 	@BeforeEach
 	public void init(){
@@ -37,7 +33,7 @@ public class ArticlesServiceTest {
 
 	@Test
 	public void getArticleById() throws Exception {
-		ArticlesService articlesService = new ArticlesServiceImpl(articlesRepository);
+		ArticlesService articlesService = new ArticlesService(articlesRepository);
 		Article mockArticle = new Article()
 			.setId(testId)
 			.setAuthor(testAuthor)
@@ -55,7 +51,7 @@ public class ArticlesServiceTest {
 
 	@Test
 	public void getArticleByIdNotFound() {
-		ArticlesService articlesService = new ArticlesServiceImpl(articlesRepository);
+		ArticlesService articlesService = new ArticlesService(articlesRepository);
 
 		when(articlesRepository.findById(testId)).thenReturn(null);
 
