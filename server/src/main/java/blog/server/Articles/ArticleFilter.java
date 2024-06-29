@@ -24,24 +24,4 @@ public class ArticleFilter {
         if (keywords != null) this.keywords = new ArrayList<>(keywords);
         return this;
     }
-
-    // private class ArticleFilterBuilder {
-    //     private ArticleFilter articleFilter;
-
-    //     public ArticleFilterBuilder(ArticleFilter articleFilter) {
-    //         this.articleFilter = articleFilter;
-    //     }
-
-    //     public void category(String category) {
-    //         articleFilter.category = category;
-    //     }
-    
-    //     public void keywords(String keywords) {
-    //         articleFilter.keywords = keywords;
-    //     }
-
-    //     public ArticleFilterBuilder build() {
-    //         return this;
-    //     }
-    // }
 }

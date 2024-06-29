@@ -1,8 +1,8 @@
 package blog.server.Article;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -58,6 +58,10 @@ public class Article {
 	public List<String> getKeywords() {
 		return this.keywords;
 	}
+
+	// public String getCreationDate() {
+	// 	return this.creationDate.toLocalDate().toString();
+	// }
 
 	public Article setId(final Long id) {
 		this.id = id;

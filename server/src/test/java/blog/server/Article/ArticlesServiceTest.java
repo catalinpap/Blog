@@ -34,7 +34,7 @@ public class ArticlesServiceTest {
 	public void getArticleById() throws Exception {
 		ArticlesService articlesService = new ArticlesService(articlesRepository);
 		Article mockArticle = new Article()
-			.setId(testId)
+			// .setId(testId)
 			.setAuthor(testAuthor)
 			.setName(testName);
 		

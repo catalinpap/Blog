@@ -152,7 +152,7 @@ public class ArticlesControllerTest {
 	private Article generateArticle(Long id) {
 		List<String> keywords = Arrays.asList("react", "java", "spring boot", "rest");
 		return new Article()
-		.setId(id)
+		// .setId(id)
 		.setName("Article name " + id)
 		.setAuthor("Author " + id)
 		.setContent("Content: abcdefshdy rfubduhfd fuyfudfb ergebuw firugheiurhw  riguwrwrg wriwrghi")
