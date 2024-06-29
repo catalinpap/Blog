@@ -1,4 +1,9 @@
-package blog.server.domain;
+package blog.server.Article;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -18,6 +23,13 @@ public class Article {
 
 	private String content;
 
+	private String category;
+
+	private List<String> keywords;
+
+	@CreationTimestamp
+	private LocalDateTime creationDate;
+
 	public Long getId() {
 		return this.id;
 	}
@@ -32,6 +44,14 @@ public class Article {
 
 	public String getContent() {
 		return this.content;
+	}
+
+	public String getCategory() {
+		return this.category;
+	}
+
+	public List<String> getKeywords() {
+		return this.keywords;
 	}
 
 	public Article setId(final Long id) {
@@ -51,6 +71,16 @@ public class Article {
 
 	public Article setContent(final String content) {
 		this.content = content;
+		return this;
+	}
+
+	public Article setCategory(final String category) {
+		this.category = category;
+		return this;
+	}
+
+	public Article setKeywords(final List<String> keywords) {
+		this.keywords = keywords;
 		return this;
 	}
 

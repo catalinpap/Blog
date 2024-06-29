@@ -1,4 +1,4 @@
-package blog.server.repository;
+package blog.server.Article.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import blog.server.domain.Article;
+import blog.server.Article.Article;
 
 @Repository
-public class ArticlesRepositoryImpl implements ArticlesRepository {
+public class ArticlesRepositoryListImpl implements ArticlesRepository {
 
 	private List<Article> repository = new ArrayList<>();
 
@@ -37,6 +37,16 @@ public class ArticlesRepositoryImpl implements ArticlesRepository {
 	@Override
 	public boolean delete(Long id) {
 		return repository.removeIf(article -> article.getId() == id);
+	}
+
+	@Override
+	public Article update(Article updatedArticle) {
+		Article foundArticle = repository.stream()
+		.filter(article -> article.getId() == updatedArticle.getId())
+		.findAny()
+		.orElseThrow();
+
+		return  null;
 	}
 	
 }

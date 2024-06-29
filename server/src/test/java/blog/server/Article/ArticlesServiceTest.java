@@ -1,4 +1,4 @@
-package blog.server.services;
+package blog.server.Article;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
@@ -14,11 +14,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import blog.server.Exceptions.ArticleNotFoundException;
-import blog.server.domain.Article;
-import blog.server.repository.ArticlesRepository;
-import blog.server.service.ArticlesService;
-import blog.server.service.ArticlesServiceImpl;
+import blog.server.Article.Article;
+import blog.server.Article.exceptions.ArticleNotFoundException;
+import blog.server.Article.repository.ArticlesRepository;
+import blog.server.Article.repository.ArticlesRepositoryJpa;
+import blog.server.Article.service.ArticlesService;
+import blog.server.Article.service.ArticlesServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 public class ArticlesServiceTest {
@@ -27,7 +28,7 @@ public class ArticlesServiceTest {
 	String testAuthor = "Demo Author";
 
 	@Mock
-	ArticlesRepository articlesRepository;
+	ArticlesRepositoryJpa articlesRepository;
 
 	@BeforeEach
 	public void init(){
@@ -43,25 +44,25 @@ public class ArticlesServiceTest {
 			.setName(testName);
 		
 
-		when(articlesRepository.get(testId)).thenReturn(Optional.of(mockArticle));
+		when(articlesRepository.findById(testId)).thenReturn(Optional.of(mockArticle));
 
 		Article foundArticle = articlesService.get(testId);
 
 		Assertions.assertThat(foundArticle).isEqualTo(mockArticle);
 
-		verify(articlesRepository).get(testId);
+		verify(articlesRepository).findById(testId);
 	}
 
 	@Test
 	public void getArticleByIdNotFound() {
 		ArticlesService articlesService = new ArticlesServiceImpl(articlesRepository);
 
-		when(articlesRepository.get(testId)).thenReturn(null);
+		when(articlesRepository.findById(testId)).thenReturn(null);
 
 		assertThrows(ArticleNotFoundException.class, () -> {
 			articlesService.get(testId);
 		});
 
-		verify(articlesRepository).get(testId);
+		verify(articlesRepository).findById(testId);
 	}
 }

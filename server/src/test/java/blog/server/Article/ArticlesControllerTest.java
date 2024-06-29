@@ -1,4 +1,4 @@
-package blog.server.controllers;
+package blog.server.Article;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -9,10 +9,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -25,10 +25,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import blog.server.Exceptions.ArticleNotFoundException;
-import blog.server.controller.ArticlesController;
-import blog.server.domain.Article;
-import blog.server.service.ArticlesService;
+import blog.server.Article.Article;
+import blog.server.Article.ArticlesController;
+import blog.server.Article.exceptions.ArticleNotFoundException;
+import blog.server.Article.service.ArticlesService;
 import blog.server.utils.APIResponseBody;
 import blog.server.utils.JSON;
 
@@ -151,10 +151,14 @@ public class ArticlesControllerTest {
 	}
 
 	private Article generateArticle(Long id) {
+		List<String> keywords = Arrays.asList("react", "java", "spring boot", "rest");
 		return new Article()
 		.setId(id)
 		.setName("Article name " + id)
-		.setAuthor("Author " + id);
+		.setAuthor("Author " + id)
+		.setContent("Content: abcdefshdy rfubduhfd fuyfudfb ergebuw firugheiurhw  riguwrwrg wriwrghi")
+		.setCategory("technology")
+		.setKeywords(keywords);
 	}
 
 	private List<Article> generateArticleList(int size) {
