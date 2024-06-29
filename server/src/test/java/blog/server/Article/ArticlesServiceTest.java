@@ -15,7 +15,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import blog.server.Article.exceptions.ArticleNotFoundException;
-import blog.server.Article.repository.ArticlesRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class ArticlesServiceTest {

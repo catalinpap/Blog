@@ -1,10 +1,11 @@
 package blog.server.Article;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -26,8 +28,15 @@ public class ArticlesController {
 	private ArticlesService articlesService;
 	
 	@GetMapping("")
-	public ResponseEntity<String> getAll() {
-		List<Article> articles = articlesService.getAll();
+	public ResponseEntity<String> getAll(
+		@RequestParam(value="category", required = false) String category,
+		@RequestParam(value="keywords", required = false) List<String> keywords) {
+
+		ArticleFilter filters = new ArticleFilter()
+			.category(category)
+			.keywords(keywords);
+
+		List<Article> articles = articlesService.getAll(filters);
 		String responseBody = new APIResponseBody().data(articles).json();
 		return ResponseEntity
 			.ok()
