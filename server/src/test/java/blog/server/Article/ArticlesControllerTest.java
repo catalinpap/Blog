@@ -25,9 +25,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import blog.server.Article.Article;
-import blog.server.Article.ArticlesController;
-import blog.server.Article.exceptions.ArticleNotFoundException;
+import blog.server.Articles.Article;
+import blog.server.Articles.ArticlesController;
+import blog.server.Articles.ArticlesService;
+import blog.server.Articles.exceptions.ArticleNotFoundException;
 import blog.server.utils.APIResponseBody;
 import blog.server.utils.JSON;
 

@@ -1,4 +1,4 @@
-package blog.server.Article;
+package blog.server.Articles;
 
 import java.util.List;
 

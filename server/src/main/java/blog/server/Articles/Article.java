@@ -1,6 +1,5 @@
-package blog.server.Article;
+package blog.server.Articles;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,9 +58,9 @@ public class Article {
 		return this.keywords;
 	}
 
-	// public String getCreationDate() {
-	// 	return this.creationDate.toLocalDate().toString();
-	// }
+	public String getCreationDate() {
+		return this.creationDate.toLocalDate().toString();
+	}
 
 	public Article setId(final Long id) {
 		this.id = id;

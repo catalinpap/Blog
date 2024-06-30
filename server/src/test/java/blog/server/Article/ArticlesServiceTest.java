@@ -14,7 +14,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import blog.server.Article.exceptions.ArticleNotFoundException;
+import blog.server.Articles.Article;
+import blog.server.Articles.ArticlesRepository;
+import blog.server.Articles.ArticlesService;
+import blog.server.Articles.exceptions.ArticleNotFoundException;
 
 @ExtendWith(MockitoExtension.class)
 public class ArticlesServiceTest {

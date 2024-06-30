@@ -1,9 +1,12 @@
-package blog.server.Article;
+package blog.server.Articles;
 
 import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import blog.server.utils.APIResponseBody;
+import blog.server.utils.Const;
 
 @RestController
-@RequestMapping("/api/articles")
+@RequestMapping(Const.ARTICLES_BASE_URL)
 public class ArticlesController {
 
 	@Autowired
@@ -27,17 +31,22 @@ public class ArticlesController {
 	
 	@GetMapping("")
 	public ResponseEntity<String> getAll(
+		@RequestParam(value="page", required = false, defaultValue = Const.DEFAULT_PAGE_NUMBER) Integer page,
+		@RequestParam(value="size", required = false, defaultValue = Const.DEFAULT_PAGE_SIZE) Integer size,
 		@RequestParam(value="category", required = false) String category,
 		@RequestParam(value="keywords", required = false) List<String> keywords) {
 
 		ArticleFilter filters = new ArticleFilter()
 			.category(category)
 			.keywords(keywords);
+		
+		PageRequest pageRequest = PageRequest.of(page, size);
 
-		List<Article> articles = articlesService.getAll(filters);
+		Page<Article> articles = articlesService.getAll(filters, pageRequest);
 		String responseBody = new APIResponseBody().data(articles).json();
 		return ResponseEntity
 			.ok()
+			.contentType(MediaType.APPLICATION_JSON)
 			.body(responseBody);
 	}
 
@@ -47,6 +56,7 @@ public class ArticlesController {
 		String responseBody = new APIResponseBody().data(article).json();
 		return ResponseEntity
 			.ok()
+			.contentType(MediaType.APPLICATION_JSON)
 			.body(responseBody);
 	}
 
@@ -63,6 +73,7 @@ public class ArticlesController {
 
 		return ResponseEntity
 			.created(articleURI)
+			.contentType(MediaType.APPLICATION_JSON)
 			.body(responseBody);
 	}
 
@@ -74,7 +85,10 @@ public class ArticlesController {
 			.message("Article deleted")
 			.json();
 		
-		return ResponseEntity.ok(responseBody);
+		return ResponseEntity
+			.ok()
+			.contentType(MediaType.APPLICATION_JSON)
+			.body(responseBody);
 		
 	}
 
@@ -86,6 +100,9 @@ public class ArticlesController {
 			.message("Article updated")
 			.json();
 
-		return ResponseEntity.ok(responseBody);
+		return ResponseEntity
+			.ok()
+			.contentType(MediaType.APPLICATION_JSON)
+			.body(responseBody);
 	}
 }

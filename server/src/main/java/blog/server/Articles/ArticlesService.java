@@ -1,13 +1,15 @@
-package blog.server.Article;
+package blog.server.Articles;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import blog.server.Article.exceptions.ArticleNotFoundException;
+import blog.server.Articles.exceptions.ArticleNotFoundException;
 
 @Service
 public class ArticlesService {
@@ -32,9 +34,9 @@ public class ArticlesService {
 		return articlesRepository.findAll();
 	}
 
-	public List<Article> getAll(ArticleFilter filter) {
+	public Page<Article> getAll(ArticleFilter filter, PageRequest pageRequest) {
 		Specification<Article> specifications = ArticlesSpecs.filterBy(filter);
-		return articlesRepository.findAll(specifications);
+		return articlesRepository.findAll(specifications, pageRequest);
 	}
 
 	// public Page<Article> getAll(int page, int size) {

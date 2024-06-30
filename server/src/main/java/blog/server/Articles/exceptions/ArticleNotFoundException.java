@@ -1,4 +1,4 @@
-package blog.server.Article.exceptions;
+package blog.server.Articles.exceptions;
 
 public class ArticleNotFoundException extends Exception {
 
