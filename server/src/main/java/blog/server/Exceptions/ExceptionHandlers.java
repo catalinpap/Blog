@@ -1,6 +1,7 @@
 package blog.server.Exceptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,6 +9,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import blog.server.Articles.exceptions.ArticleNotFoundException;
+import blog.server.Authors.exceptions.AuthorNotFoundException;
 import blog.server.utils.APIResponseBody;
 
 @ControllerAdvice
@@ -16,7 +18,20 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 	public ResponseEntity<String> handleArticleNotFound (ArticleNotFoundException exception, WebRequest request ) {
 			APIResponseBody responseBody = new APIResponseBody()
 				.message(String.format("Article with id=%s does not exist!", exception.getMessage()));
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody.json());
+			return ResponseEntity
+				.status(HttpStatus.NOT_FOUND)
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(responseBody.json());
+	}
+
+	@ExceptionHandler(AuthorNotFoundException.class)
+	public ResponseEntity<String> handleAuthorNotFound (AuthorNotFoundException exception, WebRequest request ) {
+			APIResponseBody responseBody = new APIResponseBody()
+				.message(String.format("Author with id=%s does not exist!", exception.getMessage()));
+			return ResponseEntity
+				.status(HttpStatus.NOT_FOUND)
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(responseBody.json());
 	}
 
 	@ExceptionHandler(Exception.class)
@@ -25,6 +40,9 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 			.data(exception.getStackTrace())
 			.message(exception.getMessage());
 
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody.json());
+		return ResponseEntity
+			.status(HttpStatus.INTERNAL_SERVER_ERROR)
+			.contentType(MediaType.APPLICATION_JSON)
+			.body(responseBody.json());
 	}
 }

@@ -155,7 +155,7 @@ public class ArticlesControllerTest {
 		return new Article()
 		// .setId(id)
 		.setName("Article name " + id)
-		.setAuthor("Author " + id)
+		.setAuthorId(1L)
 		.setContent("Content: abcdefshdy rfubduhfd fuyfudfb ergebuw firugheiurhw  riguwrwrg wriwrghi")
 		.setCategory("technology")
 		.setKeywords(keywords);

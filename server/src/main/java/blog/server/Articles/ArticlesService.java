@@ -39,11 +39,6 @@ public class ArticlesService {
 		return articlesRepository.findAll(specifications, pageRequest);
 	}
 
-	// public Page<Article> getAll(int page, int size) {
-	// 	Pageable pageable = PageRequest.of(page, size);
-	// 	return articlesRepository.findAll(pageable);
-	// }
-
 	public Article add(Article article) throws Exception {
 		return articlesRepository.save(article);
 	}

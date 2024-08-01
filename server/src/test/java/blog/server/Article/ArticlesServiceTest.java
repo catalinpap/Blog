@@ -23,7 +23,7 @@ import blog.server.Articles.exceptions.ArticleNotFoundException;
 public class ArticlesServiceTest {
 	Long testId = 1L;
 	String testName = "Demo Article Name";
-	String testAuthor = "Demo Author";
+	Long testAuthor = 1L;
 
 	@Mock
 	ArticlesRepository articlesRepository;
@@ -38,7 +38,7 @@ public class ArticlesServiceTest {
 		ArticlesService articlesService = new ArticlesService(articlesRepository);
 		Article mockArticle = new Article()
 			// .setId(testId)
-			.setAuthor(testAuthor)
+			.setAuthorId(testAuthor)
 			.setName(testName);
 		
 

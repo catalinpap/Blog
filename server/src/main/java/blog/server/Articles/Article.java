@@ -13,8 +13,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "article")
 public class Article {
 	@Id
 	@JsonSerialize(using = ToStringSerializer.class)
@@ -23,7 +25,7 @@ public class Article {
 
 	private String name;
 	
-	private String author;
+	private Long authorId;
 
 	private String content;
 
@@ -42,8 +44,8 @@ public class Article {
 		return this.name;
 	}
 
-	public String getAuthor() {
-		return this.author;
+	public Long getAuthorId() {
+		return this.authorId;
 	}
 
 	public String getContent() {
@@ -72,8 +74,8 @@ public class Article {
 		return this;
 	}
 
-	public Article setAuthor(final String author) {
-		this.author = author;
+	public Article setAuthorId(final Long authorId) {
+		this.authorId = authorId;
 		return this;
 	}
 
@@ -98,7 +100,7 @@ public class Article {
 			return JSON.write(this);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return String.format("{id:%d, name:'%s', author:'%s', content:'%s'}", this.id, this.name, this.author, this.content);
+			return String.format("{id:%d, name:'%s', author:'%s', content:'%s'}", this.id, this.name, this.authorId, this.content);
 		}
 		
 	}
