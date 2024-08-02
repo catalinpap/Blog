@@ -7,4 +7,13 @@
     .hero-bg {
         @apply absolute inset-0 w-full h-full -z-10 object-cover;
     }
+    .arrow {
+        @apply bg-[#212529] opacity-60 w-14 h-14 block hover:opacity-80 text-white p-4 cursor-pointer;
+    }
+    .bullet {
+        @apply block w-2 h-2 bg-white opacity-30 rounded-full cursor-pointer hover:opacity-100;
+    }
+    .bullet.selected {
+        @apply opacity-100;
+    }
 }
