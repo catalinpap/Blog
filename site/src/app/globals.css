@@ -17,7 +17,7 @@
 }
 
 body {
-  
+  @apply text-[#212529];
 }
 
 @layer base {
@@ -30,8 +30,12 @@ body {
   }
 
   .page-content {
-    @apply relative mt-14 mr-16;
+    @apply relative mt-14 mr-16 mb-14 flex gap-32;
   }
+
+  .hero-bg {
+    @apply absolute inset-0 w-full h-full -z-10 object-cover;
+}
 }
 
 @layer utilities {

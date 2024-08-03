@@ -1,10 +1,10 @@
-import Hero from "./Hero/Hero";
+import HeroCarousel from "./Hero/HeroCarousel";
 import Navbar from "./Navbar/Navbar";
 import CardGrid from "./CardGrid/CardGrid";
 import SidePanel from "./SidePanel/SidePanel";
 
 export {
-    Hero,
+    HeroCarousel,
     Navbar,
     CardGrid,
     SidePanel

@@ -4,9 +4,6 @@
     .hero-title {
         @apply text-white text-[2rem] font-bold tracking-wider leading-relaxed [text-shadow:_0_2px_0_rgb(0_0_0_/_80%)];
     }
-    .hero-bg {
-        @apply absolute inset-0 w-full h-full -z-10 object-cover;
-    }
     .arrow {
         @apply bg-[#212529] opacity-60 w-14 h-14 block hover:opacity-80 text-white p-4 cursor-pointer;
     }

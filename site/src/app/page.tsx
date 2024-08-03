@@ -1,12 +1,12 @@
-import { CardGrid, Hero, SidePanel } from "./components";
+import { CardGrid, HeroCarousel, SidePanel } from "./components";
 import { CategoryTag } from "./components/common";
 
 
 export default function Home() {
   return (
     <main>
-      <Hero />
-      <article className="page-content flex gap-32">
+      <HeroCarousel />
+      <article className="page-content">
         <CardGrid />
 
         <SidePanel>

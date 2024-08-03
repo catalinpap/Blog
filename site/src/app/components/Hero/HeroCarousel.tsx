@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { IoMdArrowForward, IoMdArrowBack  } from "react-icons/io";
-import "./Hero.css";
+import "./HeroCarousel.css";
 import { CategoryTag } from "../common";
 
-const Hero = () => {
+const HeroCarousel = () => {
     return (
         <section className="relative flex items-end w-full h-[75dvh]">
             <Image src={"https://images.unsplash.com/photo-1507149833265-60c372daea22?q=80&w=3552&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} 
@@ -37,4 +37,4 @@ const Hero = () => {
     )
 };
 
-export default Hero;
+export default HeroCarousel;
