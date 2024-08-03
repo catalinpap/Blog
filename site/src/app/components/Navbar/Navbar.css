@@ -5,9 +5,9 @@
         @apply h-full mr-2;
     }
     .navbar-link {
-        @apply text-base h-full cursor-pointer py-4 hover:bg-gray-200/20;
+        @apply text-base cursor-pointer py-4 hover:bg-gray-200/20;
     }
     .navbar-button {
-        @apply text-sm text-white h-full px-4 py-2 bg-[#212529] cursor-pointer rounded-md hover:bg-[#3E454D];
+        @apply text-sm text-white min-w-fit h-full px-4 py-2 bg-[#212529] cursor-pointer rounded-md hover:bg-[#3E454D];
     }
 }

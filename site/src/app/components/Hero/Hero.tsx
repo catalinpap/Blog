@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { IoMdArrowForward, IoMdArrowBack  } from "react-icons/io";
 import "./Hero.css";
+import { CategoryTag } from "../common";
 
 const Hero = () => {
     return (
@@ -13,7 +14,7 @@ const Hero = () => {
                 />
             <div className="main-container relative pb-40">
                 {/* Category tag */}
-                <span className="category-tag">Interior Design</span>
+                <CategoryTag>Interior Design</CategoryTag>
                 {/* Title */}
                 <h1 className="hero-title">Design is a plan for arranging elements in such a way as best to accomplish a particular purpose.</h1>
                 {/* Arrows */}

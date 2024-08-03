@@ -22,7 +22,7 @@ body {
 
 @layer base {
   .main-container {
-    @apply ml-[20%] mr-auto w-1/3;
+    @apply ml-[20%] mr-auto w-[40%];
   }
 
   .category-tag {
