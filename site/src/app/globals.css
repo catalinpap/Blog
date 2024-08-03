@@ -22,7 +22,7 @@ body {
 
 @layer base {
   .main-container {
-    @apply ml-[20%] mr-auto w-[40%];
+    @apply ml-[20%] w-[600px] flex-shrink-0;
   }
 
   .category-tag {
@@ -30,7 +30,7 @@ body {
   }
 
   .page-content {
-    @apply mt-14;
+    @apply relative mt-14 mr-16;
   }
 }
 
