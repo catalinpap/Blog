@@ -1,0 +1,25 @@
+@tailwind components;
+
+@layer components {
+    .card-wrapper {
+        @apply relative rounded-xl overflow-clip shadow-md cursor-pointer hover:shadow-xl;
+    }
+    .card-thumbnail {
+        @apply w-full h-1/2 object-cover;
+    }
+    .card-title {
+        @apply text-base font-medium mb-4 text-[#212529] hover:underline;
+    }
+    .card-description {
+        @apply text-xs font-light text-[#6C757D] mb-6;
+    }
+    .card-info {
+        @apply text-xs font-light text-[#6C757D];
+    }
+    .card-info::before {
+        @apply content-[""] block w-3.5 h-1 bg-[#CED4DA] mb-2 ;
+    }
+    .card-info b {
+        @apply text-[#212529];
+    }
+}

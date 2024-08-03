@@ -11,7 +11,7 @@ const Hero = () => {
                 height={600}
                 className="hero-bg"
                 />
-            <div className="main-container relative w-1/3 pb-40">
+            <div className="main-container relative pb-40">
                 {/* Category tag */}
                 <span className="category-tag">Interior Design</span>
                 {/* Title */}
