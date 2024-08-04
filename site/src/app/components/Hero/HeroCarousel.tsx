@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { IoMdArrowForward, IoMdArrowBack  } from "react-icons/io";
-import "./HeroCarousel.css";
+import { ArrowBackIcon, ArrowFrontIcon } from "../icons";
 import { CategoryTag } from "../common";
+import "./HeroCarousel.css";
+
 
 const HeroCarousel = () => {
     return (
@@ -20,10 +21,10 @@ const HeroCarousel = () => {
                 {/* Arrows */}
                 <div className="absolute flex bottom-0 right-0">
                     <span className="arrow">
-                        <IoMdArrowBack size={"full"}/>
+                        <ArrowBackIcon size={"full"}/>
                     </span>
                     <span className="arrow">
-                        <IoMdArrowForward size={"full"}/>
+                        <ArrowFrontIcon size={"full"}/>
                     </span>
                 </div>
                 {/* Bullets */}
@@ -34,7 +35,7 @@ const HeroCarousel = () => {
                 </div>
             </div>
         </section>
-    )
+    );
 };
 
 export default HeroCarousel;

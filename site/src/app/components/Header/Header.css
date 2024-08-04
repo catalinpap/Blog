@@ -1,0 +1,13 @@
+@tailwind components;
+
+@layer components {
+    .navbar-logo {
+        @apply h-full mr-2;
+    }
+    .navbar-link {
+        @apply text-base cursor-pointer py-4;
+    }
+    .navbar-button {
+        @apply text-sm text-white min-w-fit h-full px-4 py-2 bg-black cursor-pointer rounded-md hover:bg-[#3E454D];
+    }
+}

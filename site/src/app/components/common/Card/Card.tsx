@@ -1,11 +1,12 @@
 import Image from "next/image";
 import "./Card.css";
 import Link from "next/link";
+import { CategoryTag } from "..";
 
 const Card: React.FC<{}> = () => {
     return (
         <Link href={'/article'} className="card-wrapper">
-            <span className="category-tag absolute top-3 right-3">Interior Design</span>
+            <CategoryTag className="absolute top-3 right-3">Interior Design</CategoryTag>
             <Image src={"https://images.unsplash.com/photo-1524061662617-6a29d732e3ef?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} 
                 alt={""} 
                 width={300} 
