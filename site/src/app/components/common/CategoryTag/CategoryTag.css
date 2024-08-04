@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+    .category-tag {
+        @apply inline-block bg-orange text-white text-xs font-light px-2 py-1 rounded-md cursor-pointer hover:brightness-105;
+      }
+}

@@ -20,9 +20,9 @@ const Article: React.FC<{}> = () => {
                 {/* Tools sidepanel */}
                 <aside className="absolute h-full top-0 left-60 block">
                     <div className="sticky top-20 flex flex-col gap-4">
-                        <HeartEmptyIcon size={28} color={"#6C757D"} />
-                        <BookmarkIcon size={28} color={"#6C757D"} />
-                        <ShareIcon size={28} color={"#6C757D"} />
+                        <HeartEmptyIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-orange" />
+                        <BookmarkIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-yellow" />
+                        <ShareIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-blue" />
 
                     </div>
                 </aside>

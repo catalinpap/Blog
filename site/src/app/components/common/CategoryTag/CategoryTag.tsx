@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import "./CategoryTag.css";
 
 const CategoryTag: React.FC<{children?: ReactNode, className?: string}> = ({children, className}) => {
     return (
