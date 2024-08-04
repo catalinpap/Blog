@@ -1,0 +1,22 @@
+@tailwind components;
+
+@layer components {
+    input, textarea {
+        @apply w-full p-4 bg-light;
+    }
+
+    input[name="title"] {
+        @apply text-3xl mb-2;
+    }
+
+    textarea {
+        @apply text-lg resize-none flex-grow;
+    }
+
+    .toggle-preview {
+        @apply absolute top-2 right-0 translate-x-full bg-gray bg-opacity-20 px-2 py-1 rounded-xl text-base font-light;
+    }
+    .toggle-preview.selected {
+        @apply bg-opacity-60;
+    }
+}

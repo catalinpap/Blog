@@ -17,7 +17,7 @@
 }
 
 body {
-  @apply text-black;
+  @apply text-black min-h-[100dvh] bg-light;
 }
 
 @layer base {
@@ -31,7 +31,41 @@ body {
 
   .hero-bg {
     @apply absolute inset-0 w-full h-full -z-10 object-cover;
-}
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-light mb-10 leading-loose tracking-wider;
+  }
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-3xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-2xl;
+  }
+  p {
+    @apply text-lg font-light leading-relaxed tracking-wide mb-10;
+  }
+  strong {
+    @apply font-bold;
+  }
+  em {
+    @apply font-extralight tracking-wider;
+  }
+  blockquote {
+    @apply bg-white border-l-4 border-gray p-4 italic tracking-wider font-mono text-xl mb-10;
+  }
+  blockquote p {
+    @apply m-0;
+  }
+  code {
+    @apply  bg-slate-100 text-gray p-2 tracking-wide font-extralight;
+  }
 }
 
 @layer utilities {

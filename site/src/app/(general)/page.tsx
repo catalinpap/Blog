@@ -1,5 +1,5 @@
-import { CardGrid, HeroCarousel, SidePanel } from "./components";
-import { CategoryTag } from "./components/common";
+import { CardGrid, HeroCarousel, SidePanel } from "../components";
+import { CategoryTag } from "../components/common";
 
 
 export default function Home() {

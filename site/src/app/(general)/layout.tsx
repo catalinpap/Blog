@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Footer, Header } from "./components";
+import { Inter, Raleway, Yellowtail } from "next/font/google";
+import "../globals.css";
+import { Footer, Header } from "../components";
 
 
 const inter = Inter({ subsets: ["latin"] });
+const raleway = Raleway({subsets: ["latin"]});
+const yellowtail = Yellowtail({weight: "400", subsets: ["latin"]});
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -18,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-[#F8F9FA]`}>
+      <body className={`${raleway.className}`}>
         <Header />
           {children}
         <Footer />

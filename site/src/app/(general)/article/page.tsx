@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { CategoryTag } from "../components/common";
-import { CommentCard, SidePanel } from "../components";
-import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "../components/icons";
+import { CategoryTag } from "../../components/common";
+import { CommentCard, SidePanel } from "../../components";
+import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "../../components/icons";
 
 
 const Article: React.FC<{}> = () => {

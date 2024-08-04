@@ -1,10 +1,9 @@
 const Footer:React.FC<{}> = () => {
     return (
-        <footer className="w-full h-[45dvh] bg-black">
+        <footer className="fixed w-full h-[45dvh] bottom-0 mt-auto">
             <article>
 
             </article>
-
         </footer>
     );
 };

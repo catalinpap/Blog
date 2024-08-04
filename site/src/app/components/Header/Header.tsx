@@ -18,10 +18,10 @@ const Header = () => {
             <div className="flex items-center h-full gap-x-3">
                 <SearchIcon size={28} />
                 <UserIcon size={28} />
-                <button className="navbar-button flex items-center gap-x-2 capitalize">
+                <Link href={"/write"} className="navbar-button flex items-center gap-x-2 capitalize">
                     <WriteIcon size={20} />
                     write
-                </button>
+                </Link>
             </div>
             
         </header>
