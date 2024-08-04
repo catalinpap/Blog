@@ -64,7 +64,7 @@ body {
     @apply m-0;
   }
   code {
-    @apply  bg-slate-100 text-gray p-2 tracking-wide font-extralight;
+    @apply  bg-light-gray text-gray p-4 tracking-wide font-extralight;
   }
 }
 
