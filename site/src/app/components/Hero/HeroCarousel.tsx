@@ -13,13 +13,13 @@ const HeroCarousel = () => {
                 height={600}
                 className="hero-bg"
                 />
-            <div className="main-container relative pb-40">
+            <div className="page-content pb-10 lg:pb-32">
                 {/* Category tag */}
                 <CategoryTag>Interior Design</CategoryTag>
                 {/* Title */}
                 <h1 className="hero-title">Design is a plan for arranging elements in such a way as best to accomplish a particular purpose.</h1>
                 {/* Arrows */}
-                <div className="absolute flex bottom-0 right-0">
+                <div className="absolute bottom-0 right-0 hidden lg:flex">
                     <span className="arrow">
                         <ArrowBackIcon size={"full"}/>
                     </span>
@@ -28,7 +28,7 @@ const HeroCarousel = () => {
                     </span>
                 </div>
                 {/* Bullets */}
-                <div className="flex absolute bottom-0 left-0 space-x-2 mb-8">
+                <div className="flex absolute bottom-0 justify-center lg:justify-start w-full space-x-2 mb-8">
                     <span className="bullet selected"/>
                     <span className="bullet"/>
                     <span className="bullet"/>

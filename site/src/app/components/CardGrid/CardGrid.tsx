@@ -2,7 +2,7 @@ import { Card } from "../common";
 
 const CardGrid: React.FC<{}> = () => {
     return (
-        <section className="grid grid-cols-2 gap-4 main-container">
+        <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
           <Card />
           <Card />
           <Card />
@@ -11,7 +11,7 @@ const CardGrid: React.FC<{}> = () => {
           <Card />
           <Card />
           <Card />
-        </section>
+        </div>
     );
 };
 

@@ -16,17 +16,21 @@
   }
 }
 
-body {
-  @apply text-black min-h-[100dvh] bg-light;
-}
-
 @layer base {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+  
+  body {
+    @apply text-black min-h-[100dvh] bg-light;
+  }
+
   .main-container {
-    @apply ml-[20%] w-[768px] flex-shrink-0;
+    @apply  w-full flex-shrink-0 ;
   }
 
   .page-content {
-    @apply relative mt-14 mr-16 mb-14 flex gap-32;
+    @apply relative mt-14 mb-14 mx-8 lg:ml-[15%] lg:w-[768px];
   }
 
   .hero-bg {
@@ -49,7 +53,7 @@ body {
     @apply text-2xl;
   }
   p {
-    @apply text-lg font-light leading-relaxed tracking-wide mb-10;
+    @apply text-lg font-light leading-relaxed tracking-wide mb-10 text-justify;
   }
   strong {
     @apply font-bold;

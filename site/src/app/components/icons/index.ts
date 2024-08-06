@@ -17,9 +17,12 @@ import {
     GoComment as CommentIcon
 } from "react-icons/go";
 
-import { PiNotePencil as WriteIcon } from "react-icons/pi";
+import { 
+    PiNotePencil as WriteIcon,
+    PiUserLight as UserIcon
+ } from "react-icons/pi";
 
-import { PiUserLight as UserIcon } from "react-icons/pi";
+import { CgMenuGridO as MenuIcon } from "react-icons/cg";
 
 export {
     HeartEmptyIcon,
@@ -36,5 +39,6 @@ export {
     BookmarkSlashFillIcon,
     CommentIcon,
     WriteIcon,
-    UserIcon
+    UserIcon,
+    MenuIcon
 };

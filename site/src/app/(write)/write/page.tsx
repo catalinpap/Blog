@@ -27,20 +27,22 @@ const WritePage:React.FC<{}> = () => {
     const togglePreview = () => {
         if (articlePreviewRef.current?.classList.contains('hidden')) {
             articlePreviewRef.current?.classList.remove('hidden');
+            articleContentRef.current?.classList.add('hidden', 'lg:block');
             togglePreviewButtonRef.current?.classList.add('selected');
         } else {
             articlePreviewRef.current?.classList.add('hidden');
+            articleContentRef.current?.classList.remove('hidden', 'lg:block');
             togglePreviewButtonRef.current?.classList.remove('selected');
         }
     };
 
     return (
         <>
-            <header className="flex flex-row justify-between w-[1024px] mx-auto py-6">
+            <header className="flex flex-row justify-between mx-4 lg:mx-auto lg:container py-6">
                 <Link href={"/"}>LOGO</Link>
                 <button className="bg-green text-white rounded-full px-3 py-1">Publish</button>
             </header>
-            <main className={"flex flex-col w-[1024px] mx-auto min-h-[100dvh] mb-36"}>
+            <main className={"flex flex-col min-h-[100dvh] mb-36 mx-4 lg:mx-auto lg:container"}>
                 <input ref={titleRef} id="title" name="title" type="text" placeholder="Title"  onChange={parseMarkdown}/>
                 <div className="relative flex gap-x-1 w-full flex-grow">
                     <button 

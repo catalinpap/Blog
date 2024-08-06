@@ -16,10 +16,10 @@ const Article: React.FC<{}> = () => {
                     className="hero-bg"
                 />
             </div>
-            <main className="page-content">
+            <main className="page-content flex flex-col lg:flex-row">
                 {/* Tools sidepanel */}
-                <aside className="absolute h-full top-0 left-60 block">
-                    <div className="sticky top-20 flex flex-col gap-4">
+                <aside className="absolute h-full top-0 right-full mr-10 block">
+                    <div className="sticky top-20 flex-col gap-4 hidden lg:flex">
                         <HeartEmptyIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-orange" />
                         <BookmarkIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-yellow" />
                         <ShareIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-blue" />
@@ -48,40 +48,63 @@ const Article: React.FC<{}> = () => {
                     </div>
                     
                     <section className="text-[#6C757D] font-light tracking-wide">
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                        sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                        cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                        Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                        vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                        vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-            
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                        sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                        cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                        Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                        vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                        vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-                
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                        sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                        cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                        Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                        vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                        vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-                
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                        sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                        cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                        Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                        vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                        vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-                
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                        sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                        cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                        Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                        vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                        vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
+                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
+                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
+                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
+                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
+                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
+                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
+                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
+                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
+                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
+                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
+                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
+                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
+                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
+                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
+                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
+                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
+                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
+                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
+                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
+                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
+                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
+                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
+                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
+                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
+                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
+                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
+                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
+                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
+                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
+                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
+                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
+                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
+                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
+                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
+                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
+                        </p>
+                        
                     </section>
 
                     {/* Separator */}
@@ -89,7 +112,7 @@ const Article: React.FC<{}> = () => {
 
                     {/* Author */}
                     <section>
-                        <h2 className="text-lg font-medium">John Doe</h2>
+                        <h2 className="text-lg font-medium mb-3">John Doe</h2>
                         <span className="text-sm font-light text-[#6C757D]">“Fifth Strategy” Book Author, Designer</span>
                     </section>
 
