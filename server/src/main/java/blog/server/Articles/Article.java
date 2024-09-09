@@ -3,16 +3,22 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import blog.server.utils.JSON;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,15 +29,26 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String name;
+	private String title;
 	
 	private Long authorId;
 
+	@Lob
 	private String content;
 
+
+	@ColumnDefault("'Uncategorized'")
+	@Generated
 	private String category;
 
+	@Nullable
 	private List<String> keywords;
+
+	@ColumnDefault("0")
+	private Integer likes = 0;
+
+	@ColumnDefault("0")
+	private Integer bookmarks = 0;
 
 	@CreationTimestamp
 	private LocalDateTime creationDate;
@@ -40,8 +57,8 @@ public class Article {
 		return this.id;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getTitle() {
+		return this.title;
 	}
 
 	public Long getAuthorId() {
@@ -60,6 +77,14 @@ public class Article {
 		return this.keywords;
 	}
 
+	public Integer getLikes() {
+		return this.likes;
+	}
+
+	public Integer getBookmarks() {
+		return this.bookmarks;
+	}
+
 	public String getCreationDate() {
 		return this.creationDate.toLocalDate().toString();
 	}
@@ -69,8 +94,8 @@ public class Article {
 		return this;
 	}
 
-	public Article setName(final String name) {
-		this.name = name;
+	public Article setTitle(final String title) {
+		this.title = title;
 		return this;
 	}
 
@@ -94,13 +119,23 @@ public class Article {
 		return this;
 	}
 
+	public Article setLikes(final Integer likes) {
+		this.likes = likes;
+		return this;
+	}
+
+	public Article setBookmarks(final Integer bookmarks) {
+		this.bookmarks = bookmarks;
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		try {
 			return JSON.write(this);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return String.format("{id:%d, name:'%s', author:'%s', content:'%s'}", this.id, this.name, this.authorId, this.content);
+			return String.format("{id:%d, name:'%s', author:'%s', content:'%s'}", this.id, this.title, this.authorId, this.content);
 		}
 		
 	}

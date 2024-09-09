@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import blog.server.DTO.ArticleDTO;
 import blog.server.utils.APIResponseBody;
 import blog.server.utils.Const;
 
@@ -42,7 +43,7 @@ public class ArticlesController {
 		
 		PageRequest pageRequest = PageRequest.of(page, size);
 
-		Page<Article> articles = articlesService.getAll(filters, pageRequest);
+		Page<ArticleDTO> articles = articlesService.getAll(filters, pageRequest);
 		String responseBody = new APIResponseBody().data(articles).json();
 		return ResponseEntity
 			.ok()

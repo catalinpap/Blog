@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Raleway, Yellowtail } from "next/font/google";
+import { Footer, Header } from "@/components";
 import "../globals.css";
-import { Footer, Header } from "../components";
 
 
 const inter = Inter({ subsets: ["latin"] });

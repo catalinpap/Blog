@@ -5,17 +5,21 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import blog.server.Articles.exceptions.ArticleNotFoundException;
+import blog.server.Authors.Author;
+import blog.server.DTO.ArticleDTO;
 
 @Service
 public class ArticlesService {
 
 	// @Autowired
 	private ArticlesRepository articlesRepository;
+
 
 	@Autowired
 	public ArticlesService(ArticlesRepository articlesRepository) {
@@ -30,13 +34,19 @@ public class ArticlesService {
 		return article;
 	}
 
-	public List<Article> getAll() {
-		return articlesRepository.findAll();
+	public List<ArticleDTO> getAll() {
+		return articlesRepository
+			.findAll()
+			.stream()
+			.map(this::mapToDTO)
+			.collect(Collectors.toList());
 	}
 
-	public Page<Article> getAll(ArticleFilter filter, PageRequest pageRequest) {
+	public Page<ArticleDTO> getAll(ArticleFilter filter, PageRequest pageRequest) {
 		Specification<Article> specifications = ArticlesSpecs.filterBy(filter);
-		return articlesRepository.findAll(specifications, pageRequest);
+		return articlesRepository
+			.findAll(specifications, pageRequest)
+			.map(this::mapToDTO);
 	}
 
 	public Article add(Article article) throws Exception {
@@ -66,4 +76,16 @@ public class ArticlesService {
 			).collect(Collectors.toList());
 	}
 	
+
+	private ArticleDTO mapToDTO(Article article) {
+		ArticleDTO dto = new ArticleDTO().from(article);
+
+		//TODO: get author by id from AuthorsRpository 
+		Author dumbAuthor = new Author()
+			.name("Piedone Hahalalelor");
+		
+		dto.setAuthor(dumbAuthor);
+
+		return dto;
+	}
 }

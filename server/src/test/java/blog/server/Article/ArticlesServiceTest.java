@@ -39,7 +39,7 @@ public class ArticlesServiceTest {
 		Article mockArticle = new Article()
 			// .setId(testId)
 			.setAuthorId(testAuthor)
-			.setName(testName);
+			.setTitle(testName);
 		
 
 		when(articlesRepository.findById(testId)).thenReturn(Optional.of(mockArticle));
