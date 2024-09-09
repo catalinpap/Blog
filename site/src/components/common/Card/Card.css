@@ -17,7 +17,7 @@
         @apply text-xs font-light text-[#6C757D] !mb-3;
     }
     .card-info {
-        @apply text-xs font-light text-[#6C757D];
+        @apply text-xs font-light text-[#6C757D] text-left;
     }
     .card-info::before {
         @apply content-[""] block w-3.5 h-1 bg-[#CED4DA] mb-2 ;

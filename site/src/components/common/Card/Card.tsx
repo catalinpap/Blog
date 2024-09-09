@@ -5,6 +5,11 @@ import { CategoryTag } from "..";
 import { Article } from "@/types";
 
 const Card: React.FC<{data: Article}> = ({data}) => {
+
+    const format_date = (date: string): string => {
+        return new Date(date).toLocaleDateString('en-us', {day:'numeric', month: 'short', year: 'numeric'});
+    }
+
     return (
         <Link href={'/article'} className="card-wrapper">
             <CategoryTag className="absolute top-3 right-3 z-10">{data.category}</CategoryTag>
@@ -15,9 +20,9 @@ const Card: React.FC<{data: Article}> = ({data}) => {
                 className="card-thumbnail"
             />
             <div className="flex flex-col justify-between px-5 pt-4 pb-3">
-                <h2 className="card-title">{data.name}</h2>
-                <p className="card-description">At enim sapien erat nullam placerat felis pellentesque nam, orci justo odio...</p>
-                <p className="card-info">by <span className="font-semibold">{data.author.name}</span>, Sep 8 2023</p>
+                <h2 className="card-title">{data.title.substring(0,25) + '...'}</h2>
+                <p className="card-description">{data.content.substring(0,50) + '...'}</p>
+                <p className="card-info">by <span className="font-semibold">{data.author.name}</span>, {format_date(data.creationDate)}</p>
             </div>
             
         </Link>
