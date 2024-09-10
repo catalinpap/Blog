@@ -7,6 +7,7 @@ export type Article = {
     likes: number,
     bookmarks: number,
     creationDate: string,
+    url: string,
     author: {
       id: number,
       name: string

@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -19,6 +17,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.PostPersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,7 +35,6 @@ public class Article {
 	@Lob
 	private String content;
 
-
 	@ColumnDefault("'Uncategorized'")
 	@Generated
 	private String category;
@@ -52,6 +50,13 @@ public class Article {
 
 	@CreationTimestamp
 	private LocalDateTime creationDate;
+
+	private String url;
+
+	@PostPersist
+	public void onSave() {
+		this.url = formatUrl(this.title) + "-" + this.id.toString();
+	}
 
 	public Long getId() {
 		return this.id;
@@ -87,6 +92,10 @@ public class Article {
 
 	public String getCreationDate() {
 		return this.creationDate.toLocalDate().toString();
+	}
+
+	public String getUrl() {
+		return this.url;
 	}
 
 	public Article setId(final Long id) {
@@ -129,6 +138,11 @@ public class Article {
 		return this;
 	}
 
+	public Article setUrl(final String url) {
+		this.url = url;
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		try {
@@ -138,5 +152,9 @@ public class Article {
 			return String.format("{id:%d, name:'%s', author:'%s', content:'%s'}", this.id, this.title, this.authorId, this.content);
 		}
 		
+	}
+
+	private String formatUrl(String input) {
+		return String.join("-", input.trim().split(" ")).toLowerCase().replaceAll("[^-a-z0-9]", "");
 	}
 }

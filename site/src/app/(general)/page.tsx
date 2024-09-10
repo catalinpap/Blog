@@ -11,6 +11,7 @@ const article: Article = {
   likes: 0,
   bookmarks: 0,
   creationDate: '',
+  url: 'liviu-dragnea',
   author: {
     id: 1,
     name: 'Dan Diaconescu'

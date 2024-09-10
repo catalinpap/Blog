@@ -1,8 +1,6 @@
 package blog.server.DTO;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import blog.server.Articles.Article;
@@ -18,6 +16,7 @@ public class ArticleDTO {
     private int bookmarks;
     private Author author;
     private String creationDate;
+    private String url;
 
     public ArticleDTO() {
 
@@ -32,7 +31,8 @@ public class ArticleDTO {
             .setKeywords(article.getKeywords())
             .setLikes(article.getLikes())
             .setBookmarks(article.getBookmarks())
-            .setCreationDate(article.getCreationDate());
+            .setCreationDate(article.getCreationDate())
+            .setUrl(article.getUrl());
     }
 
     public Long getId() {
@@ -69,6 +69,10 @@ public class ArticleDTO {
 
     public String getCreationDate() {
         return this.creationDate;
+    }
+
+    public String getUrl() {
+        return this.url;
     }
 
     private ArticleDTO setId(final Long id) {
@@ -113,6 +117,11 @@ public class ArticleDTO {
 
     public ArticleDTO setCreationDate(final String creationDate) {
         this.creationDate = creationDate;
+        return this;
+    }
+
+    public ArticleDTO setUrl(final String url) {
+        this.url = url;
         return this;
     }
 

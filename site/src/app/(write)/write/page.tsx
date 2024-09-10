@@ -40,8 +40,9 @@ const WritePage:React.FC<{}> = () => {
     };
 
     const publishArticle = async () => {
-        const title = titleRef.current?.value;
-        const content = parseMarkdown();
+        const title: string = titleRef.current!.value || '';
+        const content: string | undefined = parseMarkdown();
+        //const url: string | undefined = title.trim().split(' ').join('-').toLowerCase().replace(/[^\-a-z0-9]/gi, '');
 
         const articleDTO = {
             title: title,
@@ -56,8 +57,6 @@ const WritePage:React.FC<{}> = () => {
                 'content-type': 'application/json'
             }
         });
-
-        console.log('res => ', response);
     }
 
     return (
