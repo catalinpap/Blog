@@ -25,9 +25,10 @@ public class ArticlesService {
 		this.articlesRepository = articlesRepository;
 	}
 
-	public Article get(Long id) throws Exception {
-		Article article = articlesRepository
+	public ArticleDTO get(Long id) throws Exception {
+		ArticleDTO article = articlesRepository
 			.findById(id)
+			.map(this::mapToDTO)
 			.orElseThrow(() -> new ArticleNotFoundException(id.toString()));
 
 		return article;

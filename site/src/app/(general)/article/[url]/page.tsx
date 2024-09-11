@@ -2,9 +2,29 @@ import Image from "next/image";
 import { CategoryTag } from "@/components/common";
 import { CommentCard, SidePanel } from "@/components";
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
+import { Article } from "@/types";
 
 
-const Article: React.FC<{}> = () => {
+type Props = {
+    params: {
+        url: string
+    },
+    searchParams: {
+
+    }
+}
+
+const ArticlePage: React.FC<Props> = async (props) => {
+    const {url: article_url} = props.params;
+
+    const article_id = article_url.split('-').pop();
+
+    const article_response: {data: Article, message: string} = await fetch(`http://localhost:8080/api/articles/${article_id}`, {
+        method: 'GET',
+        
+    }).then(data => data.json());
+    const {data: article} = article_response;
+
     return (
         <>
             {/* TODO: Extract Hero image to a separate component to avoid duplication. Also make it to be easy to integrate into HeroCarousel */}
@@ -27,19 +47,19 @@ const Article: React.FC<{}> = () => {
                     </div>
                 </aside>
                 <article className="main-container">
-                    <CategoryTag>Interior Design</CategoryTag>
-                    <h1 className="text-[2rem] leading-normal tracking-wide mb-4">Growing a distributed product design team.</h1>
+                    <CategoryTag>{article.category}</CategoryTag>
+                    <h1 className="text-[2rem] leading-normal tracking-wide mb-4">{article.title}</h1>
                     <div className="flex flex-row justify-between mb-16">
                         <div className="flex flex-row divide-x divide-black text-xs">
-                            <span className="pr-2 font-medium">John Doe</span>
-                            <span className="pl-2 text-[#6C757D] font-light">8 Sep 2023</span>
+                            <span className="pr-2 font-medium">{article.author.name}</span>
+                            <span className="pl-2 text-[#6C757D] font-light">{article.creationDate}</span>
                         </div>
                         <div className="flex flex-row gap-x-3">
                             <span className="flex flex-row items-center text-xs  text-[#6C757D] gap-x-0.5">
-                                <HeartEmptyIcon size={18} color={"#6C757D"} /> 258
+                                <HeartEmptyIcon size={18} color={"#6C757D"} /> {article.likes}
                             </span>
                             <span className="flex flex-row items-center text-xs  text-[#6C757D] gap-x-0.5">
-                                <BookmarkIcon size={18} color={"#6C757D"} /> 73
+                                <BookmarkIcon size={18} color={"#6C757D"} /> {article.bookmarks}
                             </span>
                             <span className="flex flex-row items-center text-xs  text-[#6C757D] gap-x-0.5">
                                 <CommentIcon size={18} color={"#6C757D"} /> 2
@@ -47,64 +67,7 @@ const Article: React.FC<{}> = () => {
                         </div>
                     </div>
                     
-                    <section className="text-[#6C757D] font-light tracking-wide">
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipiscing elit porttitor, mollis fames scelerisque aliquam ac non est penatibus hac, 
-                            sapien elementum tincidunt nunc magna varius leo. Massa luctus bibendum dapibus nisl magna netus penatibus senectus, 
-                            cubilia enim sollicitudin libero nam ultricies consequat mi non, eu eget phasellus vivamus praesent vulputate fusce. 
-                            Luctus turpis aptent sodales arcu hac porta torquent libero, conubia potenti vivamus dapibus molestie ut fames porttitor, 
-                            vel phasellus cum suscipit curabitur morbi ante. Ullamcorper interdum tortor gravida senectus turpis vulputate semper eu, 
-                            vel curabitur class imperdiet hac dictum convallis cursus, phasellus odio cubilia facilisis magna et sodales.
-                        </p>
-                        
+                    <section className="text-[#6C757D] font-light tracking-wide" dangerouslySetInnerHTML={{__html: article.content}}>
                     </section>
 
                     {/* Separator */}
@@ -112,7 +75,7 @@ const Article: React.FC<{}> = () => {
 
                     {/* Author */}
                     <section>
-                        <h2 className="text-lg font-medium mb-3">John Doe</h2>
+                        <h2 className="text-lg font-medium mb-3">{article.author.name}</h2>
                         <span className="text-sm font-light text-[#6C757D]">“Fifth Strategy” Book Author, Designer</span>
                     </section>
 
@@ -160,4 +123,17 @@ const Article: React.FC<{}> = () => {
         
     );
 };
-export default Article;
+
+export async function generateStaticParams() {
+    const articles = await fetch('http://localhost:8080/api/articles', 
+        {method:'GET'}
+    ).then((response) => response.json());
+
+    return articles.data.content.map((article: Article) => {
+        return {
+            url: article.url
+        }   
+    });
+};
+
+export default ArticlePage;

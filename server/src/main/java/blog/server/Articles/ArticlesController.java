@@ -53,7 +53,7 @@ public class ArticlesController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<String> get(@PathVariable long id) throws Exception {
-		Article article = articlesService.get(id);
+		ArticleDTO article = articlesService.get(id);
 		String responseBody = new APIResponseBody().data(article).json();
 		return ResponseEntity
 			.ok()
