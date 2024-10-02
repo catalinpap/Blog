@@ -63,9 +63,12 @@ public class ArticlesService {
 		return article;
 	}
 
-	public Article update(Article article) throws Exception {
-		// Article article = articlesRepository
-		return null;
+	public Article update(Article updatedArticle) throws Exception {
+		Long articleId = updatedArticle.getId();
+
+		if(!articlesRepository.existsById(articleId)) throw new ArticleNotFoundException(articleId.toString());
+
+		return articlesRepository.save(updatedArticle);
 	}
 
 	public List<Article> filterByCategory(String category) throws Exception {
@@ -79,7 +82,7 @@ public class ArticlesService {
 
 	private ArticleDTO mapToDTO(Article article) {
 		ArticleDTO dto = new ArticleDTO().from(article);
-		
+
 		//TODO: get author by id from AuthorsRpository 
 		Author dumbAuthor = new Author()
 			.setUsername("@piedone")

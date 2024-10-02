@@ -93,11 +93,11 @@ public class ArticlesController {
 		
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<String> update(@PathVariable long id) throws Exception {
-		Article updateResponse = null;
+	@PutMapping("")
+	public ResponseEntity<String> update(@RequestBody Article article) throws Exception {
+		Article updatedArticle = articlesService.update(article);
 		String responseBody = new APIResponseBody()
-			.data(updateResponse)
+			.data(updatedArticle)
 			.message("Article updated")
 			.json();
 
