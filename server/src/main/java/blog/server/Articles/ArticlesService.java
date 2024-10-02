@@ -11,18 +11,19 @@ import org.springframework.stereotype.Service;
 
 import blog.server.Articles.exceptions.ArticleNotFoundException;
 import blog.server.Authors.Author;
+import blog.server.Authors.AuthorsService;
 import blog.server.DTO.ArticleDTO;
 
 @Service
 public class ArticlesService {
 
-	// @Autowired
 	private ArticlesRepository articlesRepository;
-
+	private AuthorsService authorsService;
 
 	@Autowired
-	public ArticlesService(ArticlesRepository articlesRepository) {
+	public ArticlesService(ArticlesRepository articlesRepository, AuthorsService authorsService) {
 		this.articlesRepository = articlesRepository;
+		this.authorsService = authorsService;
 	}
 
 	public ArticleDTO get(Long id) throws Exception {
@@ -83,12 +84,15 @@ public class ArticlesService {
 	private ArticleDTO mapToDTO(Article article) {
 		ArticleDTO dto = new ArticleDTO().from(article);
 
-		//TODO: get author by id from AuthorsRpository 
-		Author dumbAuthor = new Author()
-			.setUsername("@piedone")
-			.setName("Piedone Hahalalelor");
+		Author author = new Author();
+		try {
+			author = authorsService.get(article.getAuthorId());
+		} catch (Exception e) {
+			// TODO: Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		dto.setAuthor(dumbAuthor);
+		dto.setAuthor(author);
 
 		return dto;
 	}
