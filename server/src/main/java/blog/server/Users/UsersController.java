@@ -1,4 +1,4 @@
-package blog.server.Authors;
+package blog.server.Users;
 
 import java.net.URI;
 import java.util.List;
@@ -20,19 +20,65 @@ import blog.server.utils.APIResponseBody;
 import blog.server.utils.Const;
 
 @RestController
-@RequestMapping(Const.AUTHORS_BASE_URL)
-public class AuthorsController {
-
+@RequestMapping(Const.USERS_BASE_URL)
+public class UsersController {
     @Autowired
-    private AuthorsService authorsService;
+    private UsersService usersService;
 
     @GetMapping("")
     public ResponseEntity<String> getAll() {
-        // TODO: maybe use paginated response for consistency reasons
+        List<User> users = usersService.getAll();
 
-        List<Author> authors = authorsService.getAll();
+        String reponseBody = new APIResponseBody()
+            .data(users)
+            .json();
+        
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(reponseBody);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> get(@PathVariable Long id) throws Exception {
+        User user = usersService.get(id);
         String responseBody = new APIResponseBody()
-            .data(authors)
+            .data(user)
+            .json();
+
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(responseBody);
+    }
+
+    @PostMapping("")
+    public ResponseEntity<String> add(@RequestBody User user) throws Exception {
+        User addedUser = usersService.add(user);
+        String responseBody = new APIResponseBody()
+            .data(addedUser)
+            .message("User created")
+            .json();
+        
+        URI userURI = ServletUriComponentsBuilder
+			.fromCurrentRequest()
+			.path("/{id}")
+			.buildAndExpand(addedUser.getId())
+			.toUri();
+        
+        return ResponseEntity
+            .created(userURI)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(responseBody);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
+        User deletedUser = usersService.delete(id);
+
+        String responseBody = new APIResponseBody()
+            .data(deletedUser)
+            .message("User deleted")
             .json();
         
         return ResponseEntity
@@ -41,69 +87,18 @@ public class AuthorsController {
             .body(responseBody);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<String> get(@PathVariable Long id) throws Exception {
-        Author author = authorsService.get(id);
-
-        String responseBody = new APIResponseBody().data(author).json();
-
-        return ResponseEntity
-            .ok()
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(responseBody);
-
-    }
-
-    @PostMapping("")
-    public ResponseEntity<String> add(@RequestBody Author author) throws Exception {
-        Author addedAuthor = authorsService.add(author);
-        String responseBody = new APIResponseBody()
-            .data(addedAuthor)
-            .message("Author created")
-            .json();
-
-        URI authorURI = ServletUriComponentsBuilder
-			.fromCurrentRequest()
-			.path("/{id}")
-			.buildAndExpand(addedAuthor.getId())
-			.toUri();
-
-        return ResponseEntity
-            .created(authorURI)
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(responseBody);
-
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
-        Author deletedAuthor = authorsService.delete(id);
-
-        String responseBody = new APIResponseBody()
-            .data(deletedAuthor)
-            .message("Author deleted")
-            .json();
-
-        return ResponseEntity
-            .ok()
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(responseBody);
-    }
-
     @PutMapping("")
-    public ResponseEntity<String> update(@RequestBody Author author) throws Exception {
-        Author updatedAuthor = authorsService.update(author);
+    public ResponseEntity<String> update(@RequestBody User user) throws Exception {
+        User updatedUser = usersService.update(user);
 
         String responseBody = new APIResponseBody()
-            .data(updatedAuthor)
-            .message("Author updated")
+            .data(updatedUser)
+            .message("User updated")
             .json();
 
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(responseBody);   
-
+            .body(responseBody);
     }
-    
 }

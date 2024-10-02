@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import blog.server.Articles.exceptions.ArticleNotFoundException;
 import blog.server.Authors.exceptions.AuthorNotFoundException;
+import blog.server.Users.exceptions.UserNotFoundException;
 import blog.server.utils.APIResponseBody;
 
 @ControllerAdvice
@@ -28,6 +29,16 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 	public ResponseEntity<String> handleAuthorNotFound (AuthorNotFoundException exception, WebRequest request ) {
 			APIResponseBody responseBody = new APIResponseBody()
 				.message(String.format("Author with id=%s does not exist!", exception.getMessage()));
+			return ResponseEntity
+				.status(HttpStatus.NOT_FOUND)
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(responseBody.json());
+	}
+
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<String> handleUserNotFound (UserNotFoundException exception, WebRequest request ) {
+			APIResponseBody responseBody = new APIResponseBody()
+				.message(String.format("User with id=%s does not exist!", exception.getMessage()));
 			return ResponseEntity
 				.status(HttpStatus.NOT_FOUND)
 				.contentType(MediaType.APPLICATION_JSON)
