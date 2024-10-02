@@ -18,6 +18,7 @@ import blog.server.Articles.Article;
 import blog.server.Articles.ArticlesRepository;
 import blog.server.Articles.ArticlesService;
 import blog.server.Articles.exceptions.ArticleNotFoundException;
+import blog.server.DTO.ArticleDTO;
 
 @ExtendWith(MockitoExtension.class)
 public class ArticlesServiceTest {
@@ -44,7 +45,7 @@ public class ArticlesServiceTest {
 
 		when(articlesRepository.findById(testId)).thenReturn(Optional.of(mockArticle));
 
-		Article foundArticle = articlesService.get(testId);
+		ArticleDTO foundArticle = articlesService.get(testId);
 
 		Assertions.assertThat(foundArticle).isEqualTo(mockArticle);
 

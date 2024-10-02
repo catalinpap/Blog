@@ -14,6 +14,7 @@ public class ArticleDTO {
     private List<String> keywords;
     private int likes;
     private int bookmarks;
+    private int views;
     private Author author;
     private String creationDate;
     private String url;
@@ -31,6 +32,7 @@ public class ArticleDTO {
             .setKeywords(article.getKeywords())
             .setLikes(article.getLikes())
             .setBookmarks(article.getBookmarks())
+            .setViews(article.getViews())
             .setCreationDate(article.getCreationDate())
             .setUrl(article.getUrl());
     }
@@ -61,6 +63,10 @@ public class ArticleDTO {
     
     public int getBookmarks() {
         return this.bookmarks;
+    }
+
+    public int getViews() {
+        return this.views;
     }
 
     public Author getAuthor() {
@@ -107,6 +113,11 @@ public class ArticleDTO {
 
     public ArticleDTO setBookmarks(final int bookmarks) {
         this.bookmarks = bookmarks;
+        return this;
+    }
+
+    public ArticleDTO setViews(final int views) {
+        this.views = views;
         return this;
     }
 

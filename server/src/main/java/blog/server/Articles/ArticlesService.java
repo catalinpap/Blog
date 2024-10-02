@@ -63,7 +63,7 @@ public class ArticlesService {
 		return article;
 	}
 
-	public Article update(Long id) throws Exception {
+	public Article update(Article article) throws Exception {
 		// Article article = articlesRepository
 		return null;
 	}
@@ -79,10 +79,11 @@ public class ArticlesService {
 
 	private ArticleDTO mapToDTO(Article article) {
 		ArticleDTO dto = new ArticleDTO().from(article);
-
+		
 		//TODO: get author by id from AuthorsRpository 
 		Author dumbAuthor = new Author()
-			.name("Piedone Hahalalelor");
+			.setUsername("@piedone")
+			.setName("Piedone Hahalalelor");
 		
 		dto.setAuthor(dumbAuthor);
 

@@ -48,6 +48,9 @@ public class Article {
 	@ColumnDefault("0")
 	private Integer bookmarks = 0;
 
+	@ColumnDefault("0")
+	private Integer views = 0;
+
 	@CreationTimestamp
 	private LocalDateTime creationDate;
 
@@ -88,6 +91,10 @@ public class Article {
 
 	public Integer getBookmarks() {
 		return this.bookmarks;
+	}
+
+	public Integer getViews() {
+		return this.views;
 	}
 
 	public String getCreationDate() {
@@ -135,6 +142,11 @@ public class Article {
 
 	public Article setBookmarks(final Integer bookmarks) {
 		this.bookmarks = bookmarks;
+		return this;
+	}
+
+	public Article setViews(final Integer views) {
+		this.views = views;
 		return this;
 	}
 
