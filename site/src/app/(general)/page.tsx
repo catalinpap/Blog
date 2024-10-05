@@ -29,7 +29,7 @@ const fetchArticles = async () => {
 
 export default async function Home() {
   const articles = await fetchArticles();
-  console.log(articles.data.content);
+  console.log(articles.data || articles.data?.content);
   return (
     <main>
       <HeroCarousel />

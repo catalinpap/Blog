@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
-import "./write-page.css";
 import Link from "next/link";
+import "./write-page.css";
 
 const WritePage:React.FC<{}> = () => {
     const titleRef = useRef<HTMLInputElement>(null);
@@ -54,7 +54,8 @@ const WritePage:React.FC<{}> = () => {
             method: 'POST',
             body: JSON.stringify(articleDTO),
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'authorization': `basic dXNlcjp1c2Vy` //TODO: handle different authorizations -> basic user:user
             }
         });
     }

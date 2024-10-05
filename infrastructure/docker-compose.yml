@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    environment:
+      POSTGRES_DB: blog_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: blogpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - my_network
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+        PGADMIN_DEFAULT_EMAIL: 'admin@blog.com'
+        PGADMIN_DEFAULT_PASSWORD: 'admin'
+    ports:
+        - 16543:80
+    volumes:
+        - ./servers.json:/pgadmin4/servers.json
+    networks:
+        - my_network
+
+volumes:
+  postgres_data:
+
+networks:
+  my_network:
+    driver: bridge
