@@ -30,7 +30,7 @@
   }
 
   .page-content {
-    @apply relative mt-14 mb-14 mx-8 lg:ml-[15%] lg:w-[768px];
+    @apply relative mt-14 mb-14 mx-8 lg:ml-[15%] max-w-[768px];
   }
 
   .hero-bg {
@@ -69,6 +69,9 @@
   }
   code {
     @apply  bg-light-gray text-gray tracking-wide font-extralight;
+  }
+  pre:has(code) {
+    @apply  bg-light-gray text-gray tracking-wide font-extralight p-2;
   }
 }
 
