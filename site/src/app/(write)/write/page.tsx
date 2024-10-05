@@ -55,7 +55,7 @@ const WritePage:React.FC<{}> = () => {
             body: JSON.stringify(articleDTO),
             headers: {
                 'content-type': 'application/json',
-                'authorization': `basic dXNlcjp1c2Vy` //TODO: handle different authorizations -> basic user:user
+                'authorization': `basic ${window.btoa('user:user')}` //TODO: handle different authorizations -> basic user:user
             }
         });
     }

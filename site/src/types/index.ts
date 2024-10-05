@@ -1,5 +1,2 @@
-import { Article } from "./Article";
-
-export type {
-    Article
-};
+export type { Article } from "./Article";
+export type { ApiResponse } from "./ApiResponse";

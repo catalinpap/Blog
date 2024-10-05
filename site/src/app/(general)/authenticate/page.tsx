@@ -1,8 +1,12 @@
 'use client';
 
-import { FormEvent } from "react";
+import { ApiResponse } from "@/types";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 
 const AuthenticatePage = () => {
+    const router = useRouter();
+    const [errorMessage, setErrorMessage] = useState<string>('');
     
     const login = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -19,23 +23,30 @@ const AuthenticatePage = () => {
             body: JSON.stringify({
                 "user": user,
                 "password": password
-            })
+            }),
+            credentials: 'include'
         });
 
-        const isUserValid = await loginResponse.json();
-    }
+        if (loginResponse.ok) {
+            router.push('/');
+        } else {
+            const data: ApiResponse = await loginResponse.json();
+            setErrorMessage(data.message);
+        }
+    };
 
     return (
         <main className="page-content">
             <div className={"block w-full h-40"}></div>
             <form onSubmit={login} className={"flex flex-col gap-2"}>
                 <h1>Login</h1>
-                <input type={"text"} name={"user"} placeholder={"email or username"} className={"p-2"} />
-                <input type={"password"} name={"password"} placeholder={"password"} className={"p-2"} />
-                <button type={"submit"} className={"bg-green cursor-pointer p-2"}>Login</button>
+                <input type={"text"} name={"user"} placeholder={"Username"} className={"p-2"} />
+                <input type={"password"} name={"password"} placeholder={"Password"} className={"p-2"} />
+                <button type={"submit"} className={"bg-green text-white text-md font-medium cursor-pointer p-2"}>Login</button>
+                <p>{errorMessage}</p>
             </form>
         </main>
-    )
-}
+    );
+};
 
 export default AuthenticatePage;
