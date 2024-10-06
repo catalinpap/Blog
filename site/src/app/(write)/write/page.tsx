@@ -42,12 +42,10 @@ const WritePage:React.FC<{}> = () => {
     const publishArticle = async () => {
         const title: string = titleRef.current!.value || '';
         const content: string | undefined = parseMarkdown();
-        //const url: string | undefined = title.trim().split(' ').join('-').toLowerCase().replace(/[^\-a-z0-9]/gi, '');
 
         const articleDTO = {
             title: title,
             content: content,
-            authorId: 1
         };
 
         const response = await fetch('http://localhost:8080/api/articles', {

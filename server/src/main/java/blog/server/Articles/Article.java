@@ -1,4 +1,5 @@
 package blog.server.Articles;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +11,17 @@ import org.hibernate.annotations.Generated;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
+import blog.server.Authors.Author;
 import blog.server.utils.JSON;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.Table;
 
@@ -31,6 +36,10 @@ public class Article {
 	private String title;
 	
 	private Long authorId;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "author")
+	private Author author;
 
 	@Lob
 	private String content;
@@ -71,6 +80,10 @@ public class Article {
 
 	public Long getAuthorId() {
 		return this.authorId;
+	}
+
+	public Author getAuthor() {
+		return this.author;
 	}
 
 	public String getContent() {
@@ -120,6 +133,11 @@ public class Article {
 		return this;
 	}
 
+	public Article setAuthor(final Author author) {
+		this.author = author;
+		return this;
+	}
+
 	public Article setContent(final String content) {
 		this.content = content;
 		return this;
@@ -163,7 +181,6 @@ public class Article {
 			e.printStackTrace();
 			return String.format("{id:%d, name:'%s', author:'%s', content:'%s'}", this.id, this.title, this.authorId, this.content);
 		}
-		
 	}
 
 	private String formatUrl(String input) {

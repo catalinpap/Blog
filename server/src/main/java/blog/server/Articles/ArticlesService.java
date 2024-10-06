@@ -7,23 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import blog.server.Articles.exceptions.ArticleNotFoundException;
 import blog.server.Authors.Author;
 import blog.server.Authors.AuthorsService;
 import blog.server.DTO.ArticleDTO;
+import blog.server.Users.UsersService;
 
 @Service
 public class ArticlesService {
 
 	private ArticlesRepository articlesRepository;
 	private AuthorsService authorsService;
+	private UsersService usersService;
 
 	@Autowired
-	public ArticlesService(ArticlesRepository articlesRepository, AuthorsService authorsService) {
+	public ArticlesService(ArticlesRepository articlesRepository, AuthorsService authorsService, UsersService usersService) {
 		this.articlesRepository = articlesRepository;
 		this.authorsService = authorsService;
+		this.usersService = usersService;
 	}
 
 	public ArticleDTO get(Long id) throws Exception {
@@ -51,6 +55,16 @@ public class ArticlesService {
 	}
 
 	public Article add(Article article) throws Exception {
+		String authorUser = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		Long userId = usersService.getByUsername(authorUser).getId();
+		article.setAuthorId(userId);
+
+		if (!authorsService.existsByUsername(authorUser)) {
+			authorsService.add(new Author()
+				.fromUser(usersService.get(userId)));
+		}
+		
 		return articlesRepository.save(article);
 	}
 

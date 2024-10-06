@@ -3,8 +3,13 @@ package blog.server.Authors;
 import java.util.ArrayList;
 import java.util.List;
 
+import blog.server.Articles.Article;
+import blog.server.Users.User;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Author {
@@ -12,7 +17,9 @@ public class Author {
     private Long id;
     private String username;
     private String name;
-    private List<Long> articlesIds;
+
+    @OneToMany(mappedBy = "authorId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Article> articles;
 
     public Author(){}
 
@@ -20,7 +27,15 @@ public class Author {
         this.id = other.getId();
         this.username = other.getUsername();
         this.name = other.getName();
-        this.setArticleIds(other.getArticlesIds());
+        this.setArticles(other.getArticles());
+    }
+
+    public Author fromUser(User user) {
+        return new Author()
+            .setId(user.getId())
+            .setUsername(user.getUsername())
+            .setName(user.getDisplayName())
+            .setArticles(new ArrayList<Article>());
     }
 
     public Long getId() {
@@ -35,8 +50,8 @@ public class Author {
         return this.name;
     }
 
-    public List<Long> getArticlesIds() {
-        return this.articlesIds;
+    public List<Article> getArticles() {
+        return this.articles;
     }
 
     public Author setId(final Long id) {
@@ -54,8 +69,8 @@ public class Author {
         return this;
     }
 
-    public Author setArticleIds(final List<Long> articleIds) {
-        this.articlesIds = (articleIds != null) ? new ArrayList<>(articleIds) : new ArrayList<Long>();
+    public Author setArticles(final List<Article> articles) {
+        this.articles = (articles != null) ? new ArrayList<>(articles) : new ArrayList<Article>();
         return this;
     }
 }

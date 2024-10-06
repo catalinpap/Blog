@@ -8,24 +8,30 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import blog.server.Users.UsersService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final UsersService usersService;
+
+    public SecurityConfig(UsersService usersService) {
+        this.usersService = usersService;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests((authorize) -> authorize
             .requestMatchers(new AntPathRequestMatcher("/api/login")).permitAll()
+            .requestMatchers(new AntPathRequestMatcher("/api/users", "POST")).permitAll()
             .requestMatchers(new AntPathRequestMatcher("/api/**", "GET")).permitAll()
             .anyRequest().authenticated()
         )
@@ -36,19 +42,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.builder()
-            .username("user")
-            .password(passwordEncoder().encode("user"))
-            .build();
-        
-        return new InMemoryUserDetailsManager(user);
-    }
-
-    @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(userDetailsService());
+        authenticationManagerBuilder
+            .userDetailsService(this.usersService)
+            .passwordEncoder(passwordEncoder());
+
         return authenticationManagerBuilder.build();
     }
 

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AuthorsRepository extends JpaRepository<Author, Long>, JpaSpecificationExecutor<Author> {
-    
+    boolean existsByUsername(String username);
 }

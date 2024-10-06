@@ -1,5 +1,10 @@
 package blog.server.Users;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -11,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Users") // "user" is not allowed as it is a reserved keyword in postgres
-public class User {
+public class User implements UserDetails {
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +34,7 @@ public class User {
         return this.id;
     }
 
+    @Override
     public String getUsername() {
         return this.username;
     }
@@ -41,6 +47,7 @@ public class User {
         return this.email;
     }
 
+    @Override
     public String getPassword() {
         return this.password;
     }
@@ -63,5 +70,10 @@ public class User {
     public User setPassword(final String password) {
         this.password = password;
         return this;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 }

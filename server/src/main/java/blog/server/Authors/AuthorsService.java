@@ -47,4 +47,8 @@ public class AuthorsService {
         
         return authorsRepository.save(updatedAuthor);
     }
+
+    public Boolean existsByUsername(String username) {
+        return authorsRepository.existsByUsername(username);
+    }
 }
