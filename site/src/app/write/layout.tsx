@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import "../../globals.css";
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -13,10 +13,10 @@ export default function WritePageLayout({
     children: React.ReactNode;
   }>) {
     return (
-        <html lang="en">
-          <body>
-            {children}
-          </body>
-        </html>
+        // <html lang="en">
+          //  <body>
+            children
+          // </body>
+        // </html>
     );
 }

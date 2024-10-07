@@ -26,6 +26,7 @@ import blog.server.utils.APIResponseBody;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Base64;
 
 @RestController
 @RequestMapping("/api")
@@ -65,7 +66,13 @@ public class AuthenticationController {
 				new UsernamePasswordAuthenticationToken(credentials.user(), credentials.password())
 			);
 
+			// TODO: Temporary solution for generating a Base64 token to use with Basic Auth
+			// ! To be replaced with JWT token authorization in the future !
+			String credentialString = credentials.user().toString() + ":" + credentials.password().toString();
+			String authToken = Base64.getEncoder().encodeToString(credentialString.getBytes());
+
 			setAuthCookie(response, authentication.isAuthenticated());
+			setAuthTokenCookie(response, authToken);
 
 			String responseBody = new APIResponseBody()
 				.data(authentication.getName())
@@ -132,6 +139,15 @@ public class AuthenticationController {
 			// authCookie.setDomain("localhost");
 			// authCookie.setHttpOnly(false);
 			// authCookie.setSecure(false);
-			response.addCookie(authCookie);
+
+
+		response.addCookie(authCookie);
+	}
+
+	private void setAuthTokenCookie(HttpServletResponse response, String cookieValue) {
+		Cookie authCookie = new Cookie("authToken", cookieValue);
+			authCookie.setPath("/");
+
+		response.addCookie(authCookie);
 	}
 }

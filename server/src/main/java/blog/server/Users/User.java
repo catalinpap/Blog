@@ -8,11 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Users") // "user" is not allowed as it is a reserved keyword in postgres
@@ -22,12 +24,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Column(unique = true)
     private String username;
 
     private String displayName;
 
+    @NotNull
+    @Column(unique = true)
     private String email;
 
+    @NotNull
     private String password;
 
     public Long getId() {

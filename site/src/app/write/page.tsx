@@ -6,6 +6,18 @@ import DOMPurify from "dompurify";
 import Link from "next/link";
 import "./write-page.css";
 
+/** 
+ * Helper function for retrieving cookies on client-side 
+*/
+const getCookie = (name: string): string | undefined => {
+    const cookieValue = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith(`${name}=`))
+        ?.split('=')[1];
+
+   return cookieValue;
+};
+
 const WritePage:React.FC<{}> = () => {
     const titleRef = useRef<HTMLInputElement>(null);
     const articleContentRef = useRef<HTMLTextAreaElement>(null);
@@ -53,7 +65,7 @@ const WritePage:React.FC<{}> = () => {
             body: JSON.stringify(articleDTO),
             headers: {
                 'content-type': 'application/json',
-                'authorization': `basic ${window.btoa('user:user')}` //TODO: handle different authorizations -> basic user:user
+                'authorization': `basic ${getCookie('authToken')}`
             }
         });
     }
