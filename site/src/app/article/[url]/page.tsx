@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { CategoryTag } from "@/components/common";
-import { CommentCard, SidePanel } from "@/components";
+import { CommentCard, FloatPanel } from "@/components";
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
-import { Article } from "@/types";
+import { ApiResponse, Article } from "@/types";
 
 
 type Props = {
@@ -19,7 +19,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
 
     const article_id = article_url.split('-').pop();
 
-    const article_response: {data: Article, message: string} = await fetch(`http://localhost:8080/api/articles/${article_id}`, {
+    const article_response: ApiResponse = await fetch(`http://localhost:8080/api/articles/${article_id}`, {
         method: 'GET',
         
     }).then(data => data.json());
@@ -89,7 +89,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                         <CommentCard />
                     </section>
                 </article>
-                <SidePanel>
+                <FloatPanel>
                     <div className="sticky top-10">
                         {/* Popular Topics */}
                         <p className="text-base font-medium mb-4">Popular Topics:</p>
@@ -117,7 +117,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                             <p className="text-base font-light ">Growing a distributed product design team</p>
                         </div>
                     </div>
-                </SidePanel>
+                </FloatPanel>
             </main>
         </>
         

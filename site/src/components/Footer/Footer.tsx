@@ -1,4 +1,4 @@
-const Footer:React.FC<{}> = () => {
+export const Footer:React.FC<{}> = () => {
     return (
         <footer className="relative w-full h-[45dvh] bottom-0 mt-auto">
             <article>
@@ -7,5 +7,3 @@ const Footer:React.FC<{}> = () => {
         </footer>
     );
 };
-
-export default Footer;

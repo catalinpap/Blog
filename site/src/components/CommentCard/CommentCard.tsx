@@ -1,6 +1,6 @@
 import { HeartEmptyIcon } from "../icons";
 
-const CommentCard: React.FC<{}> = () => {
+export const CommentCard: React.FC<{}> = () => {
     return (
         <div className="mb-8">
             <div className="flex flex-row justify-between">
@@ -23,4 +23,3 @@ const CommentCard: React.FC<{}> = () => {
         </div>
     );
 };
-export default CommentCard;

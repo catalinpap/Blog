@@ -1,4 +1,4 @@
 export type ApiResponse = {
-    data: Object,
+    data: Object | Page,
     message: string
 };
