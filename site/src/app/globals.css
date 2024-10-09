@@ -30,44 +30,16 @@
   }
 
   .page-content {
-    @apply relative mt-14 mb-14 px-8 mx-auto max-w-[768px] lg:max-w-[1024px] flex-shrink-0;
+    @apply relative mt-14 mb-14 px-8 mx-auto max-w-[768px] flex-shrink-0;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-light my-5 leading-loose tracking-wider;
+  .article-formatted {
+    @apply prose prose-lg prose-emerald prose-headings:tracking-wider prose-headings:font-normal prose-headings:leading-snug;
+    @apply prose-h1:italic;
   }
-  h1 {
-    @apply text-4xl;
-  }
-  h2 {
-    @apply text-3xl;
-  }
-  h3 {
-    @apply text-2xl;
-  }
-  h4 {
-    @apply text-2xl;
-  }
-  p {
-    @apply text-lg font-light leading-relaxed tracking-wide mb-2 text-justify;
-  }
-  strong {
-    @apply font-bold;
-  }
-  em {
-    @apply font-extralight tracking-wider;
-  }
-  blockquote {
-    @apply bg-white border-l-4 border-gray p-4 italic tracking-wider font-mono text-xl mb-2;
-  }
-  blockquote p {
-    @apply m-0;
-  }
-  code {
-    @apply  bg-light-gray text-gray tracking-wide font-extralight;
-  }
-  pre:has(code) {
-    @apply  bg-light-gray text-gray tracking-wide font-extralight p-2;
+
+  .article-formatted img {
+    @apply cursor-zoom-in;
   }
 }
 

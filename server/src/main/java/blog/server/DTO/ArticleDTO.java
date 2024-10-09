@@ -15,9 +15,11 @@ public class ArticleDTO {
     private int likes;
     private int bookmarks;
     private int views;
+    private Long authorId;
     private Author author;
     private String creationDate;
     private String url;
+    private String thumbnail;
 
     public ArticleDTO() {
 
@@ -33,8 +35,20 @@ public class ArticleDTO {
             .setLikes(article.getLikes())
             .setBookmarks(article.getBookmarks())
             .setViews(article.getViews())
+            .setAuthorId(article.getAuthorId())
+            .setAuthor(article.getAuthor())
             .setCreationDate(article.getCreationDate())
-            .setUrl(article.getUrl());
+            .setUrl(article.getUrl())
+            .setThumbnail(article.getThumbnail());
+    }
+
+    public Long getAuthorId() {
+        return this.authorId;
+    }
+
+    public ArticleDTO setAuthorId(Long authorId) {
+        this.authorId = authorId;
+        return this;
     }
 
     public Long getId() {
@@ -79,6 +93,10 @@ public class ArticleDTO {
 
     public String getUrl() {
         return this.url;
+    }
+
+    public String getThumbnail() {
+        return this.thumbnail;
     }
 
     private ArticleDTO setId(final Long id) {
@@ -133,6 +151,11 @@ public class ArticleDTO {
 
     public ArticleDTO setUrl(final String url) {
         this.url = url;
+        return this;
+    }
+
+    public ArticleDTO setThumbnail(final String thumbnail) {
+        this.thumbnail = thumbnail;
         return this;
     }
 

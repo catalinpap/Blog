@@ -1,3 +1,5 @@
+import { Author } from "./";
+
 export type Article = {
     id: number,
     title: string,
@@ -8,8 +10,6 @@ export type Article = {
     bookmarks: number,
     creationDate: string,
     url: string,
-    author: {
-      id: number,
-      name: string
-    }
+    thumbnail: string,
+    author: Author
   };

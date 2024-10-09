@@ -8,6 +8,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Generated;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -38,7 +39,8 @@ public class Article {
 	private Long authorId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "author")
+	@JoinColumn(name = "authorId", insertable=false, updatable=false)
+	@JsonIgnoreProperties("articles")
 	private Author author;
 
 	@Lob
@@ -64,6 +66,8 @@ public class Article {
 	private LocalDateTime creationDate;
 
 	private String url;
+
+	private String thumbnail;
 
 	@PostPersist
 	public void onSave() {
@@ -116,6 +120,10 @@ public class Article {
 
 	public String getUrl() {
 		return this.url;
+	}
+
+	public String getThumbnail() {
+		return this.thumbnail;
 	}
 
 	public Article setId(final Long id) {
@@ -173,13 +181,18 @@ public class Article {
 		return this;
 	}
 
+	public Article setThumbnail(final String thumbnail) {
+		this.thumbnail = thumbnail;
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		try {
 			return JSON.write(this);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return String.format("{id:%d, name:'%s', author:'%s', content:'%s'}", this.id, this.title, this.authorId, this.content);
+			return String.format("{id:%d, name:'%s', author:'%s', content:'%s'}", this.id, this.title, this.author.getId(), this.content);
 		}
 	}
 

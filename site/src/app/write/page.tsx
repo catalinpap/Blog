@@ -5,6 +5,7 @@ import { marked } from "marked";
 import DOMPurify from "dompurify";
 import Link from "next/link";
 import "./write-page.css";
+import { escape } from "querystring";
 
 /** 
  * Helper function for retrieving cookies on client-side 
@@ -51,13 +52,24 @@ const WritePage:React.FC<{}> = () => {
         }
     };
 
+    const extractThumbnail = (html: string | undefined) => {
+        if (!html) return;
+        const imgRegex = /<img[^>]+src="([^">]+)"/i;
+        const match = html.match(imgRegex);
+        const thumbnailURL = match && match[1];
+
+        return match ? thumbnailURL : undefined;
+    }
+
     const publishArticle = async () => {
         const title: string = titleRef.current!.value || '';
         const content: string | undefined = parseMarkdown();
+        const thumbnail = extractThumbnail(content);
 
         const articleDTO = {
             title: title,
             content: content,
+            thumbnail: thumbnail
         };
 
         const response = await fetch('http://localhost:8080/api/articles', {
@@ -86,7 +98,7 @@ const WritePage:React.FC<{}> = () => {
                             Preview
                     </button>
                     <textarea ref={articleContentRef} onChange={previewMarkdown} id="article-content" name="article-content" placeholder="Write your ideas..."/>
-                    <div ref={articlePreviewRef} className="w-full p-2 border-l-2 border-gray hidden"></div>
+                    <div ref={articlePreviewRef} className="article-formatted w-full p-2 border-l-2 border-gray hidden"></div>
                 </div>
             </main>
         </>

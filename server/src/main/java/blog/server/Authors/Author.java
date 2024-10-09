@@ -3,6 +3,8 @@ package blog.server.Authors;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import blog.server.Articles.Article;
 import blog.server.Users.User;
 import jakarta.persistence.CascadeType;
@@ -18,7 +20,8 @@ public class Author {
     private String username;
     private String name;
 
-    @OneToMany(mappedBy = "authorId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JsonIgnoreProperties("author")
     private List<Article> articles;
 
     public Author(){}

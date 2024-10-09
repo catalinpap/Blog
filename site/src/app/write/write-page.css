@@ -5,12 +5,20 @@
         @apply w-full p-4 bg-light;
     }
 
+    input:focus, textarea:focus {
+        @apply outline-none;
+    }
+
     input[name="title"] {
-        @apply text-3xl mb-2;
+        @apply text-3xl mb-2 font-medium tracking-wider;
+    }
+
+    input[name="title"]:focus {
+        @apply border-l border-gray;
     }
 
     textarea {
-        @apply text-lg resize-none flex-grow;
+        @apply text-lg resize-none flex-grow overflow-scroll;
     }
 
     .toggle-preview {

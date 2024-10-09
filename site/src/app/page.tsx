@@ -20,11 +20,11 @@ export default async function Home() {
         </section>
 
         <FloatPanel>
-            <PopularTopics />
+            <PopularTopics className="mb-8"/>
 
             {/* Popular Articles */}
-            <p className="text-base font-medium mb-4">Popular articles:</p>
-            <ArticleBannerList data={articles.slice(1,6)} />
+            <p className="text-base font-medium">Popular articles:</p>
+            <ArticleBannerList data={articles.slice(0,6)} className="divide-y divide-light-gray" />
         </FloatPanel>
 
       </article>

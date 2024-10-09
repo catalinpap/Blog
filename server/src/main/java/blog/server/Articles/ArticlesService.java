@@ -58,7 +58,7 @@ public class ArticlesService {
 		String authorUser = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Long userId = usersService.getByUsername(authorUser).getId();
-		article.setAuthorId(userId);
+		// article.setAuthorId(userId);
 
 		if (!authorsService.existsByUsername(authorUser)) {
 			authorsService.add(new Author()
@@ -98,15 +98,16 @@ public class ArticlesService {
 	private ArticleDTO mapToDTO(Article article) {
 		ArticleDTO dto = new ArticleDTO().from(article);
 
+		// TODO: Learn how to configure @ManyToOne relations then this won't be necessary
 		Author author = new Author();
 		try {
-			author = authorsService.get(article.getAuthorId());
+			// author = authorsService.get(article.getAuthorId());
 		} catch (Exception e) {
 			// TODO: Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		dto.setAuthor(author);
+		// dto.setAuthor(author);
 
 		return dto;
 	}

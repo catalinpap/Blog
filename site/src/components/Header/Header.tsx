@@ -4,7 +4,7 @@ import { ArrowDownIcon, MenuIcon, SearchIcon, UserIcon, WriteIcon } from "../ico
 
 export const Header = () => {
     return (
-        <header className="sticky flex justify-between items-center flex-row mx-4 lg:w-3/4 lg:mx-auto lg:min-w-[960px] bg-white/80 px-8 py-2 rounded-b-xl top-0  shadow-2xl z-50 backdrop-blur-md">
+        <header className="bg-light sticky flex justify-between items-center flex-row mx-4 w-full lg:mx-auto lg:min-w-[960px] px-8 py-2 rounded-b top-0 z-50 border-b border-light-gray">
             <nav className="flex items-center h-full gap-x-4">
                 <MenuIcon size={28} className="cursor-pointer lg:hidden"/>
                 <Link href={'/'} className="navbar-logo">LOGO</Link>
@@ -24,7 +24,6 @@ export const Header = () => {
                     write
                 </Link>
             </div>
-            
         </header>
     );
 }

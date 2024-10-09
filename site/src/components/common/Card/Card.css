@@ -2,7 +2,7 @@
 
 @layer components {
     .card-wrapper {
-        @apply relative rounded-sm overflow-hidden shadow-md cursor-pointer max-h-[375px] hover:shadow-xl;
+        @apply relative overflow-hidden shadow-md cursor-pointer max-h-[375px] hover:shadow-xl;
     }
     .card-wrapper p {
         @apply m-0;

@@ -1,6 +1,7 @@
-import Image from "next/image";
+'use server';
+
 import { CategoryTag } from "@/components/common";
-import { CommentCard, FloatPanel } from "@/components";
+import { ArticleBannerList, CommentCard, FloatPanel, PopularTopics } from "@/components";
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
 import { ApiResponse, Article } from "@/types";
 
@@ -26,19 +27,10 @@ const ArticlePage: React.FC<Props> = async (props) => {
     const {data: article} = article_response;
 
     return (
-        <>
-            {/* TODO: Extract Hero image to a separate component to avoid duplication. Also make it to be easy to integrate into HeroCarousel */}
-            <div className="relative w-full h-[75dvh]">
-                <Image src={"https://images.unsplash.com/photo-1524061662617-6a29d732e3ef?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
-                    alt=""
-                    width={800}
-                    height={600}
-                    className="hero-bg"
-                />
-            </div>
+        <>  
             <main className="page-content flex flex-col lg:flex-row">
                 {/* Tools sidepanel */}
-                <aside className="absolute h-full top-0 right-full mr-10 block">
+                <aside className="absolute h-full top-0 right-full mr-4 block">
                     <div className="sticky top-20 flex-col gap-4 hidden lg:flex">
                         <HeartEmptyIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-orange" />
                         <BookmarkIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-yellow" />
@@ -48,10 +40,13 @@ const ArticlePage: React.FC<Props> = async (props) => {
                 </aside>
                 <article className="main-container">
                     <CategoryTag>{article.category}</CategoryTag>
-                    <h1 className="text-[2rem] leading-normal tracking-wide mb-4">{article.title}</h1>
+                    <h1 className="text-[2.5rem] leading-normal tracking-wide mb-4 text-center font-thin italic">{article.title}</h1>
+                    
                     <div className="flex flex-row justify-between mb-16">
                         <div className="flex flex-row divide-x divide-black text-xs">
-                            <span className="pr-2 font-medium">{article.author.name}</span>
+                            <span className="pr-2 italic font-light">written by: 
+                                <span className="font-medium non-italic"> {article.author.name}</span>
+                            </span>
                             <span className="pl-2 text-[#6C757D] font-light">{article.creationDate}</span>
                         </div>
                         <div className="flex flex-row gap-x-3">
@@ -67,7 +62,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                         </div>
                     </div>
                     
-                    <section className="text-[#6C757D] font-light tracking-wide" dangerouslySetInnerHTML={{__html: article.content}}>
+                    <section className="article-formatted text-[#6C757D] font-light tracking-wide" dangerouslySetInnerHTML={{__html: article.content}}>
                     </section>
 
                     {/* Separator */}
@@ -90,33 +85,10 @@ const ArticlePage: React.FC<Props> = async (props) => {
                     </section>
                 </article>
                 <FloatPanel>
-                    <div className="sticky top-10">
-                        {/* Popular Topics */}
-                        <p className="text-base font-medium mb-4">Popular Topics:</p>
-                        <div className="flex flex-wrap gap-2 mb-16">
-                        <CategoryTag>Lifestyle</CategoryTag>
-                        <CategoryTag>Travel</CategoryTag>
-                        <CategoryTag>Technology</CategoryTag>
-                        <CategoryTag>Education</CategoryTag>
-                        <CategoryTag>Recipe</CategoryTag>
-                        <CategoryTag>Design</CategoryTag>
-                        </div>
+                    <PopularTopics className="mb-8"/>
 
-                        {/* Popular Articles */}
-                        <p className="text-base font-medium mb-4">Related articles:</p>
-                        <div className="cursor-pointer mb-4">
-                            <CategoryTag>Interior Design</CategoryTag>
-                            <p className="text-base font-light ">Growing a distributed product design team</p>
-                        </div>
-                        <div className="cursor-pointer mb-4">
-                            <CategoryTag>Interior Design</CategoryTag>
-                            <p className="text-base font-light ">Growing a distributed product design team</p>
-                        </div>
-                        <div className="cursor-pointer mb-4">
-                            <CategoryTag>Interior Design</CategoryTag>
-                            <p className="text-base font-light ">Growing a distributed product design team</p>
-                        </div>
-                    </div>
+                    <p className="text-base font-medium">More from this author:</p>
+                    <ArticleBannerList data={article.author.articles?.slice(0, 5)}/>
                 </FloatPanel>
             </main>
         </>
