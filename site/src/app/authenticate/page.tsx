@@ -1,6 +1,7 @@
 'use client';
 
 import { ApiResponse } from "@/types";
+import { auth } from "@/utils/auth";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
@@ -15,23 +16,15 @@ const AuthenticatePage = () => {
         const user = formData.get('user');
         const password = formData.get('password');
 
-        const loginResponse = await fetch('http://localhost:8080/api/login', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({
+        try {
+            await auth.login({
                 "user": user,
                 "password": password
-            }),
-            credentials: 'include'
-        });
-
-        if (loginResponse.ok) {
+            });
             router.push('/');
-        } else {
-            const data: ApiResponse = await loginResponse.json();
-            setErrorMessage(data.message);
+        } catch (exception) {
+            if (exception instanceof Error) setErrorMessage(exception.message);
+            else alert('Something bad happened! Try again later');
         }
     };
 
@@ -45,25 +38,18 @@ const AuthenticatePage = () => {
         const password = formData.get('password');
         const passwordConfirm = formData.get('passwordConfirm');
 
-        const registerResponse = await fetch('http://localhost:8080/api/users', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({
+        try {
+            await auth.register({
                 "username": user,
                 "displayName": name,
                 "email": email,
                 "password": password
-            }),
-        });
-
-        if (registerResponse.ok) {
+            });
+            
             alert('User created');
-            // router.push('/');
-        } else {
-            const data: ApiResponse = await registerResponse.json();
-            setErrorMessage(data.message);
+        } catch (exception) {
+            if (exception instanceof Error) setErrorMessage(exception.message);
+            else alert('Something bad happened! Try again later');
         }
     }
 

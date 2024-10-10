@@ -21,7 +21,7 @@ export const Card: React.FC<{data: Article}> = ({data}) => {
             <div className="flex flex-col justify-between px-5 pt-4 pb-3">
                 <h2 className="card-title">{data.title.substring(0,25) + '...'}</h2>
                 <p className="card-description">{data.content.substring(0,50) + '...'}</p>
-                <p className="card-info">by <span className="font-semibold">{data.author.name}</span>, {format_date(data.creationDate)}</p>
+                <p className="card-info">by <span className="font-semibold">{data.author?.name}</span>, {format_date(data.creationDate)}</p>
             </div>
             
         </Link>

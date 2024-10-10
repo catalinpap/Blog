@@ -5,19 +5,7 @@ import { marked } from "marked";
 import DOMPurify from "dompurify";
 import Link from "next/link";
 import "./write-page.css";
-import { escape } from "querystring";
-
-/** 
- * Helper function for retrieving cookies on client-side 
-*/
-const getCookie = (name: string): string | undefined => {
-    const cookieValue = document.cookie
-        .split('; ')
-        .find((row) => row.startsWith(`${name}=`))
-        ?.split('=')[1];
-
-   return cookieValue;
-};
+import { getCookie } from "@/utils/helpers";
 
 const WritePage:React.FC<{}> = () => {
     const titleRef = useRef<HTMLInputElement>(null);

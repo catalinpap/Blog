@@ -41,11 +41,12 @@ const DropdownTrigger:React.FC<{
 };
 
 const DropdownItems:React.FC<{
-    children: ReactElement | ReactElement[], 
+    key: string
+    children: ReactElement | ReactElement[],
     isOpen?: boolean, 
     setIsOpen?: Dispatch<SetStateAction<boolean>>,
     className?: string
-}> = ({children, isOpen, setIsOpen, className}) => {
+}> = ({key, children, isOpen, setIsOpen, className}) => {
     return (
         isOpen && <div className={`absolute flex flex-col top-full right-0 bg-light text-nowrap border border-light-gray shadow-sm shadow-black/20 p-1 text-black ${className}`}>
             {children}

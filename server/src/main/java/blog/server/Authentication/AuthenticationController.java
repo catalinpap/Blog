@@ -15,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.util.SerializationUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +51,8 @@ public class AuthenticationController {
 			.body(authentication);
 	}
 
-	@GetMapping("/user")
+	@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+	@PostMapping("/me")
 	public ResponseEntity<UserDetails> getUser(@AuthenticationPrincipal UserDetails user) {
 		return ResponseEntity
 			.ok()
@@ -72,7 +74,7 @@ public class AuthenticationController {
 			String authToken = Base64.getEncoder().encodeToString(credentialString.getBytes());
 
 			setAuthCookie(response, authentication.isAuthenticated());
-			setAuthTokenCookie(response, authToken);
+			setAuthTokenCookie(response, authToken, false);
 
 			String responseBody = new APIResponseBody()
 				.data(authentication.getName())
@@ -122,10 +124,8 @@ public class AuthenticationController {
 		}
 	}
 
-	@GetMapping("/logout")
-	public ResponseEntity<?> logout(HttpServletRequest req) {
-		SecurityContextLogoutHandler handler = new SecurityContextLogoutHandler();
-		handler.logout(req, null, null);
+	@PostMapping("/logout")
+	public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
 		return ResponseEntity
 			.ok()
 			.contentType(MediaType.APPLICATION_JSON)
@@ -144,9 +144,11 @@ public class AuthenticationController {
 		response.addCookie(authCookie);
 	}
 
-	private void setAuthTokenCookie(HttpServletResponse response, String cookieValue) {
+	private void setAuthTokenCookie(HttpServletResponse response, String cookieValue, Boolean delete) {
 		Cookie authCookie = new Cookie("authToken", cookieValue);
-			authCookie.setPath("/");
+		authCookie.setPath("/");
+
+		if(delete) authCookie.setMaxAge(0);
 
 		response.addCookie(authCookie);
 	}
