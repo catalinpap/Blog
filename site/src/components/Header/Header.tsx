@@ -1,6 +1,7 @@
 import './Header.css';
 import Link from "next/link";
 import { ArrowDownIcon, MenuIcon, SearchIcon, UserIcon, WriteIcon } from "../icons";
+import { AccountDropdown } from '../';
 
 export const Header = () => {
     return (
@@ -18,7 +19,7 @@ export const Header = () => {
             
             <div className="flex items-center h-full gap-x-3">
                 <SearchIcon size={28} />
-                <UserIcon size={28} className="hidden lg:inline-block" />
+                <AccountDropdown />
                 <Link href={"/write"} className="navbar-button flex items-center gap-x-2 capitalize">
                     <WriteIcon size={20} />
                     write
@@ -26,4 +27,4 @@ export const Header = () => {
             </div>
         </header>
     );
-}
+};

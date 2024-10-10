@@ -6,4 +6,5 @@ export { FloatPanel } from "./SidePanel/FloatPanel";
 export { CommentCard } from "./CommentCard/CommentCard";
 export { ArticleBanner } from "./ArticleBanner/ArticleBanner";
 export { ArticleBannerList } from "./ArticleBannerList/ArticleBannerList";
-export {PopularTopics} from "./PopularTopics/PopularTopics";
+export { PopularTopics } from "./PopularTopics/PopularTopics";
+export { AccountDropdown } from "./AccountDropdown/AccountDropdown";

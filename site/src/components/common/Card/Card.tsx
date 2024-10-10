@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CategoryTag } from "..";
 import { Article } from "@/types";
 
-const Card: React.FC<{data: Article}> = ({data}) => {
+export const Card: React.FC<{data: Article}> = ({data}) => {
     const format_date = (date: string): string => {
         return new Date(date).toLocaleDateString('en-us', {day:'numeric', month: 'short', year: 'numeric'});
     }
@@ -27,5 +27,3 @@ const Card: React.FC<{data: Article}> = ({data}) => {
         </Link>
     );
 };
-
-export default Card;

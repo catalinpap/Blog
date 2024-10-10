@@ -1,7 +1,3 @@
-import Card from "./Card/Card";
-import CategoryTag from "./CategoryTag/CategoryTag";
-
-export {
-    Card,
-    CategoryTag
-};
+export { Card } from "./Card/Card";
+export { CategoryTag } from "./CategoryTag/CategoryTag";
+export { Dropdown } from "./Dropdown/Dropdown";
