@@ -13,10 +13,9 @@ export default function WritePageLayout({
     children: React.ReactNode;
   }>) {
     return (
-        // <html lang="en">
-          //  <body>
-            children
-          // </body>
-        // </html>
+      <>
+        {children}
+      </>
+          
     );
 }

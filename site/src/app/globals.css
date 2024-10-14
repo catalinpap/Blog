@@ -41,6 +41,10 @@
   .article-formatted img {
     @apply cursor-zoom-in;
   }
+
+  .button-primary {
+    @apply text-sm text-white min-w-fit h-full px-4 py-2 bg-black cursor-pointer rounded-md hover:bg-[#3E454D];
+}
 }
 
 @layer utilities {

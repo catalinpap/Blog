@@ -3,8 +3,7 @@
 import { CategoryTag } from "@/components/common";
 import { ArticleBannerList, CommentCard, FloatPanel, PopularTopics } from "@/components";
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
-import { ApiResponse, Article } from "@/types";
-
+import { Article, PaginatedApiResponse } from "@/types";
 
 type Props = {
     params: {
@@ -13,18 +12,17 @@ type Props = {
     searchParams: {
 
     }
-}
+};
 
 const ArticlePage: React.FC<Props> = async (props) => {
     const {url: article_url} = props.params;
 
     const article_id = article_url.split('-').pop();
 
-    const article_response: ApiResponse = await fetch(`http://localhost:8080/api/articles/${article_id}`, {
+    const article: Article =  await fetch(`http://localhost:8080/api/articles/${article_id}`, {
         method: 'GET',
         
-    }).then(data => data.json());
-    const {data: article} = article_response;
+    }).then(response => response.json()).then(content => content.data);
 
     return (
         <>  
@@ -38,9 +36,9 @@ const ArticlePage: React.FC<Props> = async (props) => {
 
                     </div>
                 </aside>
-                <article className="main-container">
+                <article className="main-container article-formatted">
                     <CategoryTag>{article.category}</CategoryTag>
-                    <h1 className="text-[2.5rem] leading-normal tracking-wide mb-4 text-center font-thin italic">{article.title}</h1>
+                    <h1>{article.title}</h1>
                     
                     <div className="flex flex-row justify-between mb-16">
                         <div className="flex flex-row divide-x divide-black text-xs">
@@ -97,7 +95,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
 };
 
 export async function generateStaticParams() {
-    const articles = await fetch('http://localhost:8080/api/articles', 
+    const articles: PaginatedApiResponse = await fetch('http://localhost:8080/api/articles', 
         {method:'GET'}
     ).then((response) => response.json());
 

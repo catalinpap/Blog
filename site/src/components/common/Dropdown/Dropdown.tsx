@@ -48,7 +48,7 @@ const DropdownItems:React.FC<{
     className?: string
 }> = ({key, children, isOpen, setIsOpen, className}) => {
     return (
-        isOpen && <div className={`absolute flex flex-col top-full right-0 bg-light text-nowrap border border-light-gray shadow-sm shadow-black/20 p-1 text-black ${className}`}>
+        isOpen && <div className={`absolute flex flex-col top-full right-0 bg-light text-nowrap border border-light-gray shadow-sm shadow-black/20 p-1 text-black z-20 ${className}`}>
             {children}
         </div>
     );

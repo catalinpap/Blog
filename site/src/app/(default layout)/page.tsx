@@ -24,7 +24,7 @@ export default async function Home() {
 
             {/* Popular Articles */}
             <p className="text-base font-medium">Popular articles:</p>
-            <ArticleBannerList data={articles.slice(0,6)} className="divide-y divide-light-gray" />
+            <ArticleBannerList data={articles?.slice(0,6)} className="divide-y divide-light-gray" />
         </FloatPanel>
 
       </article>

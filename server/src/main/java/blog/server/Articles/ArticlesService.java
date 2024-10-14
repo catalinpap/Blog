@@ -58,7 +58,7 @@ public class ArticlesService {
 		String authorUser = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Long userId = usersService.getByUsername(authorUser).getId();
-		// article.setAuthorId(userId);
+		article.setAuthorId(userId);
 
 		if (!authorsService.existsByUsername(authorUser)) {
 			authorsService.add(new Author()

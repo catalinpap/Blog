@@ -1,5 +1,5 @@
 export { Carousel } from "./Carousel/Carousel";
-export { Header } from "./Header/Header";
+export { DefaultHeader } from "./DefaultHeader/DefaultHeader";
 export { Footer } from "./Footer/Footer";
 export { CardGrid } from "./CardGrid/CardGrid";
 export { FloatPanel } from "./SidePanel/FloatPanel";
