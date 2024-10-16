@@ -64,6 +64,7 @@ public class ArticlesController {
 	@PostMapping("")
 	public ResponseEntity<String> add(@RequestBody Article article) throws Exception {
 		Article addedArticle = articlesService.add(article);
+
 		String responseBody = new APIResponseBody().data(article).json();
 
 		URI articleURI = ServletUriComponentsBuilder

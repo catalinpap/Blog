@@ -5,12 +5,14 @@ import java.util.List;
 
 import blog.server.Articles.Article;
 import blog.server.Authors.Author;
+import blog.server.Categories.Category;
 
 public class ArticleDTO {
     private Long id;
     private String title;
     private String content;
     private String category;
+    // private Category categoryObj;
     private List<String> keywords;
     private int likes;
     private int bookmarks;
@@ -31,6 +33,7 @@ public class ArticleDTO {
             .setTitle(article.getTitle())
             .setContent(article.getContent())
             .setCategory(article.getCategory())
+            // .setCategoryObj(article.getCategoryObj())
             .setKeywords(article.getKeywords())
             .setLikes(article.getLikes())
             .setBookmarks(article.getBookmarks())
@@ -66,6 +69,10 @@ public class ArticleDTO {
     public String getCategory() {
         return this.category;
     }
+
+    // public Category getCategoryObj() {
+    //     return this.categoryObj;
+    // }
 
     public List<String> getKeywords() {
         return this.keywords;
@@ -118,6 +125,11 @@ public class ArticleDTO {
         this.category = category;
         return this;
     }
+
+    // public ArticleDTO setCategoryObj(final Category categoryObj) {
+    //     this.categoryObj = categoryObj;
+    //     return this;
+    // }
 
     public ArticleDTO setKeywords(final List<String> keywords) {
         this.keywords = (keywords != null) ? new ArrayList<>(keywords) : new ArrayList<String>();

@@ -6,6 +6,7 @@ import { markdownToHTML } from "@/utils/helpers";
 import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import "./ArticleForm.css";
+import { CategorySelect } from "..";
 
 export type ArticleFormProps = {
     articleData?: Article,
@@ -53,6 +54,7 @@ export const ArticleForm:React.FC<ArticleFormProps> = ({articleData, callback}) 
                 <button type="submit" className="button-primary bg-green hover:bg-teal-600">Publish</button>
             </Header>
             <main className={"flex flex-col min-h-[100dvh] mb-36 mx-4 lg:mx-auto lg:container"}>
+                <CategorySelect />
                 <input id="title" name="title" type="text" placeholder="Title" value={article?.title} onChange={handleInputChange}/>
                 <div className="relative flex gap-x-1 w-full flex-grow">
                     <button

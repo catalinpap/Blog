@@ -6,13 +6,13 @@ import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Generated;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import blog.server.Authors.Author;
+import blog.server.Categories.Category;
 import blog.server.utils.JSON;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
@@ -25,6 +25,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "article")
@@ -34,21 +35,27 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank
 	private String title;
 	
 	private Long authorId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "authorId", insertable=false, updatable=false)
+	@JoinColumn(name = "authorId", insertable = false, updatable = false)
 	@JsonIgnoreProperties("articles")
 	private Author author;
 
 	@Lob
+	@NotBlank
 	private String content;
 
 	@ColumnDefault("'Uncategorized'")
-	@Generated
 	private String category;
+
+	// @ColumnDefault("'Uncategorized'")
+	// @ManyToOne(fetch = FetchType.EAGER)
+	// @JoinColumn(name = "id", insertable = false, updatable = false)
+	// private Category categoryObj;
 
 	@Nullable
 	private List<String> keywords;
@@ -97,6 +104,10 @@ public class Article {
 	public String getCategory() {
 		return this.category;
 	}
+
+	// public Category getCategoryObj() {
+	// 	return this.categoryObj;
+	// }
 
 	public List<String> getKeywords() {
 		return this.keywords;
@@ -156,6 +167,11 @@ public class Article {
 		return this;
 	}
 
+	// public Article setCategoryObj(final Category categoryObj) {
+	// 	this.categoryObj = categoryObj;
+	// 	return this;
+	// }
+
 	public Article setKeywords(final List<String> keywords) {
 		this.keywords = new ArrayList<>(keywords);
 		return this;
@@ -192,7 +208,7 @@ public class Article {
 			return JSON.write(this);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return String.format("{id:%d, name:'%s', author:'%s', content:'%s'}", this.id, this.title, this.author.getId(), this.content);
+			return String.format("{id:%d, title:'%s', authorId:'%s', content:'%s'}", this.id, this.title, this.authorId, this.content);
 		}
 	}
 

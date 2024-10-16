@@ -7,4 +7,5 @@ public class Const {
     public static final String ARTICLES_BASE_URL = "/api/articles";
     public static final String AUTHORS_BASE_URL = "/api/authors";
     public static final String USERS_BASE_URL = "/api/users";
+    public static final String CATEGORY_BASE_URL = "/api/categories";
 }

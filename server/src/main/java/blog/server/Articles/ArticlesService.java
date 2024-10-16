@@ -55,6 +55,8 @@ public class ArticlesService {
 	}
 
 	public Article add(Article article) throws Exception {
+		// TODO: move NonNull validation into Model
+		// if(article.getTitle() == "" || article.getContent() == "") throw new Exception("Empty Article");
 		String authorUser = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Long userId = usersService.getByUsername(authorUser).getId();

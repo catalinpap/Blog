@@ -58,11 +58,13 @@ export const extractFirstImageURL = (html: string | undefined) => {
  */
 export const extractArticle = (formData: FormData) => {
     const title = formData.get('title');
-    const content = markdownToHTML(formData.get('content') as string);
-    const thumbnail = extractFirstImageURL(content);
+    const category = formData.get('category');
+    const content = markdownToHTML(formData.get('content') as string) || '';
+    const thumbnail = extractFirstImageURL(content) || '';
 
     return {
         title,
+        category,
         content,
         thumbnail
     } as Article;
