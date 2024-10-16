@@ -1,5 +1,5 @@
 import { Article } from "@/types";
-import { ArticleBanner } from "..";
+import { ArticleBanner } from "../common";
 
 export const ArticleBannerList:React.FC<{data: Article[], className?: string}> = ({data, className}) => {
     return (

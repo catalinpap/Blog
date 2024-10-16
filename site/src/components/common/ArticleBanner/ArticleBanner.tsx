@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Article } from "@/types";
-import { CategoryTag } from "../common";
+import { CategoryTag } from "..";
 import Image from "next/image";
 
 export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {

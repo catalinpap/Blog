@@ -1,5 +1,5 @@
-import { ArticleBannerList, CardGrid, Carousel, FloatPanel, PopularTopics } from "@/components";
-import { ApiResponse, Article } from "@/types";
+import { ArticleBannerList, CardGrid, HeroCarousel, FloatPanel, PopularTopics } from "@/components";
+import { ApiResponse, Article, PaginatedApiResponse } from "@/types";
 
 const fetchArticles = async () => {
   const res = await fetch('http://localhost:8080/api/articles', {
@@ -9,13 +9,13 @@ const fetchArticles = async () => {
 }
 
 export default async function Home() {
-  const fetchArticlesResponse: ApiResponse = await fetchArticles();
+  const fetchArticlesResponse: PaginatedApiResponse = await fetchArticles();
   const articles: Article[] = fetchArticlesResponse.data.content as Article[];
   return (
     <main>
       <article className="page-content flex flex-col lg:flex-row">
         <section className="main-container">
-          <Carousel className="mb-4"/>
+          <HeroCarousel className="mb-4"/>
           <CardGrid data={articles} />
         </section>
 
