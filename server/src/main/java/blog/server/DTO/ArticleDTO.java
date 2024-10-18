@@ -6,6 +6,7 @@ import java.util.List;
 import blog.server.Articles.Article;
 import blog.server.Authors.Author;
 import blog.server.Categories.Category;
+import blog.server.Comments.Comment;
 
 public class ArticleDTO {
     private Long id;
@@ -22,6 +23,7 @@ public class ArticleDTO {
     private String creationDate;
     private String url;
     private String thumbnail;
+    private List<Comment> comments;
 
     public ArticleDTO() {
 
@@ -42,7 +44,8 @@ public class ArticleDTO {
             .setAuthor(article.getAuthor())
             .setCreationDate(article.getCreationDate())
             .setUrl(article.getUrl())
-            .setThumbnail(article.getThumbnail());
+            .setThumbnail(article.getThumbnail())
+            .setComments(article.getComments());
     }
 
     public Long getAuthorId() {
@@ -104,6 +107,10 @@ public class ArticleDTO {
 
     public String getThumbnail() {
         return this.thumbnail;
+    }
+
+    public List<Comment> getComments() {
+        return this.comments;
     }
 
     private ArticleDTO setId(final Long id) {
@@ -171,4 +178,8 @@ public class ArticleDTO {
         return this;
     }
 
+    public ArticleDTO setComments(final List<Comment> comments) {
+        this.comments = (comments != null) ? new ArrayList<>(comments) : new ArrayList<Comment>();
+        return this;
+    }
 }

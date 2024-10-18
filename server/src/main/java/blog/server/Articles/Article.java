@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import blog.server.Authors.Author;
 import blog.server.Categories.Category;
+import blog.server.Comments.Comment;
 import blog.server.utils.JSON;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
@@ -23,6 +24,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -75,6 +77,9 @@ public class Article {
 	private String url;
 
 	private String thumbnail;
+
+	@OneToMany(mappedBy = "articleId", fetch = FetchType.EAGER)
+	private List<Comment> comments;
 
 	@PostPersist
 	public void onSave() {
@@ -135,6 +140,10 @@ public class Article {
 
 	public String getThumbnail() {
 		return this.thumbnail;
+	}
+
+	public List<Comment> getComments() {
+		return this.comments;
 	}
 
 	public Article setId(final Long id) {
@@ -199,6 +208,11 @@ public class Article {
 
 	public Article setThumbnail(final String thumbnail) {
 		this.thumbnail = thumbnail;
+		return this;
+	}
+
+	public Article setComments(final List<Comment> comments) {
+		this.comments = (comments != null) ? new ArrayList<>(comments) : new ArrayList<Comment>();
 		return this;
 	}
 

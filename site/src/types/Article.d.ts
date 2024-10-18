@@ -1,4 +1,4 @@
-import { Author } from "./";
+import { Author, Comment } from "./";
 
 export type Article = {
     id: number,
@@ -11,5 +11,6 @@ export type Article = {
     creationDate: string,
     url: string,
     thumbnail: string,
-    author: Author
+    author: Author,
+    comments: Comment[]
   };

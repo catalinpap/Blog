@@ -1,5 +1,6 @@
 package blog.server.Categories;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import blog.server.utils.Const;
 
@@ -56,8 +58,13 @@ public class CategoryController {
     @PostMapping("")
     public ResponseEntity<Category> add(@RequestBody Category category) throws Exception {
         Category addedCategory = categoryService.add(category);
+        URI categoryUri = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .path("{id}")
+            .buildAndExpand(addedCategory.getId())
+            .toUri();
         return ResponseEntity
-            .ok()
+            .created(categoryUri)
             .contentType(MediaType.APPLICATION_JSON)
             .body(addedCategory);
     }

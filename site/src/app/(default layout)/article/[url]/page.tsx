@@ -1,7 +1,7 @@
 'use server';
 
 import { CategoryTag } from "@/components/common";
-import { ArticleBannerList, CommentCard, FloatPanel, PopularTopics } from "@/components";
+import { ArticleBannerList, Comments, FloatPanel, PopularTopics } from "@/components";
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
 import { Article, PaginatedApiResponse } from "@/types";
 
@@ -55,7 +55,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                                 <BookmarkIcon size={18} color={"#6C757D"} /> {article.bookmarks}
                             </span>
                             <span className="flex flex-row items-center text-xs  text-[#6C757D] gap-x-0.5">
-                                <CommentIcon size={18} color={"#6C757D"} /> 2
+                                <CommentIcon size={18} color={"#6C757D"} /> {article.comments.length}
                             </span>
                         </div>
                     </div>
@@ -76,11 +76,8 @@ const ArticlePage: React.FC<Props> = async (props) => {
                     <span className="block border border-[#CED4DA] rounded-md  w-full my-5" />
 
                     {/* Comments */}
-                    <section>
-                        <h2 className="text-base font-medium mb-3">2 comments</h2>
-                        <CommentCard />
-                        <CommentCard />
-                    </section>
+                    <Comments comments={article.comments} />
+
                 </article>
                 <FloatPanel>
                     <PopularTopics className="mb-8"/>
