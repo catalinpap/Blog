@@ -1,19 +1,21 @@
 import Image from "next/image";
 import { Carousel, CategoryTag } from "../common";
 import { Article } from "@/types";
+import Link from "next/link";
 
 const ArticleCarouselItem:React.FC<{
     thumbnail: string,
     category: string,
-    title: string
-}> = ({thumbnail, category, title}) => {
+    title: string,
+    url: string
+}> = ({thumbnail, category, title, url}) => {
     return (
-        <>
+        <Link href={`/article/${url}`}>
             <Image src={thumbnail || ''} 
                 alt="" 
                 width={1600} 
                 height={1200}
-                className="background"
+                className="w-full h-full -z-10 object-cover"
                 />
             <div className="absolute w-full bottom-4 p-4">
                 {/* Category tag */}
@@ -21,7 +23,7 @@ const ArticleCarouselItem:React.FC<{
                 {/* Title */}
                 <h1 className="title">{title}</h1>
             </div>
-        </>
+        </Link>
     )
 }
 
@@ -32,13 +34,14 @@ export const HeroCarousel: React.FC<{className?: string}> = async ({className}) 
     }).then(response => response.json()).then(res => res.data.content);
 
     return (
-        <Carousel className={`relative items-end w-full ${className}`} transitionStyle="scroll">    
+        <Carousel className={`relative items-end w-full ${className}`} transitionStyle="scroll" autoScroll={true}>    
             {articles.map(article => 
                 <ArticleCarouselItem 
                     key={`carousel-article-${article.id}`}
                     thumbnail={article.thumbnail}
                     title={article.title}
                     category={article.category}
+                    url={article.url}
                 />
             )}
         </Carousel>

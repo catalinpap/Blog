@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowBackIcon, ArrowFrontIcon } from "@/components/icons";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import "./Carousel.css";
 
 
@@ -28,24 +28,24 @@ export const Carousel:React.FC<CarouselProps> = ({
     const [currentIndex, setCurrentIndex] = useState(0);
     const totalItems = children.length;
 
-    const next = () => {
+    const next = useCallback(() => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % totalItems);
-    }
+    }, [totalItems]);
 
-    const previous = () => {
+    const previous = useCallback(() => {
         setCurrentIndex(prevIndex => (prevIndex - 1 + totalItems) % totalItems);
-    }
+    }, [totalItems]);
 
-    const setCurrent = (index: number) => {
+    const setCurrent = useCallback((index: number) => {
         setCurrentIndex(index);
-    }
+    }, []);
 
     useEffect(() => {
         if(autoScroll) {
             const interval = setInterval(next, scrollInterval);
             return () => clearInterval(interval);
         }
-    }, [autoScroll, scrollInterval]);
+    }, [autoScroll, scrollInterval, next]);
 
     const renderChildren = (() => {
         switch(transitionStyle) {
@@ -60,7 +60,7 @@ export const Carousel:React.FC<CarouselProps> = ({
                     <div className="flex transition-transform duration-300" 
                         style={{ transform: `translateX(-${currentIndex * 100}%)`, width: `${totalItems * 100}%` }}>
                             {children.map((child, index) => (
-                                <div key={`carousel-${index}`} className="w-full h-full flex-shrink-0">
+                                <div key={`carousel-${index}`} className="w-full flex-shrink-0">
                                     {child}
                                 </div>
                                     
@@ -75,10 +75,9 @@ export const Carousel:React.FC<CarouselProps> = ({
             
             {renderChildren}
 
-            {/* Controls */}
-            <div className="absolute w-full flex justify-between items-center">
-                {/* Bullets */}
-                <div className="flex bottom-0 justify-center lg:justify-start w-full space-x-2">
+            {/* Indicators */}
+            <div className="absolute w-full flex justify-between items-center bottom-4 z-10">
+                <div className="flex justify-center w-full space-x-2">
                     {children.map((_, index) => (
                         <button key={`carousel-bullet-${index}`} 
                             className={`bullet ${(currentIndex === index) && 'selected'}`}
@@ -86,15 +85,15 @@ export const Carousel:React.FC<CarouselProps> = ({
                         />
                     ))}
                 </div>
-                {/* Arrows */}
-                <div className="bottom-0 right-0 hidden lg:flex">
-                    <button className="arrow" onClick={previous}>
-                        <ArrowBackIcon size={"full"}/>
-                    </button>
-                    <button className="arrow" onClick={next}>
-                        <ArrowFrontIcon size={"full"}/>
-                    </button>
-                </div>
+            </div>
+            {/* Controls */}
+            <div className="absolute inset-0 hidden lg:flex justify-between items-center pointer-events-none">
+                <button className="arrow" onClick={previous}>
+                    <ArrowBackIcon size={"full"}/>
+                </button>
+                <button className="arrow" onClick={next}>
+                    <ArrowFrontIcon size={"full"}/>
+                </button>
             </div>
         </section>
     );
