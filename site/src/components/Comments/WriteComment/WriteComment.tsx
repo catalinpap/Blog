@@ -53,8 +53,8 @@ export const WriteComment = () => {
             <textarea name="content" placeholder="Write a comment..." className="w-full h-[240px] p-2 resize-none overflow-y-scroll" />
             <button type="submit" className="button-primary mt-2 right-0">Post Comment</button>
         </form>
-        : <div className="py-8">
-            <p className="capitalize font-light">you must be logged in to leave a comment!</p>
+        : <div className="py-8 text-gray">
+            <p className="capitalize font-extralight">you must be logged in to leave a comment!</p>
             <Link href={'/authenticate'} className="font-light underline">Sign in here</Link>
         </div>   
     );

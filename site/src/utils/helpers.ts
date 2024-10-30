@@ -69,3 +69,13 @@ export const extractArticle = (formData: FormData) => {
         thumbnail
     } as Article;
 };
+
+export const format_date = (date: string): string => {
+    return new Date(date).toLocaleDateString('en-us', {day:'numeric', month: 'short', year: 'numeric'});
+};
+
+export const limit_string = (title: string, limit: number) => {
+    return (title.length > limit) 
+    ? title.substring(0, limit) + '...'
+    : title;
+};

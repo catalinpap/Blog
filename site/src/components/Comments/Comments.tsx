@@ -1,7 +1,7 @@
-import { CommentCard } from "..";
 import { Comment } from "@/types";
 import { WriteComment } from "./WriteComment/WriteComment";
 import { CommentIcon } from "../icons";
+import { CommentCard } from "./CommentCard/CommentCard";
 
 export const Comments:React.FC<{comments: Comment[]}> = ({comments}) => {
     return (

@@ -4,6 +4,7 @@ import { CategoryTag } from "@/components/common";
 import { ArticleBannerList, Comments, FloatPanel, PopularTopics } from "@/components";
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
 import { Article, PaginatedApiResponse } from "@/types";
+import { format_date } from "@/utils/helpers";
 
 type Props = {
     params: {
@@ -26,7 +27,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
 
     return (
         <>  
-            <main className="page-content flex flex-col lg:flex-row">
+            <main className="page-content flex flex-col 2xl:flex-row">
                 {/* Tools sidepanel */}
                 <aside className="absolute h-full top-0 right-full mr-4 block">
                     <div className="sticky top-20 flex-col gap-4 hidden lg:flex">
@@ -45,7 +46,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                             <span className="pr-2 italic font-light">written by: 
                                 <span className="font-medium non-italic"> {article.author.name}</span>
                             </span>
-                            <span className="pl-2 text-[#6C757D] font-light">{article.creationDate}</span>
+                            <span className="pl-2 text-[#6C757D] font-light">{format_date(article.creationDate)}</span>
                         </div>
                         <div className="flex flex-row gap-x-3">
                             <span className="flex flex-row items-center text-xs  text-[#6C757D] gap-x-0.5">

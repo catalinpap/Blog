@@ -13,7 +13,7 @@ export default async function Home() {
   const articles: Article[] = fetchArticlesResponse.data.content as Article[];
   return (
     <main>
-      <article className="page-content flex flex-col lg:flex-row">
+      <article className="page-content flex flex-col 2xl:flex-row">
         <section className="main-container">
           <HeroCarousel className="mb-4"/>
           <CardGrid data={articles} />
