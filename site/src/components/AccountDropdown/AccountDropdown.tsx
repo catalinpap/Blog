@@ -1,30 +1,29 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import { Dropdown } from "../common";
 import { UserIcon } from "../icons";
 import { auth } from "@/utils/auth";
 import Link from 'next/link';
+import { User } from "@/types";
 
 export const AccountDropdown:React.FC = () => {
-    const [user, setUser] = useState<any>(null); // TODO: implement 'User' type
+    const [user, setUser] = useState<User | null>(null);
 
-    const getUser = async () => {
-        const user = await auth.user();
-        setUser(user);
-    }
-
+    // TODO: implement user in Context API to trigger re-renders when user state is changing
     useEffect(() => {
-        (async () => {
-            await getUser();
-        })();
+        const getUser = async () => {
+            const user = await auth.user();
+            setUser(user);
+        }
+
+        getUser();
     }, []);
 
-    const router = useRouter();
+
     const logout = () => {
         auth.logout();
-        router.refresh();
+        setUser(null);
     }
 
     const AuthMenu = () => <>

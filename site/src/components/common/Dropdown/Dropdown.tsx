@@ -1,22 +1,40 @@
 "use client";
 
-import { cloneElement, Dispatch, ReactElement, SetStateAction, useState } from "react";
+import { cloneElement, Dispatch, ReactElement, SetStateAction, useEffect, useRef, useState } from "react";
 
 const DropdownWrapper:React.FC<{
     children: ReactElement | ReactElement[],
     className?: string
 }> = ({children, className}) => {
     const [isOpen, setIsOpen] = useState(false);
+    const dropdown = useRef<HTMLDivElement>(null);
 
     const injectProps = (element: ReactElement) => {
         if(element.type === DropdownTrigger || element.type === DropdownItems) {
-            return cloneElement(element, {isOpen, setIsOpen})
+            return cloneElement(element, {isOpen, setIsOpen});
         }
         return element;
     };
 
+    useEffect(() => {
+        if(!isOpen) return;
+
+        /**
+         * Hide the dropdown when clicking outside of it
+         * @param event 
+         */
+        const hideOnBlur = (event: MouseEvent) => {
+            if(dropdown.current && event.target instanceof Node && !dropdown.current.contains(event.target))
+                setIsOpen(false);
+        };
+        window.addEventListener('click', hideOnBlur);
+        return () => {
+            window.removeEventListener('click', hideOnBlur);
+        };
+    }, [isOpen])
+
     return (
-        <div className={`relative ${className}`}>
+        <div ref={dropdown} className={`relative ${className}`}>
             {
                 (Array.isArray(children))
                 ? children.map(child => injectProps(child))
