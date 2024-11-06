@@ -77,7 +77,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                     <span className="block border border-[#CED4DA] rounded-md  w-full my-5" />
 
                     {/* Comments */}
-                    <Comments comments={article.comments} />
+                    <Comments articleId={article.id} comments={article.comments} />
 
                 </article>
                 <FloatPanel>

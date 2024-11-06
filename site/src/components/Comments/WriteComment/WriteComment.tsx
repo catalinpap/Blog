@@ -1,10 +1,12 @@
 'use client';
 
-import { getCookie } from "@/utils/helpers";
-import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
+import { getCookie } from "@/utils/helpers";
+import { Comment } from "@/types";
 
-export const WriteComment = () => {
+export const WriteComment:React.FC<{
+    articleId: number, 
+    onSubmit?: (newComment: Comment) => void}> = ({articleId, onSubmit}) => {
     const [isAuth, setIsAuth] = useState(false);
 
     const getUser = async () => {
@@ -22,24 +24,31 @@ export const WriteComment = () => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const { username } = await getUser();
-        console.log(username);
         const content = formData.get('content');
 
-        const comment = {
+        if(!username || !content) return;
+
+        const commentData = {
             content: content,
             username: username,
-            articleId: 3
+            articleId: articleId
         };
 
-        fetch('http://localhost:8080/api/comments', {
+        const response = await fetch('http://localhost:8080/api/comments', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
                 'authorization': `basic ${getCookie('authToken')}`
             },
-            body: JSON.stringify(comment)
-            
+            body: JSON.stringify(commentData)
         });
+
+        if(response.ok) {
+            const newComment = await response.json();
+            onSubmit?.(newComment);
+        } else {
+            alert('Something went wrong! Try again later.');
+        }
     };
 
     useEffect(() => {
@@ -47,15 +56,23 @@ export const WriteComment = () => {
         setIsAuth(isAuthCookie);
     }, []);
 
+    const commentPlaceholder = isAuth ? "Write a comment..." : "You Must Be Logged In To Leave A Comment!";
+
     return (
-        isAuth  
-        ? <form id="comment-form" className="text-right" onSubmit={postComment}>
-            <textarea name="content" placeholder="Write a comment..." className="w-full h-[240px] p-2 resize-none overflow-y-scroll" />
-            <button type="submit" className="button-primary mt-2 right-0">Post Comment</button>
-        </form>
-        : <div className="py-8 text-gray">
-            <p className="capitalize font-extralight">you must be logged in to leave a comment!</p>
-            <Link href={'/authenticate'} className="font-light underline">Sign in here</Link>
-        </div>   
+        <form id="comment-form" className="text-right" onSubmit={postComment}>
+            <textarea 
+                name="content" 
+                placeholder={commentPlaceholder} 
+                className="w-full h-[240px] p-2 resize-none" 
+                disabled={!isAuth} 
+                required
+            />
+            <button 
+                type="submit" 
+                className="button-primary mt-2 right-0" 
+                disabled={!isAuth}>
+                    Post Comment
+            </button>
+        </form>  
     );
 };
