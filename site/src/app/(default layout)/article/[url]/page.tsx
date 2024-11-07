@@ -4,7 +4,7 @@ import { CategoryTag } from "@/components/common";
 import { ArticleBannerList, Comments, FloatPanel, PopularTopics } from "@/components";
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
 import { Article, PaginatedApiResponse } from "@/types";
-import { format_date } from "@/utils/helpers";
+import { format_date, markdownToHTML } from "@/utils/helpers";
 
 type Props = {
     params: {
@@ -61,7 +61,9 @@ const ArticlePage: React.FC<Props> = async (props) => {
                         </div>
                     </div>
                     
-                    <section className="article-formatted text-[#6C757D] font-light tracking-wide" dangerouslySetInnerHTML={{__html: article.content}}>
+                    <section 
+                        className="article-formatted text-[#6C757D] font-light tracking-wide" 
+                        dangerouslySetInnerHTML={{__html: markdownToHTML(article.content)}}>
                     </section>
 
                     {/* Separator */}

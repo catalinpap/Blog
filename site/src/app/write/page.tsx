@@ -15,6 +15,10 @@ const WritePage:React.FC = () => {
                 'authorization': `basic ${getCookie('authToken')}`
             }
         });
+
+        if (response.ok) {
+            alert('article published');
+        }
     }
 
     return (

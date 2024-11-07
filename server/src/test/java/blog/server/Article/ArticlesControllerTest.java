@@ -29,7 +29,7 @@
 // import blog.server.Articles.ArticlesController;
 // import blog.server.Articles.ArticlesService;
 // import blog.server.Articles.exceptions.ArticleNotFoundException;
-// import blog.server.utils.APIResponseBody;
+// import blog.server.utils.ApiResponseBody;
 // import blog.server.utils.JSON;
 
 // @ExtendWith(SpringExtension.class)
@@ -46,7 +46,7 @@
 // 		Long testId = 1L;
 
 // 		Article article = generateArticle(testId);
-// 		String expectedResponse = new APIResponseBody().data(article).json();
+// 		String expectedResponse = new ApiResponseBody().data(article).json();
 
 // 		when(articlesService.get(testId)).thenReturn(article);
 
@@ -76,7 +76,7 @@
 // 	public void test_getAll_returnsListOfArticles() throws Exception {
 	
 // 		List<Article> articlesList = generateArticleList(2);
-// 		String expectedResponse = new APIResponseBody().data(articlesList).json();
+// 		String expectedResponse = new ApiResponseBody().data(articlesList).json();
 
 
 // 		// Mock the ArticlesService.getAll() method
@@ -93,7 +93,7 @@
 // 	@Test
 // 	public void test_getAll_emptyResponseWhenNoArticles() throws Exception {
 // 		List<Article> articlesList = generateArticleList(0);
-// 		APIResponseBody responseBody = new APIResponseBody().data(articlesList);
+// 		ApiResponseBody responseBody = new ApiResponseBody().data(articlesList);
 
 // 		// Mock the ArticlesService.getAll() method
 // 		when(articlesService.getAll()).thenReturn(articlesList);
@@ -122,7 +122,7 @@
 
 // 		// Deserialize response
 // 		String response = result.getResponse().getContentAsString();
-// 		APIResponseBody responseBody = JSON.parse(response, APIResponseBody.class);
+// 		ApiResponseBody responseBody = JSON.parse(response, ApiResponseBody.class);
 // 		Object addedArticleObject = responseBody.getData();
 // 		Article  addedArticle = JSON.parse(JSON.write(addedArticleObject), Article.class);
 
@@ -138,7 +138,7 @@
 // 		final long id = 404L;
 // 		final Article articleToDelete = generateArticle(id);
 
-// 		String expectedResponse = new APIResponseBody().data(articleToDelete).message("Article deleted").json();
+// 		String expectedResponse = new ApiResponseBody().data(articleToDelete).message("Article deleted").json();
 
 // 		when(articlesService.delete(id)).thenReturn(articleToDelete);
 

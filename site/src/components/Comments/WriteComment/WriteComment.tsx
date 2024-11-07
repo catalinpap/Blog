@@ -63,7 +63,7 @@ export const WriteComment:React.FC<{
             <textarea 
                 name="content" 
                 placeholder={commentPlaceholder} 
-                className="w-full h-[240px] p-2 resize-none" 
+                className="w-full h-[240px] p-2 resize-none overflow-x-hidden overflow-y-auto"
                 disabled={!isAuth} 
                 required
             />

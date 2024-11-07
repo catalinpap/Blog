@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import blog.server.utils.APIResponseBody;
+import blog.server.utils.ApiResponseBody;
 import blog.server.utils.Const;
 
 @RestController
@@ -29,7 +29,7 @@ public class UsersController {
     public ResponseEntity<String> getAll() {
         List<User> users = usersService.getAll();
 
-        String reponseBody = new APIResponseBody()
+        String reponseBody = new ApiResponseBody()
             .data(users)
             .json();
         
@@ -42,7 +42,7 @@ public class UsersController {
     @GetMapping("/{id}")
     public ResponseEntity<String> get(@PathVariable Long id) throws Exception {
         User user = usersService.get(id);
-        String responseBody = new APIResponseBody()
+        String responseBody = new ApiResponseBody()
             .data(user)
             .json();
 
@@ -55,7 +55,7 @@ public class UsersController {
     @PostMapping("")
     public ResponseEntity<String> add(@RequestBody User user) throws Exception {
         User addedUser = usersService.add(user);
-        String responseBody = new APIResponseBody()
+        String responseBody = new ApiResponseBody()
             .data(addedUser)
             .message("User created")
             .json();
@@ -76,7 +76,7 @@ public class UsersController {
     public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
         User deletedUser = usersService.delete(id);
 
-        String responseBody = new APIResponseBody()
+        String responseBody = new ApiResponseBody()
             .data(deletedUser)
             .message("User deleted")
             .json();
@@ -91,7 +91,7 @@ public class UsersController {
     public ResponseEntity<String> update(@RequestBody User user) throws Exception {
         User updatedUser = usersService.update(user);
 
-        String responseBody = new APIResponseBody()
+        String responseBody = new ApiResponseBody()
             .data(updatedUser)
             .message("User updated")
             .json();

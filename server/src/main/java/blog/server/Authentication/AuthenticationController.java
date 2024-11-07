@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import blog.server.utils.APIResponseBody;
+import blog.server.utils.ApiResponseBody;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -76,7 +76,7 @@ public class AuthenticationController {
 			setAuthCookie(response, authentication.isAuthenticated());
 			setAuthTokenCookie(response, authToken, false);
 
-			String responseBody = new APIResponseBody()
+			String responseBody = new ApiResponseBody()
 				.data(authentication.getName())
 				.message("Successful login!")
 				.json();
@@ -89,7 +89,7 @@ public class AuthenticationController {
 		} catch (BadCredentialsException e) {
 			setAuthCookie(response, false);
 
-			String responseBody = new APIResponseBody()
+			String responseBody = new ApiResponseBody()
 				.data(false)
 				.message("Invalid Credentials!")
 				.json();
@@ -101,7 +101,7 @@ public class AuthenticationController {
 
 		} catch (AuthenticationException e) {
 			setAuthCookie(response, false);
-			String responseBody = new APIResponseBody()
+			String responseBody = new ApiResponseBody()
 				.data(false)
 				.message("Authentication Failed!")
 				.json();
@@ -112,7 +112,7 @@ public class AuthenticationController {
 				.body(responseBody);
 
 		} catch (Exception e) {
-			String responseBody = new APIResponseBody()
+			String responseBody = new ApiResponseBody()
 				.data(false)
 				.message("An error occured. Try again later")
 				.json();
@@ -129,7 +129,7 @@ public class AuthenticationController {
 		return ResponseEntity
 			.ok()
 			.contentType(MediaType.APPLICATION_JSON)
-			.body(new APIResponseBody().message("logged out"));
+			.body(new ApiResponseBody().message("logged out"));
 	}
 
 	private void setAuthCookie(HttpServletResponse response, boolean cookieValue) {

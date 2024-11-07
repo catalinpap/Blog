@@ -12,13 +12,13 @@ import blog.server.Articles.exceptions.ArticleNotFoundException;
 import blog.server.Authors.exceptions.AuthorNotFoundException;
 import blog.server.Categories.exceptions.CategoryNotFoundException;
 import blog.server.Users.exceptions.UserNotFoundException;
-import blog.server.utils.APIResponseBody;
+import blog.server.utils.ApiResponseBody;
 
 @ControllerAdvice
 public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(ArticleNotFoundException.class)
 	public ResponseEntity<String> handleArticleNotFound (ArticleNotFoundException exception, WebRequest request ) {
-			APIResponseBody responseBody = new APIResponseBody()
+			ApiResponseBody responseBody = new ApiResponseBody()
 				.message(String.format("Article with id=%s does not exist!", exception.getMessage()));
 			return ResponseEntity
 				.status(HttpStatus.NOT_FOUND)
@@ -28,7 +28,7 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(AuthorNotFoundException.class)
 	public ResponseEntity<String> handleAuthorNotFound (AuthorNotFoundException exception, WebRequest request ) {
-			APIResponseBody responseBody = new APIResponseBody()
+			ApiResponseBody responseBody = new ApiResponseBody()
 				.message(String.format("Author with id=%s does not exist!", exception.getMessage()));
 			return ResponseEntity
 				.status(HttpStatus.NOT_FOUND)
@@ -38,7 +38,7 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(UserNotFoundException.class)
 	public ResponseEntity<String> handleUserNotFound (UserNotFoundException exception, WebRequest request ) {
-			APIResponseBody responseBody = new APIResponseBody()
+			ApiResponseBody responseBody = new ApiResponseBody()
 				.message(String.format("User with id=%s does not exist!", exception.getMessage()));
 			return ResponseEntity
 				.status(HttpStatus.NOT_FOUND)
@@ -48,7 +48,7 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(CategoryNotFoundException.class)
 	public ResponseEntity<String> handleCategoryNotFound (CategoryNotFoundException exception, WebRequest request ) {
-			APIResponseBody responseBody = new APIResponseBody()
+			ApiResponseBody responseBody = new ApiResponseBody()
 				.message(String.format("Category with name=%s does not exist!", exception.getMessage()));
 			return ResponseEntity
 				.status(HttpStatus.NOT_FOUND)
@@ -58,7 +58,7 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handleGenericException (Exception exception, WebRequest request) {
-		APIResponseBody responseBody = new APIResponseBody()
+		ApiResponseBody responseBody = new ApiResponseBody()
 			.data(exception.getStackTrace())
 			.message(exception.getMessage());
 

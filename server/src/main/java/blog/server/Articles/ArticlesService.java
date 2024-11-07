@@ -1,5 +1,6 @@
 package blog.server.Articles;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,28 +31,25 @@ public class ArticlesService {
 		this.usersService = usersService;
 	}
 
-	public ArticleDTO get(Long id) throws Exception {
-		ArticleDTO article = articlesRepository
+	public Article get(Long id) throws Exception {
+		Article article = articlesRepository
 			.findById(id)
-			.map(this::mapToDTO)
 			.orElseThrow(() -> new ArticleNotFoundException(id.toString()));
 
 		return article;
 	}
 
-	public List<ArticleDTO> getAll() {
+	public List<Article> getAll() {
 		return articlesRepository
 			.findAll()
 			.stream()
-			.map(this::mapToDTO)
 			.collect(Collectors.toList());
 	}
 
-	public Page<ArticleDTO> getAll(ArticleFilter filter, PageRequest pageRequest) {
+	public Page<Article> getAll(ArticleFilter filter, PageRequest pageRequest) {
 		Specification<Article> specifications = ArticlesSpecs.filterBy(filter);
 		return articlesRepository
-			.findAll(specifications, pageRequest)
-			.map(this::mapToDTO);
+			.findAll(specifications, pageRequest);
 	}
 
 	public Article add(Article article) throws Exception {
@@ -78,10 +76,16 @@ public class ArticlesService {
 		return article;
 	}
 
-	public Article update(Article updatedArticle) throws Exception {
-		Long articleId = updatedArticle.getId();
+	public Article update(Article updateRequest) throws Exception {
+		Long articleId = updateRequest.getId();
 
-		if(!articlesRepository.existsById(articleId)) throw new ArticleNotFoundException(articleId.toString());
+		Article article = articlesRepository
+			.findById(articleId)
+			.orElseThrow(() -> new ArticleNotFoundException(articleId.toString()));
+
+		
+		// Merge properties from updateRequest and article
+		Article updatedArticle = applyUpdates(article, updateRequest);
 
 		return articlesRepository.save(updatedArticle);
 	}
@@ -97,18 +101,24 @@ public class ArticlesService {
 
 	private ArticleDTO mapToDTO(Article article) {
 		ArticleDTO dto = new ArticleDTO().from(article);
-
-		// TODO: Learn how to configure @ManyToOne relations then this won't be necessary
-		Author author = new Author();
-		try {
-			// author = authorsService.get(article.getAuthorId());
-		} catch (Exception e) {
-			// TODO: Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		// dto.setAuthor(author);
-
 		return dto;
+	}
+
+	// TODO: move it to the helpers package and make it generic, so it applies to any class
+	private Article applyUpdates(Article original, Article updates) {
+		Field[] fields = Article.class.getDeclaredFields();
+
+		for(Field field : fields) {
+			field.setAccessible(true);
+			try {
+				Object newValue = field.get(updates);
+				if(newValue != null) 
+					field.set(original, newValue);
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException("Error updating field: " + field.getName(), e);
+			}
+		}
+
+		return original;
 	}
 }

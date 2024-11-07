@@ -2,7 +2,7 @@ package blog.server.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public class APIResponseBody {
+public class ApiResponseBody {
     private Object data;
     private String message;
 
@@ -14,12 +14,12 @@ public class APIResponseBody {
         return this.message;
     }
 
-    public APIResponseBody data(Object data) {
+    public ApiResponseBody data(Object data) {
         this.data = data;
         return this;
     }
 
-    public APIResponseBody message(String message) {
+    public ApiResponseBody message(String message) {
         this.message = message;
         return this;
     }

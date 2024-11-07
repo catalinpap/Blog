@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -16,6 +18,7 @@ import blog.server.Categories.Category;
 import blog.server.Comments.Comment;
 import blog.server.utils.JSON;
 import jakarta.annotation.Nullable;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -42,7 +45,7 @@ public class Article {
 	
 	private Long authorId;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Author.class)
 	@JoinColumn(name = "authorId", insertable = false, updatable = false)
 	@JsonIgnoreProperties("articles")
 	private Author author;
@@ -78,7 +81,7 @@ public class Article {
 
 	private String thumbnail;
 
-	@OneToMany(mappedBy = "articleId", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "articleId", fetch = FetchType.EAGER, targetEntity = Comment.class)
 	private List<Comment> comments;
 
 	@PostPersist
@@ -224,6 +227,22 @@ public class Article {
 			e.printStackTrace();
 			return String.format("{id:%d, title:'%s', authorId:'%s', content:'%s'}", this.id, this.title, this.authorId, this.content);
 		}
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if(this == other) return true;
+		if (other == null || this.getClass() != other.getClass()) return false;
+
+		Article otherArticle = (Article) other;
+		if(this.getId() == null || otherArticle.getId() == null) return false;
+
+		return this.getId().equals(otherArticle.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return (this.getId() == null) ? System.identityHashCode(this) : this.getId().hashCode();
 	}
 
 	private String formatUrl(String input) {

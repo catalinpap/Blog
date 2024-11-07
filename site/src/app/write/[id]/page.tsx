@@ -15,7 +15,7 @@ type Props = {
 };
 
 // TODO: add check so that only the author can edit an article
-// Current behavior: can navigate to url /write/[id], edit article and post it as a new one
+// Current behavior: any user can navigate to url /write/[id], edit article and post it
 
 const EditPage: React.FC<Props> = (props) => {
     const {id} = props.params;
@@ -26,7 +26,7 @@ const EditPage: React.FC<Props> = (props) => {
             const response = await fetch(`http://localhost:8080/api/articles/${id}`);
             const responseData: ApiResponse = await response.json();
             const {data, message} = responseData;
-            if (!response.ok) alert(responseData.message);
+            if (!response.ok) alert(message);
             setArticle(data as Article);
         }
 
@@ -35,16 +35,25 @@ const EditPage: React.FC<Props> = (props) => {
 
 
     const editArticle = async (formData: FormData) => {
-        const articleData: Article = extractArticle(formData);
+        if(!article) return;
+
+        const articleData: Article = {
+            ...extractArticle(formData),
+            id: article.id,
+        };
 
         const response = await fetch('http://localhost:8080/api/articles', {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify(articleData),
             headers: {
                 'content-type': 'application/json',
                 'authorization': `basic ${getCookie('authToken')}`
             }
         });
+
+        if (response.ok) {
+            alert('article updated');
+        }
     }
 
     return (

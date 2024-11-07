@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import blog.server.utils.APIResponseBody;
+import blog.server.utils.ApiResponseBody;
 import blog.server.utils.Const;
 
 @RestController
@@ -31,7 +31,7 @@ public class AuthorsController {
         // TODO: maybe use paginated response for consistency reasons
 
         List<Author> authors = authorsService.getAll();
-        String responseBody = new APIResponseBody()
+        String responseBody = new ApiResponseBody()
             .data(authors)
             .json();
         
@@ -45,7 +45,7 @@ public class AuthorsController {
     public ResponseEntity<String> get(@PathVariable Long id) throws Exception {
         Author author = authorsService.get(id);
 
-        String responseBody = new APIResponseBody().data(author).json();
+        String responseBody = new ApiResponseBody().data(author).json();
 
         return ResponseEntity
             .ok()
@@ -57,7 +57,7 @@ public class AuthorsController {
     @PostMapping("")
     public ResponseEntity<String> add(@RequestBody Author author) throws Exception {
         Author addedAuthor = authorsService.add(author);
-        String responseBody = new APIResponseBody()
+        String responseBody = new ApiResponseBody()
             .data(addedAuthor)
             .message("Author created")
             .json();
@@ -79,7 +79,7 @@ public class AuthorsController {
     public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
         Author deletedAuthor = authorsService.delete(id);
 
-        String responseBody = new APIResponseBody()
+        String responseBody = new ApiResponseBody()
             .data(deletedAuthor)
             .message("Author deleted")
             .json();
@@ -94,7 +94,7 @@ public class AuthorsController {
     public ResponseEntity<String> update(@RequestBody Author author) throws Exception {
         Author updatedAuthor = authorsService.update(author);
 
-        String responseBody = new APIResponseBody()
+        String responseBody = new ApiResponseBody()
             .data(updatedAuthor)
             .message("Author updated")
             .json();

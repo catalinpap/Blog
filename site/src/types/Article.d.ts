@@ -8,9 +8,11 @@ export type Article = {
     keywords: string[],
     likes: number,
     bookmarks: number,
+    views: number,
     creationDate: string,
     url: string,
     thumbnail: string,
     author: Author,
+    authorId: number,
     comments: Comment[]
   };

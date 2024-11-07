@@ -1,5 +1,5 @@
 import { Article } from "@/types";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
 
 /**
@@ -31,7 +31,7 @@ export const eraseCookie = (name: string) => {
  * @returns 
  */
 export const markdownToHTML = (markdown: string | undefined | null) => {
-    if (!markdown) return;
+    if (!markdown) return '';
     const sanitizedMarkdown = DOMPurify.sanitize(markdown, {USE_PROFILES: {html: true}});
     const parsedHTML = marked.parse(sanitizedMarkdown);
     return parsedHTML.toString();
@@ -59,7 +59,7 @@ export const extractFirstImageURL = (html: string | undefined) => {
 export const extractArticle = (formData: FormData) => {
     const title = formData.get('title');
     const category = formData.get('category');
-    const content = markdownToHTML(formData.get('content') as string) || '';
+    const content = formData.get('content') as string || '';
     const thumbnail = extractFirstImageURL(content) || '';
 
     return {

@@ -71,5 +71,4 @@ public class Comment {
         this.likes = likes;
         return this;
     }
-
 }
