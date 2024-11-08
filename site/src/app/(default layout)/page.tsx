@@ -1,5 +1,5 @@
 import { ArticleBannerList, CardGrid, HeroCarousel, FloatPanel, PopularTopics } from "@/components";
-import { ApiResponse, Article, PaginatedApiResponse } from "@/types";
+import { Article, PaginatedApiResponse } from "@/types";
 
 const fetchArticles = async () => {
   const res = await fetch('http://localhost:8080/api/articles', {
@@ -24,7 +24,7 @@ export default async function Home() {
 
             {/* Popular Articles */}
             <p className="text-base font-medium">Popular articles:</p>
-            <ArticleBannerList data={articles?.slice(0,6)} className="divide-y divide-light-gray" />
+            <ArticleBannerList data={articles?.slice(0,6)} className="divide-y divide-light-gray text-sm font-medium" />
         </FloatPanel>
 
       </article>

@@ -27,8 +27,9 @@ export const AccountDropdown:React.FC = () => {
     }
 
     const AuthMenu = () => <>
-        <p className="border-b border-light-gray w-full mb-2 p-2">Hello, {user && user.username}</p>
+        <p className="border-b border-light-gray w-full mb-2 p-2 text-wrap">Hello, {user && user.username}</p>
         <p className="p-2 cursor-pointer hover:font-medium">Profile</p>
+        <Link href={'/me/articles'} className="p-2 cursor-pointer hover:font-medium">Articles</Link>
         <p className="p-2 text-red-400  cursor-pointer hover:font-medium" onClick={logout}>Sign out</p>
     </>;
     
@@ -38,7 +39,7 @@ export const AccountDropdown:React.FC = () => {
                 <Dropdown.Trigger key={"account-dropdown-trigger"}>
                     <UserIcon size={28} className="hidden lg:inline-block" />
                 </Dropdown.Trigger>
-                <Dropdown.Items key={"account-dropdown-items"} className="w-[240px] font-normal">
+                <Dropdown.Items key={"account-dropdown-items"} className="w-[280px] font-normal">
                     {
                         user ? <AuthMenu/> : <Link href={'/authenticate'}>Sign in</Link> 
                     }

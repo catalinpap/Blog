@@ -7,3 +7,4 @@ export { ArticleBannerList } from "./ArticleBannerList/ArticleBannerList";
 export { PopularTopics } from "./PopularTopics/PopularTopics";
 export { AccountDropdown } from "./AccountDropdown/AccountDropdown";
 export { Comments } from "./Comments/Comments";
+export { EditableArticleBanner } from "./EditableArticleBanner/EditableArticleBanner";

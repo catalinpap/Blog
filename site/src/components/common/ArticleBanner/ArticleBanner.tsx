@@ -5,11 +5,21 @@ import Image from "next/image";
 
 export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {
     return (
-      <Link href={`/article/${data.url}`} className="cursor-pointer p-2 flex flex-col gap-1 text-black">
-        {/* <p className="text-xs font-thin">{data.category}</p> */}
-        <CategoryTag className="text-xs font-thin py-1 w-fit">{data.category}</CategoryTag>
-        <p className="text-base font-bold">{data.title}</p>
-        {/* <p className="w-fit text-xs font-thin left-full -translate-x-full relative">{data.author.name}</p> */}
-      </Link>
+        <Link href={`/article/${data.url}`} className="w-full cursor-pointer p-2 flex flex-row gap-2 text-black">
+          <Image
+            src={
+              data.thumbnail ||
+              "https://images.unsplash.com/photo-1472289065668-ce650ac443d2?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} 
+            alt=""
+            width={4 * 70}
+            height={3 * 70}
+            className="w-[30%] max-w-[160px] object-cover p-2"
+          />
+          <div className="flex flex-col gap-1">
+            <CategoryTag className="text-xs font-thin py-1 w-fit">{data.category}</CategoryTag>
+            <p className="hover:underline">{data.title}</p>
+            {/* <p className="w-fit text-xs font-thin left-full -translate-x-full relative">{data.author.name}</p> */}
+          </div>
+        </Link>
     );
   };

@@ -98,7 +98,6 @@ public class ArticlesService {
 			).collect(Collectors.toList());
 	}
 	
-
 	private ArticleDTO mapToDTO(Article article) {
 		ArticleDTO dto = new ArticleDTO().from(article);
 		return dto;
