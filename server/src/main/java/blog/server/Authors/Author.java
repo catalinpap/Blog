@@ -21,7 +21,7 @@ public class Author {
     private String name;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    // @JsonIgnoreProperties("author")
+    @JsonIgnoreProperties("author")
     private List<Article> articles;
 
     public Author(){}

@@ -9,16 +9,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import blog.server.Authors.Author;
-import blog.server.Categories.Category;
 import blog.server.Comments.Comment;
 import blog.server.utils.JSON;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -47,7 +44,7 @@ public class Article {
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Author.class)
 	@JoinColumn(name = "authorId", insertable = false, updatable = false)
-	@JsonIgnoreProperties("articles")
+	// @JsonIgnoreProperties("articles")
 	private Author author;
 
 	@Lob
