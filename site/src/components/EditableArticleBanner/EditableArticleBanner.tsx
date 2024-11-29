@@ -7,14 +7,18 @@ import { getCookie } from "@/utils/helpers";
 import { useContext } from "react";
 import { ArticlesContext, ArticlesContextType } from "@/context/articles-context/articles-context";
 
-const deleteArticle = async (articleId: number) => {
+const deleteArticle = async (articleId: number, articles: Article[], setArticles: (newArticles: Article[]) => void) => {
     const response = await fetch(`http://localhost:8080/api/articles/${articleId}`, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',
           'authorization': `basic ${getCookie('authToken')}`
       }
-    }).then(response => response.json());
+    });
+    const responseData = await response.json();
+
+    if(response.ok) removeFromContext(articleId, articles, setArticles);
+    else alert(responseData.message);
 };
 
 const removeFromContext = (articleId: number, articles: Article[], setArticles: (newArticles: Article[]) => void) => {
@@ -32,7 +36,7 @@ export const EditableArticleBanner:React.FC<{data: Article}> = ({data}) => {
           <Link href={`/write/${data.id}`} className="w-full h-full px-2 flex justify-center items-center">Edit</Link>
           <button 
             className="w-full h-full px-2" 
-            onClick={() => {deleteArticle(data.id); removeFromContext(data.id, articles, setArticles)}}>
+            onClick={() => deleteArticle(data.id, articles, setArticles)}>
               Delete
           </button>
         </div>

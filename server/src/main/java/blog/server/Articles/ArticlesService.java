@@ -71,6 +71,9 @@ public class ArticlesService {
 			.findById(id)
 			.orElseThrow(() -> new ArticleNotFoundException(id.toString()));
 
+		boolean isSameAuthor = checkSameAuthor(article);
+		if(!isSameAuthor) throw new Exception("Current user has no rights to delete this article");
+
 		articlesRepository.deleteById(id);
 	
 		return article;
@@ -83,7 +86,9 @@ public class ArticlesService {
 			.findById(articleId)
 			.orElseThrow(() -> new ArticleNotFoundException(articleId.toString()));
 
-		
+		boolean isSameAuthor = checkSameAuthor(article);
+		if(!isSameAuthor) throw new Exception("Current user has no rights to modify this article");
+	
 		// Merge properties from updateRequest and article
 		Article updatedArticle = applyUpdates(article, updateRequest);
 
@@ -96,11 +101,6 @@ public class ArticlesService {
 			.filter((article) -> 
 				article.getCategory().equals(category)
 			).collect(Collectors.toList());
-	}
-	
-	private ArticleDTO mapToDTO(Article article) {
-		ArticleDTO dto = new ArticleDTO().from(article);
-		return dto;
 	}
 
 	// TODO: move it to the helpers package and make it generic, so it applies to any class
@@ -119,5 +119,12 @@ public class ArticlesService {
 		}
 
 		return original;
+	}
+
+	private boolean checkSameAuthor(Article article) throws Exception {
+		String authorUser = SecurityContextHolder.getContext().getAuthentication().getName();
+		Long userId = usersService.getByUsername(authorUser).getId();
+
+		return userId == article.getAuthorId();
 	}
 }
