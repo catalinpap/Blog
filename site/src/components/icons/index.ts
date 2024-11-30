@@ -1,4 +1,4 @@
-import { 
+export { 
     IoIosHeartEmpty as HeartEmptyIcon,
     IoIosHeart as HeartIcon,
     IoIosHeartDislike as HeartDislikeIcon,
@@ -9,7 +9,7 @@ import {
     IoIosSearch as SearchIcon
  } from "react-icons/io";
 
- import { 
+ export { 
     GoBookmark as BookmarkIcon, 
     GoBookmarkFill as BookmarkFillIcon,
     GoBookmarkSlash as BookmarkSlashIcon,
@@ -17,28 +17,10 @@ import {
     GoComment as CommentIcon
 } from "react-icons/go";
 
-import { 
+export { 
     PiNotePencil as WriteIcon,
-    PiUserLight as UserIcon
+    PiUserLight as UserIcon,
+    PiTrash as TrashIcon
  } from "react-icons/pi";
 
-import { CgMenuGridO as MenuIcon } from "react-icons/cg";
-
-export {
-    HeartEmptyIcon,
-    HeartIcon,
-    HeartDislikeIcon,
-    ShareIcon,
-    ArrowFrontIcon,
-    ArrowBackIcon,
-    ArrowDownIcon,
-    SearchIcon,
-    BookmarkIcon,
-    BookmarkFillIcon,
-    BookmarkSlashIcon,
-    BookmarkSlashFillIcon,
-    CommentIcon,
-    WriteIcon,
-    UserIcon,
-    MenuIcon
-};
+export { CgMenuGridO as MenuIcon } from "react-icons/cg";

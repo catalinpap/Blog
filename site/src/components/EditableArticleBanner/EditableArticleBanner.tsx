@@ -6,6 +6,7 @@ import Link from "next/link";
 import { getCookie } from "@/utils/helpers";
 import { useContext } from "react";
 import { ArticlesContext, ArticlesContextType } from "@/context/articles-context/articles-context";
+import { TrashIcon, WriteIcon } from "../icons";
 
 const deleteArticle = async (articleId: number, articles: Article[], setArticles: (newArticles: Article[]) => void) => {
     const response = await fetch(`http://localhost:8080/api/articles/${articleId}`, {
@@ -33,10 +34,14 @@ export const EditableArticleBanner:React.FC<{data: Article}> = ({data}) => {
       <div className="flex flex-row w-full">
         <ArticleBanner data={data} />
         <div className="flex flex-col border-l border-light-gray">
-          <Link href={`/write/${data.id}`} className="w-full h-full px-2 flex justify-center items-center">Edit</Link>
+          <Link href={`/write/${data.id}`} className="w-full h-full px-2 flex justify-start items-center gap-1">
+            <WriteIcon />
+            Edit
+          </Link>
           <button 
-            className="w-full h-full px-2" 
+            className="w-full h-full px-2 flex justify-start items-center gap-1" 
             onClick={() => deleteArticle(data.id, articles, setArticles)}>
+              <TrashIcon />
               Delete
           </button>
         </div>
