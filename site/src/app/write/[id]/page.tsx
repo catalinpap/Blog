@@ -14,8 +14,7 @@ type Props = {
     }
 };
 
-// TODO: add check so that only the author can edit an article
-// Current behavior: any user can navigate to url /write/[id], edit article and post it
+// TODO: prevent any user, besides the author, to navigate to /write/[id] page
 
 const EditPage: React.FC<Props> = (props) => {
     const {id} = props.params;

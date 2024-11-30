@@ -14,8 +14,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.util.SerializationUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import blog.server.DTO.UserDTO;
+import blog.server.Users.User;
 import blog.server.utils.ApiResponseBody;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -76,8 +76,15 @@ public class AuthenticationController {
 			setAuthCookie(response, authentication.isAuthenticated());
 			setAuthTokenCookie(response, authToken, false);
 
+			User user = (User) authentication.getPrincipal();
+
+			UserDTO userDTO = new UserDTO()
+				.setId(user.getId())
+				.setUsername(user.getUsername())
+				.setDisplayName(user.getDisplayName());
+
 			String responseBody = new ApiResponseBody()
-				.data(authentication.getName())
+				.data(userDTO)
 				.message("Successful login!")
 				.json();
 

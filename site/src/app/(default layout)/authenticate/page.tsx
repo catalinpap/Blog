@@ -1,15 +1,15 @@
 'use client';
 
-import { ApiResponse } from "@/types";
-import { auth } from "@/utils/auth";
+import { useAuth } from "@/utils/useAuth";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 const AuthenticatePage = () => {
+    const { login, register } = useAuth();
     const router = useRouter();
     const [errorMessage, setErrorMessage] = useState<string>('');
     
-    const login = async (event: FormEvent<HTMLFormElement>) => {
+    const login_user = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
@@ -17,7 +17,7 @@ const AuthenticatePage = () => {
         const password = formData.get('password');
 
         try {
-            await auth.login({
+            await login({
                 "user": user,
                 "password": password
             });
@@ -28,7 +28,7 @@ const AuthenticatePage = () => {
         }
     };
 
-    const register = async (event: FormEvent<HTMLFormElement>) => {
+    const register_user = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
@@ -39,7 +39,7 @@ const AuthenticatePage = () => {
         const passwordConfirm = formData.get('passwordConfirm');
 
         try {
-            await auth.register({
+            await register({
                 "username": user,
                 "displayName": name,
                 "email": email,
@@ -57,14 +57,14 @@ const AuthenticatePage = () => {
         <main className="page-content">
             <div className={"block w-full h-40"}></div>
             <article className={"flex gap-4"}>
-                <form onSubmit={login} className={"flex flex-col gap-2 w-full"}>
+                <form onSubmit={login_user} className={"flex flex-col gap-2 w-full"}>
                     <h1>Login</h1>
                     <input type={"text"} name={"user"} placeholder={"Username*"} className={"p-2"} required />
                     <input type={"password"} name={"password"} placeholder={"Password*"} className={"p-2"} required />
                     <button type={"submit"} className={"bg-green text-white text-md font-medium cursor-pointer p-2"}>Login</button>
                     <p>{errorMessage}</p>
                 </form>
-                <form onSubmit={register} className={"flex flex-col gap-2 w-full"}>
+                <form onSubmit={register_user} className={"flex flex-col gap-2 w-full"}>
                     <h1>Register</h1>
                     <input type={"text"} name={"user"} placeholder={"Username*"} className={"p-2"} required />
                     <input type={"text"} name={"name"} placeholder={"Your Name"} className={"p-2"} />

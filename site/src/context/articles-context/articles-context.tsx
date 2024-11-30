@@ -16,4 +16,4 @@ export const ArticlesProvider: React.FC<{children: ReactNode}> = ({children}) =>
     return <ArticlesContext.Provider value={{articles, setArticles}}>
         {children}
     </ArticlesContext.Provider>
-}
+};

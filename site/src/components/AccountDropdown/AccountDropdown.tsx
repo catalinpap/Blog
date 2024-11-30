@@ -1,36 +1,22 @@
 'use client';
 
-import { useEffect, useState } from "react";
 import { Dropdown } from "../common";
 import { UserIcon } from "../icons";
-import { auth } from "@/utils/auth";
 import Link from 'next/link';
-import { User } from "@/types";
+import { useAuth } from "@/utils/useAuth";
 
 export const AccountDropdown:React.FC = () => {
-    const [user, setUser] = useState<User | null>(null);
+    const { user, logout } = useAuth();
 
-    // TODO: implement user in Context API to trigger re-renders when user state is changing
-    useEffect(() => {
-        const getUser = async () => {
-            const user = await auth.user();
-            setUser(user);
-        }
-
-        getUser();
-    }, []);
-
-
-    const logout = () => {
-        auth.logout();
-        setUser(null);
+    const logout_user = () => {
+        logout();
     }
 
     const AuthMenu = () => <>
-        <p className="border-b border-light-gray w-full mb-2 p-2 text-wrap">Hello, {user && user.username}</p>
+        <p className="border-b border-light-gray w-full mb-2 p-2 text-wrap">Hello, {user && user.displayName}</p>
         <p className="p-2 cursor-pointer hover:font-medium">Profile</p>
         <Link href={'/me/articles'} className="p-2 cursor-pointer hover:font-medium">Articles</Link>
-        <p className="p-2 text-red-400  cursor-pointer hover:font-medium" onClick={logout}>Sign out</p>
+        <p className="p-2 text-red-400  cursor-pointer hover:font-medium" onClick={logout_user}>Sign out</p>
     </>;
     
     return (

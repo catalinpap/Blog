@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Raleway, Yellowtail } from "next/font/google";
 import "./globals.css";
+import { UserProvider } from "@/context/user-context/user-context";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${raleway.className}`}>
+        <UserProvider>
           {children}
+        </UserProvider>
       </body>
     </html>
   );
