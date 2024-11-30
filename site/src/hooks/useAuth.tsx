@@ -1,5 +1,5 @@
 import { ApiResponse, User } from "@/types";
-import { eraseCookie, getCookie } from "./helpers";
+import { eraseCookie, getCookie } from "../utils/helpers";
 import { useContext } from "react";
 import { UserContext, UserContextType } from "@/context/user-context/user-context";
 
@@ -19,6 +19,7 @@ const user = async () => {
 };
 
 export const useAuth = () => {
+    // TODO: BUG: on refresh, the in-memory user is lost, even though, the auth cookies are still set 
     const { user, setUser } = useContext(UserContext) as UserContextType;
 
     /**

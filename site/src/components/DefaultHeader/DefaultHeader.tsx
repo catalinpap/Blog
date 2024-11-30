@@ -1,6 +1,6 @@
 import './Header.css';
 import Link from "next/link";
-import { ArrowDownIcon, MenuIcon, SearchIcon, UserIcon, WriteIcon } from "../icons";
+import { ArrowDownIcon, MenuIcon, SearchIcon, WriteIcon } from "../icons";
 import { AccountDropdown } from '..';
 import { Header } from '../common';
 

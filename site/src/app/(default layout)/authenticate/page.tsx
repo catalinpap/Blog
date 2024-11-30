@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuth } from "@/utils/useAuth";
+import { useAuth } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 

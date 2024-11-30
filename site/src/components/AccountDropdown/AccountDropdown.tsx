@@ -3,7 +3,7 @@
 import { Dropdown } from "../common";
 import { UserIcon } from "../icons";
 import Link from 'next/link';
-import { useAuth } from "@/utils/useAuth";
+import { useAuth } from "@/hooks";
 
 export const AccountDropdown:React.FC = () => {
     const { user, logout } = useAuth();
