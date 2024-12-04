@@ -12,7 +12,7 @@ public class ArticleDTO {
     private Long id;
     private String title;
     private String content;
-    private String category;
+    private Category category;
     // private Category categoryObj;
     private List<String> keywords;
     private int likes;
@@ -69,13 +69,9 @@ public class ArticleDTO {
         return this.content;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return this.category;
     }
-
-    // public Category getCategoryObj() {
-    //     return this.categoryObj;
-    // }
 
     public List<String> getKeywords() {
         return this.keywords;
@@ -128,15 +124,10 @@ public class ArticleDTO {
         return this;
     }
 
-    public ArticleDTO setCategory(final String category) {
+    public ArticleDTO setCategory(final Category category) {
         this.category = category;
         return this;
     }
-
-    // public ArticleDTO setCategoryObj(final Category categoryObj) {
-    //     this.categoryObj = categoryObj;
-    //     return this;
-    // }
 
     public ArticleDTO setKeywords(final List<String> keywords) {
         this.keywords = (keywords != null) ? new ArrayList<>(keywords) : new ArrayList<String>();

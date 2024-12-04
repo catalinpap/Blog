@@ -40,7 +40,7 @@ export const HeroCarousel: React.FC<{className?: string}> = async ({className}) 
                     key={`carousel-article-${article.id}`}
                     thumbnail={article.thumbnail}
                     title={article.title}
-                    category={article.category}
+                    category={article.category.name}
                     url={article.url}
                 />
             )}

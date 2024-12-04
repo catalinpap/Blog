@@ -12,7 +12,7 @@ export const ArticleBannerList:React.FC<{
       <div className={`flex flex-col ${className}`}>
           {
             data.length === 0
-            ? <div className="text-lg font-medium text-gray">There are no articles yet.</div>
+            ? <p className="text-lg font-light text-gray">There are no articles yet.</p>
             : data?.map(article => 
               editable 
               ? <EditableArticleBanner key={article.id} data={article} />

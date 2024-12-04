@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import blog.server.utils.ApiResponseBody;
 import blog.server.utils.Const;
 
 @RestController
@@ -26,14 +27,18 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("")
-    public ResponseEntity<List<Category>> getAll() {
+    public ResponseEntity<String> getAll() {
 
         List<Category> categories = categoryService.getAll();
+
+        String responseBody = new ApiResponseBody()
+            .data(categories)
+            .json();
 
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(categories);
+            .body(responseBody);
 
     }
 
@@ -47,43 +52,57 @@ public class CategoryController {
     // }
 
     @GetMapping("/{name}")
-    public ResponseEntity<Category> getByName(@PathVariable String name) throws Exception {
+    public ResponseEntity<String> getByName(@PathVariable String name) throws Exception {
         Category category = categoryService.get(name);
+
+        String responseBody = new ApiResponseBody()
+            .data(category)
+            .json();
+
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(category);
+            .body(responseBody);
     }
 
     @PostMapping("")
-    public ResponseEntity<Category> add(@RequestBody Category category) throws Exception {
+    public ResponseEntity<String> add(@RequestBody Category category) throws Exception {
         Category addedCategory = categoryService.add(category);
         URI categoryUri = ServletUriComponentsBuilder
             .fromCurrentRequest()
             .path("{id}")
             .buildAndExpand(addedCategory.getId())
             .toUri();
+        String responseBody = new ApiResponseBody()
+            .data(addedCategory)
+            .json();
         return ResponseEntity
             .created(categoryUri)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(addedCategory);
+            .body(responseBody);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Category> delete(@PathVariable Long id) throws Exception {
+    public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
         Category deletedCategory = categoryService.delete(id);
+        String responseBody = new ApiResponseBody()
+            .data(deletedCategory)
+            .json();
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(deletedCategory);
+            .body(responseBody);
     }
 
     @PutMapping("")
-    public ResponseEntity<Category> update(@RequestBody Category category) throws Exception {
+    public ResponseEntity<String> update(@RequestBody Category category) throws Exception {
         Category updatedCategory = categoryService.update(category);
+        String responseBody = new ApiResponseBody()
+            .data(updatedCategory)
+            .json();
         return ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(updatedCategory);
+            .body(responseBody);
     }
 }

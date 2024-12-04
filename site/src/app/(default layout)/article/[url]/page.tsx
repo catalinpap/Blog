@@ -38,7 +38,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                     </div>
                 </aside>
                 <article className="main-container article-formatted">
-                    <CategoryTag>{article.category}</CategoryTag>
+                    <CategoryTag>{article.category.name}</CategoryTag>
                     <h1>{article.title}</h1>
                     
                     <div className="flex flex-row justify-between mb-16">

@@ -1,4 +1,7 @@
+import { Article } from "./Article";
+
 export type Category = {
     id: number,
-    name: string
+    name: string,
+    articles: Article[]
 };

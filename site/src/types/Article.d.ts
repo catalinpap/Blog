@@ -1,10 +1,10 @@
-import { Author, Comment } from "./";
+import { Author, Category, Comment } from "./";
 
 export type Article = {
     id: number,
     title: string,
     content: string,
-    category: string,
+    category: Category,
     keywords: string[],
     likes: number,
     bookmarks: number,

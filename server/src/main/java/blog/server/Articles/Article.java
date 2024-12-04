@@ -6,13 +6,14 @@ import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import blog.server.Authors.Author;
+import blog.server.Categories.Category;
 import blog.server.Comments.Comment;
 import blog.server.utils.JSON;
 import jakarta.annotation.Nullable;
@@ -44,19 +45,23 @@ public class Article {
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Author.class)
 	@JoinColumn(name = "authorId", insertable = false, updatable = false)
-	// @JsonIgnoreProperties("articles")
 	private Author author;
 
 	@Lob
 	@NotBlank
 	private String content;
 
-	@ColumnDefault("'Uncategorized'")
-	private String category;
+	@ColumnDefault("56")
+	private Long categoryId;
+
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
+	@JoinColumn(name = "categoryId", insertable = false, updatable = false)
+	@JsonIgnoreProperties("articles")
+	private Category category;
 
 	// @ColumnDefault("'Uncategorized'")
-	// @ManyToOne(fetch = FetchType.EAGER)
-	// @JoinColumn(name = "id", insertable = false, updatable = false)
+	// @OneToOne(fetch = FetchType.EAGER)
+	// @JoinColumn(name = "name", insertable = false, updatable = false)
 	// private Category categoryObj;
 
 	@Nullable
@@ -106,13 +111,13 @@ public class Article {
 		return this.content;
 	}
 
-	public String getCategory() {
-		return this.category;
+	public Long getCategoryId() {
+		return this.categoryId;
 	}
 
-	// public Category getCategoryObj() {
-	// 	return this.categoryObj;
-	// }
+	public Category getCategory() {
+		return this.category;
+	}
 
 	public List<String> getKeywords() {
 		return this.keywords;
@@ -171,15 +176,15 @@ public class Article {
 		return this;
 	}
 
-	public Article setCategory(final String category) {
-		this.category = category;
+	public Article setCategoryId(final Long categoryId) {
+		this.categoryId = categoryId;
 		return this;
 	}
 
-	// public Article setCategoryObj(final Category categoryObj) {
-	// 	this.categoryObj = categoryObj;
-	// 	return this;
-	// }
+	public Article setCategory(final Category category) {
+		this.category = category;
+		return this;
+	}
 
 	public Article setKeywords(final List<String> keywords) {
 		this.keywords = new ArrayList<>(keywords);
