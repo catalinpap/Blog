@@ -8,11 +8,11 @@ export const CategorySelect = () => {
 
     useEffect(() => {
         const fetchCategories = async () => {
-            fetch('http://localhost:8080/api/categories', {
+            fetch('http://localhost:8080/api/topics', {
                 method: 'GET'
             })
             .then(response => response.json())
-            .then(categories => setCategories(categories));
+            .then(categories => setCategories(categories.data));
         }
 
         fetchCategories();
@@ -22,7 +22,7 @@ export const CategorySelect = () => {
         <select name="category" className="w-[180px] p-2 text-sm">
             {
                 categories.map(category => (
-                <option key={category.name}>{category.name}</option>
+                <option key={category.name} value={category.id}>{category.name}</option>
             ))
             }
             

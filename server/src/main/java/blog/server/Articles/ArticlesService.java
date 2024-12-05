@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import blog.server.Articles.exceptions.ArticleNotFoundException;
 import blog.server.Authors.Author;
 import blog.server.Authors.AuthorsService;
-import blog.server.DTO.ArticleDTO;
 import blog.server.Users.UsersService;
 
 @Service
@@ -93,14 +92,6 @@ public class ArticlesService {
 		Article updatedArticle = applyUpdates(article, updateRequest);
 
 		return articlesRepository.save(updatedArticle);
-	}
-
-	public List<Article> filterByCategory(String category) throws Exception {
-		return articlesRepository.findAll()
-			.stream()
-			.filter((article) -> 
-				article.getCategory().equals(category)
-			).collect(Collectors.toList());
 	}
 
 	// TODO: move it to the helpers package and make it generic, so it applies to any class

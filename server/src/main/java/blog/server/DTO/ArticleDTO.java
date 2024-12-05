@@ -12,8 +12,8 @@ public class ArticleDTO {
     private Long id;
     private String title;
     private String content;
-    private Category category;
-    // private Category categoryObj;
+    private Long categoryId;
+    private String category;
     private List<String> keywords;
     private int likes;
     private int bookmarks;
@@ -69,7 +69,11 @@ public class ArticleDTO {
         return this.content;
     }
 
-    public Category getCategory() {
+    public Long getCategoryId() {
+        return this.categoryId;
+    }
+
+    public String getCategory() {
         return this.category;
     }
 
@@ -124,7 +128,12 @@ public class ArticleDTO {
         return this;
     }
 
-    public ArticleDTO setCategory(final Category category) {
+    public ArticleDTO setCategoryId(final Long categoryId) {
+        this.categoryId = categoryId;
+        return this;
+    }
+
+    public ArticleDTO setCategory(final String category) {
         this.category = category;
         return this;
     }

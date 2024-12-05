@@ -28,6 +28,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -51,18 +52,16 @@ public class Article {
 	@NotBlank
 	private String content;
 
-	@ColumnDefault("56")
+	@ColumnDefault("1")
 	private Long categoryId;
+
+	@Transient
+	private String category;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
 	@JoinColumn(name = "categoryId", insertable = false, updatable = false)
 	@JsonIgnoreProperties("articles")
-	private Category category;
-
-	// @ColumnDefault("'Uncategorized'")
-	// @OneToOne(fetch = FetchType.EAGER)
-	// @JoinColumn(name = "name", insertable = false, updatable = false)
-	// private Category categoryObj;
+	private Category categoryRef;
 
 	@Nullable
 	private List<String> keywords;
@@ -115,8 +114,12 @@ public class Article {
 		return this.categoryId;
 	}
 
-	public Category getCategory() {
-		return this.category;
+	public String getCategory() {
+		return this.categoryRef.getName();
+	}
+
+	public Category getCategoryRef() {
+		return this.categoryRef;
 	}
 
 	public List<String> getKeywords() {
@@ -181,8 +184,13 @@ public class Article {
 		return this;
 	}
 
-	public Article setCategory(final Category category) {
+	public Article setCategory(final String category) {
 		this.category = category;
+		return this;
+	}
+	
+	public Article setCategoryRef(final Category categoryRef) {
+		this.categoryRef = categoryRef;
 		return this;
 	}
 

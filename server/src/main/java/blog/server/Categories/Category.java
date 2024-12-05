@@ -25,8 +25,8 @@ public class Category {
     @Column(unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "categoryId", fetch = FetchType.EAGER, targetEntity = Article.class)
-    private List<Article> articles;
+    // @OneToMany(mappedBy = "categoryId", fetch = FetchType.EAGER, targetEntity = Article.class)
+    // private List<Article> articles;
 
     public Long getId() {
         return this.id;
@@ -36,9 +36,9 @@ public class Category {
         return this.name;
     }
 
-    public List<Article> getArticles() {
-        return this.articles;
-    }
+    // public List<Article> getArticles() {
+    //     return this.articles;
+    // }
 
     public Category setId(final Long id) {
         this.id = id;

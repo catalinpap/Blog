@@ -57,14 +57,14 @@ export const extractFirstImageURL = (html: string | undefined) => {
  * @returns 
  */
 export const extractArticle = (formData: FormData) => {
-    const title = formData.get('title');
-    const category = formData.get('category');
-    const content = formData.get('content') as string || '';
-    const thumbnail = extractFirstImageURL(content) || '';
+    const title: string = formData.get('title') as string;
+    const categoryId: number = Number(formData.get('category') || 1);
+    const content: string = formData.get('content') as string || '';
+    const thumbnail: string = extractFirstImageURL(content) || '';
 
     return {
         title,
-        category,
+        categoryId,
         content,
         thumbnail
     } as Article;
