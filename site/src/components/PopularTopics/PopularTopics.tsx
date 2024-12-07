@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { CategoryTag } from "../common";
-import { ApiResponse, Category } from "@/types";
+import { ApiResponse, Category, PaginatedApiResponse } from "@/types";
 
 export const PopularTopics:React.FC<{className?: string}> = ({className}) => {
   const [topics, setTopics] = useState<Category[]>([]);
 
   useEffect(() => {
     const fetchTopics = async () => {
-      const response: ApiResponse = await fetch('http://localhost:8080/api/topics', {
+      const response: PaginatedApiResponse = await fetch('http://localhost:8080/api/topics', {
         method: 'GET'
       }).then(response => response.json());
       
-      const topics = response.data;
+      const topics = response.data.content;
       setTopics(topics as Category[]);
     }
 

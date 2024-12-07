@@ -3,6 +3,8 @@ package blog.server.Categories;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import blog.server.Categories.exceptions.CategoryNotFoundException;
@@ -18,6 +20,10 @@ public class CategoryService {
 
     public List<Category> getAll() {
         return this.categoryRepository.findAll();
+    }
+
+    public Page<Category> getAll(PageRequest pageRequest) {
+        return this.categoryRepository.findAll(pageRequest);
     }
 
     public Category get(final Long id) throws Exception {
