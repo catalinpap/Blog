@@ -10,12 +10,14 @@ public class ArticlesSpecs {
 
     private static final String CATEGORY_REF = "categoryRef"; // The Category object field of Article class
     private static final String CATEGORY_NAME = "name"; // The name field of the Category class 
-    private static final String KEYWORDS = "keywords"; // The jeywords field of the Article class
+    private static final String KEYWORDS = "keywords"; // The keywords field of the Article class
+    private static final String AUTHOR_ID = "authorId";
 
     public static Specification<Article> filterBy(ArticleFilter filter) {
         return Specification
             .where(hasCategory(filter.getCategory()))
-            .and(hasKeywords(filter.getKeywords()));
+            .and(hasKeywords(filter.getKeywords()))
+            .and(hasAuthorId(filter.getAuthorId()));
     }
 
     private static Specification<Article> hasCategory(String category) {
@@ -38,6 +40,13 @@ public class ArticlesSpecs {
 
             return builder.or(predicates);
         };
+    }
+
+    private static Specification<Article> hasAuthorId(Long authorId) {
+        return (root, query, builder) -> 
+            (authorId == null)
+            ? builder.conjunction()
+            : builder.equal(root.get(AUTHOR_ID), authorId);
     }
 }
 

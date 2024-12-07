@@ -20,9 +20,9 @@ public class Author {
     private String username;
     private String name;
 
-    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("author")
-    private List<Article> articles;
+    // @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JsonIgnoreProperties("author")
+    // private List<Article> articles;
 
     public Author(){}
 
@@ -30,15 +30,15 @@ public class Author {
         this.id = other.getId();
         this.username = other.getUsername();
         this.name = other.getName();
-        this.setArticles(other.getArticles());
+        // this.setArticles(other.getArticles());
     }
 
     public Author fromUser(User user) {
         return new Author()
             .setId(user.getId())
             .setUsername(user.getUsername())
-            .setName(user.getDisplayName())
-            .setArticles(new ArrayList<Article>());
+            .setName(user.getDisplayName());
+            // .setArticles(new ArrayList<Article>());
     }
 
     public Long getId() {
@@ -53,9 +53,9 @@ public class Author {
         return this.name;
     }
 
-    public List<Article> getArticles() {
-        return this.articles;
-    }
+    // public List<Article> getArticles() {
+    //     return this.articles;
+    // }
 
     public Author setId(final Long id) {
         this.id = id;
@@ -72,8 +72,8 @@ public class Author {
         return this;
     }
 
-    public Author setArticles(final List<Article> articles) {
-        this.articles = (articles != null) ? new ArrayList<>(articles) : new ArrayList<Article>();
-        return this;
-    }
+    // public Author setArticles(final List<Article> articles) {
+    //     this.articles = (articles != null) ? new ArrayList<>(articles) : new ArrayList<Article>();
+    //     return this;
+    // }
 }

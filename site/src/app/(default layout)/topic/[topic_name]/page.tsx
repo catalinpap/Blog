@@ -1,6 +1,7 @@
 'use client';
 
 import { ArticleBannerList, CardGrid } from "@/components";
+import { Article, PaginatedApiResponse } from "@/types";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -12,14 +13,14 @@ type Props = {
 
 const TopicPage: React.FC<Props> = ({params}) => {
     const { topic_name } = params;
-    const [articles, setArticles] = useState([]);
+    const [articles, setArticles] = useState<Article[]>([]);
 
     useEffect(() => {
         const fetchArticlesByCategory = async () => {
-            const topic = await fetch(`http://localhost:8080/api/topics/${topic_name}`, {
+            const topic: PaginatedApiResponse = await fetch(`http://localhost:8080/api/articles?category=${topic_name}`, {
                 method: 'GET'
-            }).then(response => response.json()).then(response => response.data);
-            setArticles(topic.articles);
+            }).then(response => response.json());
+            setArticles(topic.data.content as Article[]);
         }
 
         fetchArticlesByCategory();

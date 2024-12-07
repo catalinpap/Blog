@@ -38,7 +38,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                     </div>
                 </aside>
                 <article className="main-container article-formatted">
-                    <CategoryTag>{article.category.name}</CategoryTag>
+                    <CategoryTag href={article.category}>{article.category}</CategoryTag>
                     <h1>{article.title}</h1>
                     
                     <div className="flex flex-row justify-between mb-16">
@@ -95,11 +95,13 @@ const ArticlePage: React.FC<Props> = async (props) => {
 };
 
 export async function generateStaticParams() {
-    const articles: PaginatedApiResponse = await fetch('http://localhost:8080/api/articles', 
+    const response: PaginatedApiResponse = await fetch('http://localhost:8080/api/articles', 
         {method:'GET'}
     ).then((response) => response.json());
 
-    return articles.data.content.map((article: Article) => {
+    const articles: Article[] = response.data.content as Article[];
+
+    return articles.map((article: Article) => {
         return {
             url: article.url
         }   

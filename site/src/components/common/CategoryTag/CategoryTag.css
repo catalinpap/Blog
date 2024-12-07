@@ -2,6 +2,6 @@
 
 @layer components {
     .category-tag {
-        @apply bg-light-gray text-black text-xs font-normal p-1 rounded-md cursor-pointer hover:brightness-105;
+        @apply bg-light-gray text-black text-xs font-normal p-1 rounded-md cursor-pointer no-underline hover:brightness-105;
       }
 }

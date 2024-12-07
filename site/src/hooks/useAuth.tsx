@@ -3,7 +3,7 @@ import { eraseCookie, getCookie } from "../utils/helpers";
 import { useContext } from "react";
 import { UserContext, UserContextType } from "@/context/user-context/user-context";
 
-const user = async () => {
+const getUser = async () => {
     const authToken = getCookie('authToken');
     if (!authToken) return null;
     
@@ -18,8 +18,7 @@ const user = async () => {
     return await response.json();
 };
 
-export const useAuth = () => {
-    // TODO: BUG: on refresh, the in-memory user is lost, even though, the auth cookies are still set 
+export const useAuth = () => { 
     const { user, setUser } = useContext(UserContext) as UserContextType;
 
     /**

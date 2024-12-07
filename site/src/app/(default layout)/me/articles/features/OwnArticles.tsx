@@ -1,7 +1,7 @@
 'use client';
 
 import { ArticlesContext, ArticlesContextType } from "@/context/articles-context/articles-context";
-import { Article } from "@/types";
+import { Article, PaginatedApiResponse } from "@/types";
 import { useContext, useEffect } from "react";
 import { ArticleBannerList } from "@/components";
 import { UserContext, UserContextType } from "@/context/user-context/user-context";
@@ -13,13 +13,12 @@ export const OwnArticles: React.FC = () => {
     useEffect(() => {
         const fetchOwnArticles = async () => {
             if (!user) return;
-            const fetchedArticles: Article[] = await fetch(`http://localhost:8080/api/authors/${user.id}`, {
+            const fetchedArticles: PaginatedApiResponse = await fetch(`http://localhost:8080/api/articles?authorId=${user.id}`, {
                 method: 'GET'
             })
-            .then(response => response.json())
-            .then(response => response.data.articles);
+            .then(response => response.json());
 
-            setOwnArticles(fetchedArticles);
+            setOwnArticles(fetchedArticles.data.content as Article[]);
         };
 
         fetchOwnArticles();

@@ -16,7 +16,7 @@ export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {
             className="w-[30%] max-w-[160px] object-cover p-2"
           />
           <div className="flex flex-col gap-1">
-            <CategoryTag className="text-xs font-thin py-1 w-fit">{data.category}</CategoryTag>
+            <CategoryTag href={data.category} className="text-xs font-thin py-1 w-fit">{data.category}</CategoryTag>
             <p className="hover:underline">{data.title}</p>
             {/* <p className="w-fit text-xs font-thin left-full -translate-x-full relative">{data.author.name}</p> */}
           </div>

@@ -19,7 +19,7 @@ const ArticleCarouselItem:React.FC<{
                 />
             <div className="absolute w-full bottom-4 p-4">
                 {/* Category tag */}
-                <CategoryTag>{category}</CategoryTag>
+                <CategoryTag href={category}>{category}</CategoryTag>
                 {/* Title */}
                 <h1 className="title">{title}</h1>
             </div>
@@ -40,7 +40,7 @@ export const HeroCarousel: React.FC<{className?: string}> = async ({className}) 
                     key={`carousel-article-${article.id}`}
                     thumbnail={article.thumbnail}
                     title={article.title}
-                    category={article.category.name}
+                    category={article.category}
                     url={article.url}
                 />
             )}

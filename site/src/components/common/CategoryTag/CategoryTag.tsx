@@ -1,10 +1,14 @@
 import { ReactNode } from "react";
 import "./CategoryTag.css";
+import Link from "next/link";
 
-export const CategoryTag: React.FC<{children?: ReactNode, className?: string}> = ({children, className}) => {
+export const CategoryTag: React.FC<{
+    href: string,
+    children?: ReactNode,
+    className?: string}> = ({children, className, href}) => {
     return (
-        <span className={`category-tag ${className}`}>
+        <Link href={`/topic/${href}`} className={`category-tag ${className}`}>
             {children}
-        </span>
+        </Link>
     );
 };
