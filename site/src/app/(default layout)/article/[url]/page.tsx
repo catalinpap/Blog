@@ -3,7 +3,7 @@
 import { CategoryTag } from "@/components/common";
 import { ArticleBannerList, Comments, FloatPanel, PopularTopics } from "@/components";
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
-import { Article, PaginatedApiResponse } from "@/types";
+import { ApiResponse, Article, PaginatedApiResponse } from "@/types";
 import { format_date, markdownToHTML } from "@/utils/helpers";
 
 type Props = {
@@ -22,8 +22,11 @@ const ArticlePage: React.FC<Props> = async (props) => {
 
     const article: Article =  await fetch(`http://localhost:8080/api/articles/${article_id}`, {
         method: 'GET',
-        
-    }).then(response => response.json()).then(content => content.data);
+    }).then(response => response.json()).then((content: ApiResponse) => content.data as Article);
+
+    const articlesFromThisAuthor: Article[] = await fetch(`http://localhost:8080/api/articles?authorId=${article.authorId}`, {
+        method: 'GET'
+    }).then(response => response.json()).then((paged: PaginatedApiResponse) => paged.data.content as Article[]);
 
     return (
         <>  
@@ -86,7 +89,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                     <PopularTopics className="mb-8"/>
 
                     <p className="text-base font-medium">More from this author:</p>
-                    <ArticleBannerList data={article.author.articles?.slice(0, 5)}/>
+                    <ArticleBannerList data={articlesFromThisAuthor}/>
                 </FloatPanel>
             </main>
         </>

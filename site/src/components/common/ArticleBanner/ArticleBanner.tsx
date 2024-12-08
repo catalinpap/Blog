@@ -13,7 +13,7 @@ export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {
             alt=""
             width={4 * 70}
             height={3 * 70}
-            className="w-[30%] max-w-[160px] object-cover p-2"
+            className="max-w-[160px] aspect-[4/3] object-cover p-2"
           />
           <div className="flex flex-col gap-1">
             <CategoryTag href={data.category} className="text-xs font-thin py-1 w-fit">{data.category}</CategoryTag>

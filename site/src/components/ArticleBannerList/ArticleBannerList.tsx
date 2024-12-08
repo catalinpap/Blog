@@ -11,7 +11,7 @@ export const ArticleBannerList:React.FC<{
     return (
       <div className={`flex flex-col ${className}`}>
           {
-            data.length === 0
+            data?.length === 0
             ? <p className="text-lg font-light text-gray">There are no articles yet.</p>
             : data?.map(article => 
               editable 

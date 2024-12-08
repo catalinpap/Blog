@@ -34,7 +34,7 @@ export const HeroCarousel: React.FC<{className?: string}> = async ({className}) 
     }).then(response => response.json()).then(res => res.data.content);
 
     return (
-        <Carousel className={`relative items-end w-full ${className}`} transitionStyle="scroll" autoScroll={true}>    
+        <Carousel className={`relative items-end w-fulls ${className}`} transitionStyle="scroll" autoScroll={true}>    
             {articles.map(article => 
                 <ArticleCarouselItem 
                     key={`carousel-article-${article.id}`}

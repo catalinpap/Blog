@@ -15,7 +15,7 @@ export default async function Home() {
     <main>
       <article className="page-content flex flex-col 2xl:flex-row">
         <section className="main-container">
-          <HeroCarousel className="mb-4"/>
+          <HeroCarousel className="mb-4 aspect-[4/3]"/>
           <CardGrid data={articles} />
         </section>
 
