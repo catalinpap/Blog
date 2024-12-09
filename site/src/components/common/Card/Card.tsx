@@ -4,13 +4,14 @@ import Link from "next/link";
 import { TopicTag } from "..";
 import { Article } from "@/types";
 import { format_date, limit_string } from "@/utils/helpers";
+import { config } from "@/config";
 
 export const Card: React.FC<{data: Article}> = ({data}) => {
     return (
         <div className="relative">
             <TopicTag href={data.category} className="absolute top-3 right-3 z-10">{data.category}</TopicTag>
             <Link href={`/article/${data.url}`} className="card-wrapper">
-                <Image src={data.thumbnail || "https://images.unsplash.com/photo-1524061662617-6a29d732e3ef?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} 
+                <Image src={data.thumbnail || config.defaultThumbnail} 
                     alt={""}
                     width={960}
                     height={600}

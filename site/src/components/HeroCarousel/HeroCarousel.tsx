@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Carousel, TopicTag } from "../common";
 import { Article } from "@/types";
 import Link from "next/link";
+import { config } from "@/config";
 
 const ArticleCarouselItem:React.FC<{
     thumbnail: string,
@@ -13,8 +14,8 @@ const ArticleCarouselItem:React.FC<{
         <Link href={`/article/${url}`}>
             <Image src={thumbnail || ''} 
                 alt="" 
-                width={1600} 
-                height={1200}
+                width={4 * 400} 
+                height={3 * 400}
                 className="w-full h-full -z-10 object-cover"
                 />
             <div className="absolute w-full bottom-4 p-4">
@@ -38,7 +39,7 @@ export const HeroCarousel: React.FC<{className?: string}> = async ({className}) 
             {articles.map(article => 
                 <ArticleCarouselItem 
                     key={`carousel-article-${article.id}`}
-                    thumbnail={article.thumbnail}
+                    thumbnail={article.thumbnail || config.defaultThumbnail}
                     title={article.title}
                     category={article.category}
                     url={article.url}
