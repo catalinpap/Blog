@@ -1,10 +1,10 @@
 'use client';
 
 import { MouseEvent, ReactNode, useCallback } from "react";
-import "./CategoryTag.css";
 import { useRouter } from "next/navigation";
+import "./TopicTag.css";
 
-export const CategoryTag: React.FC<{
+export const TopicTag: React.FC<{
     href: string,
     children?: ReactNode,
     className?: string}> = ({children, className, href}) => {
@@ -17,7 +17,7 @@ export const CategoryTag: React.FC<{
 
         return (
             <button onClick={(e) => navigate(href, e)} className={`category-tag ${className}`}>
-                {children}
+                {children || 'uncategorized'}
             </button>
         );
 };

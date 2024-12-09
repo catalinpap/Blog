@@ -1,6 +1,6 @@
 import { Article } from "./Article";
 
-export type Category = {
+export type Topic = {
     id: number,
     name: string,
     articles: Article[]

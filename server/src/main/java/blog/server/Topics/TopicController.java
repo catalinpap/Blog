@@ -1,4 +1,4 @@
-package blog.server.Categories;
+package blog.server.Topics;
 
 import java.net.URI;
 
@@ -22,11 +22,11 @@ import blog.server.utils.ApiResponseBody;
 import blog.server.utils.Const;
 
 @RestController
-@RequestMapping(Const.CATEGORY_BASE_URL)
-public class CategoryController {
+@RequestMapping(Const.TOPIC_BASE_URL)
+public class TopicController {
     
     @Autowired
-    private CategoryService categoryService;
+    private TopicService topicService;
 
     @GetMapping("")
     public ResponseEntity<String> getAll(
@@ -36,10 +36,10 @@ public class CategoryController {
 
         PageRequest pageRequest = PageRequest.of(page, size);
 
-        Page<Category> categories = categoryService.getAll(pageRequest);
+        Page<Topic> topics = topicService.getAll(pageRequest);
 
         String responseBody = new ApiResponseBody()
-            .data(categories)
+            .data(topics)
             .json();
 
         return ResponseEntity
@@ -60,10 +60,10 @@ public class CategoryController {
 
     @GetMapping("/{name}")
     public ResponseEntity<String> getByName(@PathVariable String name) throws Exception {
-        Category category = categoryService.get(name);
+        Topic topic = topicService.get(name);
 
         String responseBody = new ApiResponseBody()
-            .data(category)
+            .data(topic)
             .json();
 
         return ResponseEntity
@@ -73,27 +73,27 @@ public class CategoryController {
     }
 
     @PostMapping("")
-    public ResponseEntity<String> add(@RequestBody Category category) throws Exception {
-        Category addedCategory = categoryService.add(category);
-        URI categoryUri = ServletUriComponentsBuilder
+    public ResponseEntity<String> add(@RequestBody Topic category) throws Exception {
+        Topic addedTopic = topicService.add(category);
+        URI topicUri = ServletUriComponentsBuilder
             .fromCurrentRequest()
             .path("{id}")
-            .buildAndExpand(addedCategory.getId())
+            .buildAndExpand(addedTopic.getId())
             .toUri();
         String responseBody = new ApiResponseBody()
-            .data(addedCategory)
+            .data(addedTopic)
             .json();
         return ResponseEntity
-            .created(categoryUri)
+            .created(topicUri)
             .contentType(MediaType.APPLICATION_JSON)
             .body(responseBody);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) throws Exception {
-        Category deletedCategory = categoryService.delete(id);
+        Topic deletedTopic = topicService.delete(id);
         String responseBody = new ApiResponseBody()
-            .data(deletedCategory)
+            .data(deletedTopic)
             .json();
         return ResponseEntity
             .ok()
@@ -102,10 +102,10 @@ public class CategoryController {
     }
 
     @PutMapping("")
-    public ResponseEntity<String> update(@RequestBody Category category) throws Exception {
-        Category updatedCategory = categoryService.update(category);
+    public ResponseEntity<String> update(@RequestBody Topic category) throws Exception {
+        Topic updatedTopic = topicService.update(category);
         String responseBody = new ApiResponseBody()
-            .data(updatedCategory)
+            .data(updatedTopic)
             .json();
         return ResponseEntity
             .ok()

@@ -5,7 +5,6 @@ import java.util.List;
 
 import blog.server.Articles.Article;
 import blog.server.Authors.Author;
-import blog.server.Categories.Category;
 import blog.server.Comments.Comment;
 
 public class ArticleDTO {
@@ -34,7 +33,7 @@ public class ArticleDTO {
             .setId(article.getId())
             .setTitle(article.getTitle())
             .setContent(article.getContent())
-            .setCategory(article.getCategory())
+            .setCategory(article.getTopic())
             // .setCategoryObj(article.getCategoryObj())
             .setKeywords(article.getKeywords())
             .setLikes(article.getLikes())

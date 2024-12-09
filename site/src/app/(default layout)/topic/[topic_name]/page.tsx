@@ -17,7 +17,7 @@ const TopicPage: React.FC<Props> = ({params}) => {
 
     useEffect(() => {
         const fetchArticlesByCategory = async () => {
-            const topic: PaginatedApiResponse = await fetch(`http://localhost:8080/api/articles?category=${topic_name}`, {
+            const topic: PaginatedApiResponse = await fetch(`http://localhost:8080/api/articles?topic=${topic_name}`, {
                 method: 'GET'
             }).then(response => response.json());
             setArticles(topic.data.content as Article[]);

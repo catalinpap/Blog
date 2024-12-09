@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import blog.server.Articles.exceptions.ArticleNotFoundException;
 import blog.server.Authors.exceptions.AuthorNotFoundException;
-import blog.server.Categories.exceptions.CategoryNotFoundException;
+import blog.server.Topics.exceptions.TopicNotFoundException;
 import blog.server.Users.exceptions.UserNotFoundException;
 import blog.server.utils.ApiResponseBody;
 
@@ -46,8 +46,8 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 				.body(responseBody.json());
 	}
 
-	@ExceptionHandler(CategoryNotFoundException.class)
-	public ResponseEntity<String> handleCategoryNotFound (CategoryNotFoundException exception, WebRequest request ) {
+	@ExceptionHandler(TopicNotFoundException.class)
+	public ResponseEntity<String> handleTopicNotFound (TopicNotFoundException exception, WebRequest request ) {
 			ApiResponseBody responseBody = new ApiResponseBody()
 				.message(String.format("Category with name=%s does not exist!", exception.getMessage()));
 			return ResponseEntity

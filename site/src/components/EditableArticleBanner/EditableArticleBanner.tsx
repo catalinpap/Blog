@@ -34,12 +34,12 @@ export const EditableArticleBanner:React.FC<{data: Article}> = ({data}) => {
       <div className="flex flex-row w-full">
         <ArticleBanner data={data} />
         <div className="flex flex-col border-l border-light-gray">
-          <Link href={`/write/${data.id}`} className="w-full h-full px-2 flex justify-start items-center gap-1">
+          <Link href={`/write/${data.id}`} className="w-full h-full px-2 flex justify-start items-center gap-1 hover:text-blue">
             <WriteIcon />
             Edit
           </Link>
           <button 
-            className="w-full h-full px-2 flex justify-start items-center gap-1" 
+            className="w-full h-full px-2 flex justify-start items-center gap-1 hover:text-red-500" 
             onClick={() => deleteArticle(data.id, articles, setArticles)}>
               <TrashIcon />
               Delete

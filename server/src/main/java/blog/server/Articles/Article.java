@@ -13,8 +13,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import blog.server.Authors.Author;
-import blog.server.Categories.Category;
 import blog.server.Comments.Comment;
+import blog.server.Topics.Topic;
 import blog.server.utils.JSON;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
@@ -53,15 +53,15 @@ public class Article {
 	private String content;
 
 	@ColumnDefault("1")
-	private Long categoryId;
+	private Long topicId;
 
 	@Transient
-	private String category;
+	private String topic;
 
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
-	@JoinColumn(name = "categoryId", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Topic.class)
+	@JoinColumn(name = "topicId", insertable = false, updatable = false)
 	@JsonIgnoreProperties("articles")
-	private Category categoryRef;
+	private Topic topicRef;
 
 	@Nullable
 	private List<String> keywords;
@@ -110,16 +110,16 @@ public class Article {
 		return this.content;
 	}
 
-	public Long getCategoryId() {
-		return this.categoryId;
+	public Long getTopicId() {
+		return this.topicId;
 	}
 
-	public String getCategory() {
-		return this.categoryRef.getName();
+	public String getTopic() {
+		return this.topicRef.getName();
 	}
 
-	public Category getCategoryRef() {
-		return this.categoryRef;
+	public Topic getTopicRef() {
+		return this.topicRef;
 	}
 
 	public List<String> getKeywords() {
@@ -179,18 +179,18 @@ public class Article {
 		return this;
 	}
 
-	public Article setCategoryId(final Long categoryId) {
-		this.categoryId = categoryId;
+	public Article setTopicId(final Long topicId) {
+		this.topicId = topicId;
 		return this;
 	}
 
-	public Article setCategory(final String category) {
-		this.category = category;
+	public Article setTopic(final String topic) {
+		this.topic = topic;
 		return this;
 	}
 	
-	public Article setCategoryRef(final Category categoryRef) {
-		this.categoryRef = categoryRef;
+	public Article setTopicyRef(final Topic topicRef) {
+		this.topicRef = topicRef;
 		return this;
 	}
 

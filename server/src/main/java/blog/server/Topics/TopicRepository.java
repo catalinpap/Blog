@@ -1,4 +1,4 @@
-package blog.server.Categories;
+package blog.server.Topics;
 
 import java.util.Optional;
 
@@ -10,6 +10,6 @@ import jakarta.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long>, JpaSpecificationExecutor<Category> {
-    public Optional<Category> findByName(final String name);
+public interface TopicRepository extends JpaRepository<Topic, Long>, JpaSpecificationExecutor<Topic> {
+    public Optional<Topic> findByName(final String name);
 }

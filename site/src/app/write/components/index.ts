@@ -1,2 +1,2 @@
 export { ArticleForm } from "./ArticleForm/ArticleForm";
-export { CategorySelect } from "./CategorySelect/CategorySelect";
+export { TopicSelect } from "./TopicSelect/TopicSelect";

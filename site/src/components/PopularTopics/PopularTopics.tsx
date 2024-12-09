@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { CategoryTag } from "../common";
-import { ApiResponse, Category, PaginatedApiResponse } from "@/types";
+import { TopicTag } from "../common";
+import { Category, PaginatedApiResponse } from "@/types";
 
 export const PopularTopics:React.FC<{className?: string}> = ({className}) => {
   const [topics, setTopics] = useState<Category[]>([]);
@@ -26,12 +26,12 @@ export const PopularTopics:React.FC<{className?: string}> = ({className}) => {
         <div className="flex flex-wrap gap-2">
           {
             topics.map(topic => 
-              <CategoryTag 
+              <TopicTag 
                 key={topic.id} 
-                href={topic.name} 
+                href={topic.name}
                 className="font-medium p-2">
                   {topic.name}
-              </CategoryTag>
+              </TopicTag>
             )
           }
         </div>

@@ -1,20 +1,15 @@
-package blog.server.Categories;
+package blog.server.Topics;
 
-import java.util.List;
-
-import blog.server.Articles.Article;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PostPersist;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Category {
+public class Topic {
     // TODO: Rethink the ID for the category. Numerical or name as id?
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,12 +35,12 @@ public class Category {
     //     return this.articles;
     // }
 
-    public Category setId(final Long id) {
+    public Topic setId(final Long id) {
         this.id = id;
         return this;
     }
 
-    public Category setName(final String name) {
+    public Topic setName(final String name) {
         this.name = name;
         return this;
     }

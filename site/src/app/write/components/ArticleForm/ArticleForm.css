@@ -18,7 +18,7 @@
     }
 
     textarea {
-        @apply text-lg resize-none flex-grow overflow-scroll;
+        @apply text-lg resize-none flex-grow overflow-auto;
     }
 
     .toggle-preview {

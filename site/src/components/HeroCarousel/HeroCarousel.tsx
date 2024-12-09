@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Carousel, CategoryTag } from "../common";
+import { Carousel, TopicTag } from "../common";
 import { Article } from "@/types";
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ const ArticleCarouselItem:React.FC<{
                 />
             <div className="absolute w-full bottom-4 p-4">
                 {/* Category tag */}
-                <CategoryTag href={category}>{category}</CategoryTag>
+                <TopicTag href={category}>{category}</TopicTag>
                 {/* Title */}
                 <h1 className="title">{title}</h1>
             </div>

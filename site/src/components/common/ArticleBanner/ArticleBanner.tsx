@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Article } from "@/types";
-import { CategoryTag } from "..";
+import { TopicTag } from "..";
 import Image from "next/image";
 
 export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {
@@ -16,7 +16,7 @@ export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {
             className="max-w-[160px] aspect-[4/3] object-cover p-2"
           />
           <div className="flex flex-col gap-1">
-            <CategoryTag href={data.category} className="text-xs font-thin py-1 w-fit">{data.category}</CategoryTag>
+            <TopicTag href={data.category} className="text-xs font-thin py-1 w-fit">{data.category}</TopicTag>
             <p className="hover:underline">{data.title}</p>
             {/* <p className="w-fit text-xs font-thin left-full -translate-x-full relative">{data.author.name}</p> */}
           </div>

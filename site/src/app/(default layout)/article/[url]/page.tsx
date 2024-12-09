@@ -1,6 +1,6 @@
 'use server';
 
-import { CategoryTag } from "@/components/common";
+import { TopicTag } from "@/components/common";
 import { ArticleBannerList, Comments, FloatPanel, PopularTopics } from "@/components";
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
 import { ApiResponse, Article, PaginatedApiResponse } from "@/types";
@@ -41,7 +41,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                     </div>
                 </aside>
                 <article className="main-container article-formatted">
-                    <CategoryTag href={article.category}>{article.category}</CategoryTag>
+                    <TopicTag href={article.category}>{article.category}</TopicTag>
                     <h1>{article.title}</h1>
                     
                     <div className="flex flex-row justify-between mb-16">
