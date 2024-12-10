@@ -9,8 +9,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import blog.server.Authors.Author;
 import blog.server.Comments.Comment;
@@ -35,7 +33,6 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "article")
 public class Article {
 	@Id
-	@JsonSerialize(using = ToStringSerializer.class)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 

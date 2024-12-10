@@ -59,7 +59,7 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handleGenericException (Exception exception, WebRequest request) {
 		ApiResponseBody responseBody = new ApiResponseBody()
-			.data(exception.getStackTrace())
+			// .data(exception.getStackTrace())
 			.message(exception.getMessage());
 
 		return ResponseEntity

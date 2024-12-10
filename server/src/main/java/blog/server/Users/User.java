@@ -5,9 +5,6 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +17,6 @@ import jakarta.validation.constraints.NotNull;
 @Table(name = "Users") // "user" is not allowed as it is a reserved keyword in postgres
 public class User implements UserDetails {
     @Id
-    @JsonSerialize(using = ToStringSerializer.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
