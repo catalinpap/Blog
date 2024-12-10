@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import blog.server.Articles.Article;
 import blog.server.Articles.ArticlesService;
+import blog.server.Articles.Likes.exceptions.AlreadyLikedException;
+import blog.server.Articles.Likes.exceptions.NoLikeException;
 import blog.server.Users.User;
 import blog.server.Users.UsersService;
 
@@ -35,7 +37,7 @@ public class ArticleLikesService {
         User user = usersService.getByUsername(userName);
 
         if (articleLikesRepository.existsByArticleIdAndUserId(articleId, user.getId())) {
-            throw new Error("User already liked this article");
+            throw new AlreadyLikedException();
         }
 
         ArticleLikes newEntry = new ArticleLikes()
@@ -54,7 +56,7 @@ public class ArticleLikesService {
         User user = usersService.getByUsername(userName);
 
         if (!articleLikesRepository.existsByArticleIdAndUserId(articleId, user.getId())) {
-            throw new Error("User did not like this article yet");
+            throw new NoLikeException();
         }
 
         article.setLikes(article.getLikes() - 1);

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import blog.server.Articles.Article;
 import blog.server.Articles.ArticlesService;
+import blog.server.Articles.Bookmarks.exceptions.AlreadyBookmarkedException;
+import blog.server.Articles.Bookmarks.exceptions.NoBookmarkException;
 import blog.server.Users.User;
 import blog.server.Users.UsersService;
 
@@ -35,7 +37,7 @@ public class ArticleBookmarksService {
         User user = usersService.getByUsername(userName);
 
         if (articleBookmarksRepository.existsByArticleIdAndUserId(articleId, user.getId())) {
-            throw new Error("User already bookmarked this article");
+            throw new AlreadyBookmarkedException();
         }
 
         ArticleBookmarks newEntry = new ArticleBookmarks()
@@ -54,7 +56,7 @@ public class ArticleBookmarksService {
         User user = usersService.getByUsername(userName);
 
         if (!articleBookmarksRepository.existsByArticleIdAndUserId(articleId, user.getId())) {
-            throw new Error("User did not bookmarked this article yet");
+            throw new NoBookmarkException();
         }
 
         article.setBookmarks(article.getBookmarks() - 1);
