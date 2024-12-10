@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArticleLikesRepository extends JpaRepository<ArticleLikes, Long> {
-    public boolean existsByArticleIdAndUserId(Long articleId, Long UserId);
-    public ArticleLikes findByArticleIdAndUserId(Long articleId, Long UserId);
+    public boolean existsByArticleIdAndUserId(Long articleId, Long userId);
+    public ArticleLikes findByArticleIdAndUserId(Long articleId, Long userId);
 }

@@ -1,4 +1,4 @@
-package blog.server.Articles.Likes;
+package blog.server.Articles.Bookmarks;
 
 import java.util.List;
 
@@ -17,15 +17,15 @@ import blog.server.utils.Const;
 
 @Controller
 @RequestMapping(Const.ARTICLES_BASE_URL)
-public class ArticleLikesController {
+public class ArticleBookmarksController {
     @Autowired
-    private ArticleLikesService articleLikesService;
+    private ArticleBookmarksService articleBookmarksService;
 
-    @GetMapping("/likes")
-    public ResponseEntity<String> getLikes() {
-        List<ArticleLikes> likes = this.articleLikesService.getAll();
-        
-        String responseBody = new ApiResponseBody().data(likes).json();
+    @GetMapping("/bookmarks")
+    public ResponseEntity<String> getBookmarks() {
+        List<ArticleBookmarks> bookmarks = this.articleBookmarksService.getAll();
+
+        String responseBody = new ApiResponseBody().data(bookmarks).json();
 
         return ResponseEntity
             .ok()
@@ -33,13 +33,13 @@ public class ArticleLikesController {
             .body(responseBody);
     }
 
-    @PostMapping("/{articleId}/like")
-    public ResponseEntity<String> likeArticle(@PathVariable Long articleId) throws Exception {
-        ArticleLikes newEntry = articleLikesService.add(articleId);
+    @PostMapping("/{articleId}/bookmark")
+    public ResponseEntity<String> bookmarkArticle(@PathVariable Long articleId) throws Exception {
+        ArticleBookmarks newEntry = articleBookmarksService.add(articleId);
 
         String responseBody = new ApiResponseBody()
             .data(newEntry)
-            .message("Article liked")
+            .message("Article bookmarked")
             .json();
 
         return ResponseEntity
@@ -48,13 +48,13 @@ public class ArticleLikesController {
             .body(responseBody);
     }
 
-    @DeleteMapping("/{articleId}/like")
-    public ResponseEntity<String> removeLike(@PathVariable Long articleId) throws Exception {
-        ArticleLikes deletedEntry = articleLikesService.delete(articleId);
+    @DeleteMapping("/{articleId}/bookmark")
+    public ResponseEntity<String> removeBookmark(@PathVariable Long articleId) throws Exception {
+        ArticleBookmarks deletedEntry = articleBookmarksService.delete(articleId);
 
         String responseBody = new ApiResponseBody()
             .data(deletedEntry)
-            .message("Removed liked")
+            .message("Removed bookmark")
             .json();
 
         return ResponseEntity

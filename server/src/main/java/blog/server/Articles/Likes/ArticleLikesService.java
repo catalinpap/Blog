@@ -13,7 +13,6 @@ import blog.server.Users.UsersService;
 
 @Service
 public class ArticleLikesService {
-
     private ArticleLikesRepository articleLikesRepository;
     private UsersService usersService;
     private ArticlesService articlesService;
