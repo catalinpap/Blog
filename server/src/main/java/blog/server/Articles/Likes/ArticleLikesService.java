@@ -67,5 +67,11 @@ public class ArticleLikesService {
 
         return entity;
     }
+
+    public Boolean checkUserLikedArticle(Long articleId) throws Exception {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = usersService.getByUsername(userName);
+        return articleLikesRepository.existsByArticleIdAndUserId(articleId, user.getId());
+    }
     
 }

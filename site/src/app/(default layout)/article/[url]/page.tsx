@@ -5,6 +5,7 @@ import { ArticleBannerList, Comments, FloatPanel, PopularTopics } from "@/compon
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
 import { ApiResponse, Article, PaginatedApiResponse } from "@/types";
 import { format_date, markdownToHTML } from "@/utils/helpers";
+import { InteractControls } from "./components";
 
 type Props = {
     params: {
@@ -34,14 +35,11 @@ const ArticlePage: React.FC<Props> = async (props) => {
                 {/* Tools sidepanel */}
                 <aside className="absolute h-full top-0 right-full mr-4 block">
                     <div className="sticky top-20 flex-col gap-4 hidden lg:flex">
-                        <HeartEmptyIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-orange" />
-                        <BookmarkIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-yellow" />
-                        <ShareIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-blue" />
-
+                        <InteractControls articleId={article.id}/>
                     </div>
                 </aside>
                 <article className="main-container article-formatted">
-                    <TopicTag href={article.category}>{article.category}</TopicTag>
+                    <TopicTag href={article.topic}>{article.topic}</TopicTag>
                     <h1>{article.title}</h1>
                     
                     <div className="flex flex-row justify-between mb-16">

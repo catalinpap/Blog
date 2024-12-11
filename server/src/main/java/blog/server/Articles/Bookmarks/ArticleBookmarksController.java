@@ -62,4 +62,13 @@ public class ArticleBookmarksController {
             .contentType(MediaType.APPLICATION_JSON)
             .body(responseBody);
     }
+
+    @PostMapping("/{articleId}/bookmark/check")
+    public ResponseEntity<Boolean> checkUserBookmarkedArticle(@PathVariable Long articleId) throws Exception {
+        Boolean isBookmarked = articleBookmarksService.checkUserBookmarkedArticle(articleId);
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(isBookmarked);
+    }
 }

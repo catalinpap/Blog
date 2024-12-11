@@ -67,4 +67,10 @@ public class ArticleBookmarksService {
 
         return entity;
     }
+
+    public Boolean checkUserBookmarkedArticle(Long articleId) throws Exception {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = usersService.getByUsername(userName);
+        return articleBookmarksRepository.existsByArticleIdAndUserId(articleId, user.getId());
+    }
 }

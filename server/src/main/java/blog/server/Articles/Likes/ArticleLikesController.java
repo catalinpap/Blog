@@ -62,4 +62,13 @@ public class ArticleLikesController {
             .contentType(MediaType.APPLICATION_JSON)
             .body(responseBody);
     }
+
+    @PostMapping("/{articleId}/like/check")
+    public ResponseEntity<Boolean> checkUserLikedArticle(@PathVariable Long articleId) throws Exception {
+        Boolean isLiked = articleLikesService.checkUserLikedArticle(articleId);
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(isLiked);
+    }
 }
