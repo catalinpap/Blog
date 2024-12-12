@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
+
+// TODO: Think how to refactor the Likes API
 @Entity
 @Table(name = "article_likes")
 public class ArticleLikes {

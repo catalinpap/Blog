@@ -63,7 +63,7 @@ public class ArticleLikesController {
             .body(responseBody);
     }
 
-    @PostMapping("/{articleId}/like/check")
+    @GetMapping("/{articleId}/like/check")
     public ResponseEntity<Boolean> checkUserLikedArticle(@PathVariable Long articleId) throws Exception {
         Boolean isLiked = articleLikesService.checkUserLikedArticle(articleId);
         return ResponseEntity

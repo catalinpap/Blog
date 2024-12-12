@@ -61,9 +61,8 @@ export const InteractControls: React.FC<{articleId: number}> = ({articleId}) => 
 
     useEffect(() => {
         const checkAlreadyLiked = async () => {
-            if(!user) return;
             await fetch(`http://localhost:8080/api/articles/${articleId}/like/check`, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Authorization': `basic ${getCookie('authToken')}`
                 }
@@ -73,7 +72,6 @@ export const InteractControls: React.FC<{articleId: number}> = ({articleId}) => 
         };
 
         const checkAlreadyBookmarked = async () => {
-            if(!user) return;
             await fetch(`http://localhost:8080/api/articles/${articleId}/bookmark/check`, {
                 method: 'GET',
                 headers: {

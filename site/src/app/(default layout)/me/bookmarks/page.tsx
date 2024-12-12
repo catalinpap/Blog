@@ -12,7 +12,7 @@ const BookmarksPage = () => {
     useEffect(() => {
         const fetchBookmarks = async () => {
             if(!user) return;
-            const bookmarks = await fetch(`http://localhost:8080/api/articles/bookmarks?userId=${user.id}`)
+            const bookmarks = await fetch(`http://localhost:8080/api/bookmarks?userId=${user.id}`)
                 .then(response => response.json())
                 .then((response: ApiResponse) => response.data as Article[]);
 
