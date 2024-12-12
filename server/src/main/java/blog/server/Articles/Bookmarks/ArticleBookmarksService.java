@@ -1,8 +1,11 @@
 package blog.server.Articles.Bookmarks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +31,26 @@ public class ArticleBookmarksService {
 
     public List<ArticleBookmarks> getAll() {
         return articleBookmarksRepository.findAll();
+    }
+
+    public List<Article> getAll(BookmarkFilter filter) {
+        Specification<ArticleBookmarks> specifications = BookmarkSpecs.filterBy(filter);
+        List<ArticleBookmarks> bookmarks = articleBookmarksRepository.findAll(specifications);
+        List<Article> bookmarkedArticles =  new ArrayList<Article>();
+        
+        bookmarkedArticles = bookmarks
+        .stream()
+        .map(bookmark -> bookmark.getArticleId())
+        .map(articleId -> {
+            try {
+                return articlesService.get(articleId);
+            } catch (Exception e) {
+                return null;
+            }
+        })
+        .toList();
+        
+        return bookmarkedArticles;
     }
 
     public ArticleBookmarks add(Long articleId) throws Exception {

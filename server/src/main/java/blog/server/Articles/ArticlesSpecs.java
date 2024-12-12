@@ -8,23 +8,23 @@ import jakarta.persistence.criteria.Predicate;
 
 public class ArticlesSpecs {
 
-    private static final String CATEGORY_REF = "categoryRef"; // The Category object field of Article class
-    private static final String CATEGORY_NAME = "name"; // The name field of the Category class 
+    private static final String TOPIC_REF = "topicRef"; // The Category object field of Article class
+    private static final String TOPIC_NAME = "name"; // The name field of the Category class 
     private static final String KEYWORDS = "keywords"; // The keywords field of the Article class
     private static final String AUTHOR_ID = "authorId";
 
     public static Specification<Article> filterBy(ArticleFilter filter) {
         return Specification
-            .where(hasCategory(filter.getCategory()))
+            .where(hasTopic(filter.getCategory()))
             .and(hasKeywords(filter.getKeywords()))
             .and(hasAuthorId(filter.getAuthorId()));
     }
 
-    private static Specification<Article> hasCategory(String category) {
+    private static Specification<Article> hasTopic(String topic) {
         return (root, query, builder) ->
-            (category == null || category.isEmpty())
+            (topic == null || topic.isEmpty())
                 ? builder.conjunction()
-                : builder.equal(root.join(CATEGORY_REF).get(CATEGORY_NAME), category);
+                : builder.equal(root.join(TOPIC_REF).get(TOPIC_NAME), topic);
         
     }
 

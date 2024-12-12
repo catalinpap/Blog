@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import blog.server.Articles.Article;
 import blog.server.utils.ApiResponseBody;
 import blog.server.utils.Const;
 
@@ -22,8 +24,16 @@ public class ArticleBookmarksController {
     private ArticleBookmarksService articleBookmarksService;
 
     @GetMapping("/bookmarks")
-    public ResponseEntity<String> getBookmarks() {
-        List<ArticleBookmarks> bookmarks = this.articleBookmarksService.getAll();
+    public ResponseEntity<String> getBookmarks(@RequestParam(value = "userId", required = false) Long userId) {
+        BookmarkFilter filters = new BookmarkFilter()
+            .setUserId(userId);
+        
+        List<?> bookmarks;
+        if (userId != null) {
+            bookmarks = this.articleBookmarksService.getAll(filters);
+        } else {
+            bookmarks = this.articleBookmarksService.getAll();
+        }
 
         String responseBody = new ApiResponseBody().data(bookmarks).json();
 

@@ -16,6 +16,7 @@ export const AccountDropdown:React.FC = () => {
         <p className="border-b border-light-gray w-full mb-2 p-2 text-wrap">Hello, {user && user.displayName}</p>
         <p className="p-2 cursor-pointer hover:font-medium">Profile</p>
         <Link href={'/me/articles'} className="p-2 cursor-pointer hover:font-medium">Articles</Link>
+        <Link href={'/me/bookmarks'} className="p-2 cursor-pointer hover:font-medium">Bookmarks</Link>
         <p className="p-2 text-red-400  cursor-pointer hover:font-medium" onClick={logout_user}>Sign out</p>
     </>;
     

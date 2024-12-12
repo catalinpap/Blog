@@ -44,7 +44,7 @@ export const markdownToHTML = (markdown: string | undefined | null) => {
  */
 export const extractFirstImageURL = (html: string | undefined) => {
     if (!html) return;
-    const imgRegex = /<img[^>]+src="([^">]+)"/i;
+    const imgRegex: RegExp = /!\[.*?\]\((https?:\/\/[^\s\)]+)\)/;
     const match = html.match(imgRegex);
     const thumbnailURL = match && match[1];
 
