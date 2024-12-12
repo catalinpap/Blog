@@ -19,7 +19,12 @@ export const DefaultHeader = () => {
             </nav>
             
             <div className="flex items-center h-full gap-x-3">
-                <SearchIcon size={28} />
+                <form className="flex items-center">
+                    <input type="text" className="bg-transparent border-b border-gray outline-none" />
+                    <button>
+                        <SearchIcon size={28} />
+                    </button>
+                </form>
                 <AccountDropdown />
                 <Link href={"/write"} className="button-primary flex items-center gap-x-2 capitalize">
                     <WriteIcon size={20} />
