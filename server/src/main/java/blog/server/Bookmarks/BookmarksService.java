@@ -1,41 +1,40 @@
-package blog.server.Articles.Bookmarks;
+package blog.server.Bookmarks;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import blog.server.Articles.Article;
 import blog.server.Articles.ArticlesService;
-import blog.server.Articles.Bookmarks.exceptions.AlreadyBookmarkedException;
-import blog.server.Articles.Bookmarks.exceptions.NoBookmarkException;
+import blog.server.Bookmarks.exceptions.AlreadyBookmarkedException;
+import blog.server.Bookmarks.exceptions.NoBookmarkException;
 import blog.server.Users.User;
 import blog.server.Users.UsersService;
 
 @Service
-public class ArticleBookmarksService {
-    private ArticleBookmarksRepository articleBookmarksRepository;
+public class BookmarksService {
+    private BookmarksRepository bookmarksRepository;
     private UsersService usersService;
     private ArticlesService articlesService;
 
     @Autowired
-    public ArticleBookmarksService(ArticleBookmarksRepository articleBookmarksRepository, UsersService usersService, ArticlesService articlesService) {
-        this.articleBookmarksRepository = articleBookmarksRepository;
+    public BookmarksService(BookmarksRepository bookmarksRepository, UsersService usersService, ArticlesService articlesService) {
+        this.bookmarksRepository = bookmarksRepository;
         this.usersService = usersService;
         this.articlesService = articlesService;
     }
 
-    public List<ArticleBookmarks> getAll() {
-        return articleBookmarksRepository.findAll();
+    public List<Bookmark> getAll() {
+        return bookmarksRepository.findAll();
     }
 
     public List<Article> getAll(BookmarkFilter filter) {
-        Specification<ArticleBookmarks> specifications = BookmarkSpecs.filterBy(filter);
-        List<ArticleBookmarks> bookmarks = articleBookmarksRepository.findAll(specifications);
+        Specification<Bookmark> specifications = BookmarkSpecs.filterBy(filter);
+        List<Bookmark> bookmarks = bookmarksRepository.findAll(specifications);
         List<Article> bookmarkedArticles =  new ArrayList<Article>();
         
         bookmarkedArticles = bookmarks
@@ -53,40 +52,40 @@ public class ArticleBookmarksService {
         return bookmarkedArticles;
     }
 
-    public ArticleBookmarks add(Long articleId) throws Exception {
+    public Bookmark add(Long articleId) throws Exception {
         Article article = articlesService.get(articleId);
 
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = usersService.getByUsername(userName);
 
-        if (articleBookmarksRepository.existsByArticleIdAndUserId(articleId, user.getId())) {
+        if (bookmarksRepository.existsByArticleIdAndUserId(articleId, user.getId())) {
             throw new AlreadyBookmarkedException();
         }
 
-        ArticleBookmarks newEntry = new ArticleBookmarks()
+        Bookmark newEntry = new Bookmark()
             .setArticleId(articleId)
             .setUserId(user.getId());
 
         article.setBookmarks(article.getBookmarks() + 1);
 
-        return articleBookmarksRepository.save(newEntry);
+        return bookmarksRepository.save(newEntry);
     }
 
-    public ArticleBookmarks delete(Long articleId) throws Exception {
+    public Bookmark delete(Long articleId) throws Exception {
         Article article = articlesService.get(articleId);
 
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = usersService.getByUsername(userName);
 
-        if (!articleBookmarksRepository.existsByArticleIdAndUserId(articleId, user.getId())) {
+        if (!bookmarksRepository.existsByArticleIdAndUserId(articleId, user.getId())) {
             throw new NoBookmarkException();
         }
 
         article.setBookmarks(article.getBookmarks() - 1);
 
-        ArticleBookmarks entity = articleBookmarksRepository.findByArticleIdAndUserId(articleId, user.getId());
+        Bookmark entity = bookmarksRepository.findByArticleIdAndUserId(articleId, user.getId());
 
-        articleBookmarksRepository.deleteById(entity.getId());
+        bookmarksRepository.deleteById(entity.getId());
 
         return entity;
     }
@@ -94,6 +93,6 @@ public class ArticleBookmarksService {
     public Boolean checkUserBookmarkedArticle(Long articleId) throws Exception {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = usersService.getByUsername(userName);
-        return articleBookmarksRepository.existsByArticleIdAndUserId(articleId, user.getId());
+        return bookmarksRepository.existsByArticleIdAndUserId(articleId, user.getId());
     }
 }

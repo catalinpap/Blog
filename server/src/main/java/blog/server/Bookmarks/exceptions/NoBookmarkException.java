@@ -1,4 +1,4 @@
-package blog.server.Articles.Bookmarks.exceptions;
+package blog.server.Bookmarks.exceptions;
 
 public class NoBookmarkException extends Exception {
     public NoBookmarkException() {

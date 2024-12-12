@@ -1,4 +1,4 @@
-package blog.server.Articles.Bookmarks;
+package blog.server.Bookmarks;
 
 import java.time.LocalDateTime;
 
@@ -9,12 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "article_bookmarks")
-public class ArticleBookmarks {
+public class Bookmark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -45,12 +43,12 @@ public class ArticleBookmarks {
         return this.createdAt.toLocalDate().toString();
     }
 
-    public ArticleBookmarks setArticleId(final Long articleId) {
+    public Bookmark setArticleId(final Long articleId) {
         this.articleId = articleId;
         return this;
     }
 
-    public ArticleBookmarks setUserId(final Long userId) {
+    public Bookmark setUserId(final Long userId) {
         this.userId = userId;
         return this;
     }

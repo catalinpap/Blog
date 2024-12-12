@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import blog.server.Bookmarks.Bookmark;
+import blog.server.Bookmarks.BookmarksService;
 import blog.server.utils.ApiResponseBody;
 import blog.server.utils.Const;
 
@@ -28,6 +30,8 @@ public class ArticlesController {
 
 	@Autowired
 	private ArticlesService articlesService;
+	@Autowired
+	private BookmarksService bookmarksService;
 	
 	@GetMapping("")
 	public ResponseEntity<String> getAll(
@@ -108,4 +112,43 @@ public class ArticlesController {
 			.contentType(MediaType.APPLICATION_JSON)
 			.body(responseBody);
 	}
+
+	@PostMapping("/{articleId}/bookmark")
+    public ResponseEntity<String> bookmarkArticle(@PathVariable Long articleId) throws Exception {
+        Bookmark newEntry = bookmarksService.add(articleId);
+
+        String responseBody = new ApiResponseBody()
+            .data(newEntry)
+            .message("Article bookmarked")
+            .json();
+
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(responseBody);
+    }
+
+    @DeleteMapping("/{articleId}/bookmark")
+    public ResponseEntity<String> removeBookmark(@PathVariable Long articleId) throws Exception {
+        Bookmark deletedEntry = bookmarksService.delete(articleId);
+
+        String responseBody = new ApiResponseBody()
+            .data(deletedEntry)
+            .message("Removed bookmark")
+            .json();
+
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(responseBody);
+    }
+
+	@GetMapping("/{articleId}/bookmark/check")
+    public ResponseEntity<Boolean> checkUserBookmarkedArticle(@PathVariable Long articleId) throws Exception {
+        Boolean isBookmarked = bookmarksService.checkUserBookmarkedArticle(articleId);
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(isBookmarked);
+    }
 }

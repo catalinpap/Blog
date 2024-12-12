@@ -1,4 +1,4 @@
-package blog.server.Articles.Bookmarks;
+package blog.server.Bookmarks;
 
 public class BookmarkFilter {
     private Long userId;

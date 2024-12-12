@@ -9,4 +9,5 @@ public class Const {
     public static final String USERS_BASE_URL = "/api/users";
     public static final String TOPIC_BASE_URL = "/api/topics";
     public static final String COMMENTS_BASE_URL = "/api/comments";
+    public static final String BOOKMARKS_BASE_URL = "/api/bookmarks";
 }

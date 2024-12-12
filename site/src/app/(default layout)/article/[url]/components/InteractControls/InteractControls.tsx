@@ -61,10 +61,11 @@ export const InteractControls: React.FC<{articleId: number}> = ({articleId}) => 
 
     useEffect(() => {
         const checkAlreadyLiked = async () => {
+            if(!user) return;
             await fetch(`http://localhost:8080/api/articles/${articleId}/like/check`, {
                 method: 'POST',
                 headers: {
-                    'AUTHORIZATION': `BASIC ${getCookie('authToken')}`
+                    'Authorization': `basic ${getCookie('authToken')}`
                 }
             })
             .then(response => response.json())
@@ -72,16 +73,18 @@ export const InteractControls: React.FC<{articleId: number}> = ({articleId}) => 
         };
 
         const checkAlreadyBookmarked = async () => {
+            if(!user) return;
             await fetch(`http://localhost:8080/api/articles/${articleId}/bookmark/check`, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
-                    'AUTHORIZATION': `BASIC ${getCookie('authToken')}`
+                    'Authorization': `basic ${getCookie('authToken')}`
                 }
             })
             .then(response => response.json())
             .then(isBookmarked => setBookmarked(isBookmarked));
         }
-
+       
+        // TODO: Create a unified endpoint for user interactions (e.g. {liked: false, bookmarked: false})
         checkAlreadyLiked();
         checkAlreadyBookmarked();
     }, []);
