@@ -1,7 +1,7 @@
 import './Header.css';
 import Link from "next/link";
-import { ArrowDownIcon, MenuIcon, SearchIcon, WriteIcon } from "../icons";
-import { AccountDropdown } from '..';
+import { ArrowDownIcon, MenuIcon, WriteIcon } from "../icons";
+import { AccountDropdown, Search } from '..';
 import { Header } from '../common';
 
 export const DefaultHeader = () => {
@@ -19,12 +19,7 @@ export const DefaultHeader = () => {
             </nav>
             
             <div className="flex items-center h-full gap-x-3">
-                <form className="flex items-center">
-                    <input type="text" className="bg-transparent border-b border-gray outline-none" />
-                    <button>
-                        <SearchIcon size={28} />
-                    </button>
-                </form>
+                <Search />
                 <AccountDropdown />
                 <Link href={"/write"} className="button-primary flex items-center gap-x-2 capitalize">
                     <WriteIcon size={20} />
