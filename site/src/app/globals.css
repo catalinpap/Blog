@@ -33,6 +33,10 @@
     @apply relative mt-14 mb-14 px-8 mx-auto max-w-[768px] flex-shrink-0;
   }
 
+  .page-content h1 {
+    @apply text-2xl font-extralight mb-4;
+  }
+
   .article-formatted {
     @apply prose prose-lg prose-emerald prose-headings:tracking-wider prose-headings:font-normal prose-headings:leading-snug;
     @apply prose-h1:italic;

@@ -3,7 +3,7 @@
 import { BookmarkFillIcon, BookmarkIcon, HeartEmptyIcon, HeartIcon, ShareIcon } from "@/components/icons";
 import { UserContext, UserContextType } from "@/context/user-context/user-context";
 import { getCookie } from "@/utils/helpers";
-import { useContext, useEffect, useState } from "react";
+import { MouseEvent, useContext, useEffect, useState } from "react";
 
 
 const postLike = async (articleId: number) => {
@@ -50,11 +50,13 @@ const removeBookmark = async (articleId: number) => {
     return response.ok;
 };
 
-const share = () => {
+const share = (event: MouseEvent) => {
+    event.preventDefault();
+
     console.log('share');
 }
 
-export const InteractControls: React.FC<{articleId: number}> = ({articleId}) => {
+export const InteractControls: React.FC<{articleId: number, size?: number}> = ({articleId, size = 28}) => {
     const {user} = useContext(UserContext) as UserContextType;
     const [liked, setLiked] = useState(false);
     const [bookmarked, setBookmarked] = useState(false);
@@ -87,7 +89,9 @@ export const InteractControls: React.FC<{articleId: number}> = ({articleId}) => 
         checkAlreadyBookmarked();
     }, []);
 
-    const handleLike = async () => {
+    const handleLike = async (event: MouseEvent) => {
+        event.preventDefault();
+
         if (!user) {
             alert("Need to sign in");
             return;
@@ -108,7 +112,9 @@ export const InteractControls: React.FC<{articleId: number}> = ({articleId}) => 
         setLiked(!liked);
     };
 
-    const handleBookmark = async () => {
+    const handleBookmark = async (event: MouseEvent) => {
+        event.preventDefault();
+
         if (!user) {
             alert("need to sign in");
             return;
@@ -126,23 +132,22 @@ export const InteractControls: React.FC<{articleId: number}> = ({articleId}) => 
 
     return (
         <>
-            <button className="cursor-pointer" onClick={handleLike}>
+            <button className="cursor-pointer" onClick={(event) => handleLike(event)}>
                 {
                     liked
-                    ? <HeartIcon size={28} color={"#6C757D"} className="fill-orange"/>
-                    : <HeartEmptyIcon size={28} color={"#6C757D"} className={`${liked && 'fill-orange'} hover:fill-orange`} />
+                    ? <HeartIcon size={size} color={"#6C757D"} className="fill-orange"/>
+                    : <HeartEmptyIcon size={size} color={"#6C757D"} className={`${liked && 'fill-orange'} hover:fill-orange`} />
                 }
-                
             </button>
-            <button className="cursor-pointer" onClick={handleBookmark}>
+            <button className="cursor-pointer" onClick={(event) => handleBookmark(event)}>
                 {
                     bookmarked
-                    ? <BookmarkFillIcon size={28} color={"#6C757D"} className="fill-yellow"/>
-                    : <BookmarkIcon size={28} color={"#6C757D"} className="hover:fill-yellow" />
+                    ? <BookmarkFillIcon size={size} color={"#6C757D"} className="fill-yellow"/>
+                    : <BookmarkIcon size={size} color={"#6C757D"} className="hover:fill-yellow" />
                 }
             </button>
-            <button className="" onClick={share}>
-                <ShareIcon size={28} color={"#6C757D"} className="cursor-pointer hover:fill-blue" />
+            <button className="" onClick={(event) => share(event)}>
+                <ShareIcon size={size} color={"#6C757D"} className="cursor-pointer hover:fill-blue" />
             </button>
         </>
     );

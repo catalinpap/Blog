@@ -4,7 +4,7 @@ import { OwnArticles } from "./features/OwnArticles";
 const OwnArticlesPage: React.FC<{}> = () => {
     return (
         <main className="page-content">
-            <h1 className="text-2xl font-extralight mb-4">My Articles</h1>
+            <h1 className="">My Articles</h1>
             <ArticlesProvider>
                 <OwnArticles />
             </ArticlesProvider>

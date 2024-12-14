@@ -3,10 +3,12 @@ import { Article } from "@/types";
 import { TopicTag } from "..";
 import Image from "next/image";
 import { config } from "@/config";
+import { InteractControls } from "@/app/(default layout)/article/[url]/components";
+import { format_date } from "@/utils/helpers";
 
 export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {
     return (
-        <Link href={`/article/${data.url}`} className="w-full cursor-pointer p-2 flex flex-row gap-2 text-black">
+        <Link href={`/article/${data.url}`} className="w-full cursor-pointer p-2 flex flex-row gap-2 text-black hover:bg-light-gray/40">
           <Image
             src={
               data.thumbnail ||
@@ -14,13 +16,24 @@ export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {
             alt=""
             width={4 * 70}
             height={3 * 70}
-            className="max-w-[160px] aspect-[4/3] object-cover p-2"
+            className="w-[10%] aspect-square object-cover flex-[1]"
           />
-          <div className="flex flex-col gap-1">
-            <TopicTag href={data.category} className="text-xs font-thin py-1 w-fit">{data.category}</TopicTag>
-            <p className="hover:underline">{data.title}</p>
-            {/* <p className="w-fit text-xs font-thin left-full -translate-x-full relative">{data.author.name}</p> */}
-          </div>
+          <article className="flex flex-col gap-1 w-full justify-between flex-[3]">
+            <section>
+              <div className="flex flex-row items-center justify-between leading-none">
+                <p className="w-fit text-xs font-thin relative">{data.author.name}</p>
+                <TopicTag href={data.topic} className="text-xs font-thin py-1 w-fit">{data.topic}</TopicTag>
+              </div>
+              <p className="hover:underline">{data.title}</p>
+              
+            </section>
+
+            <section className="flex bottom-0 gap-2 relative w-full">
+              <InteractControls articleId={data.id} size={20} />
+              <p className="text-xs font-thin left-full">{format_date(data.creationDate)}</p>
+            </section>
+            
+          </article>
         </Link>
     );
   };

@@ -9,7 +9,7 @@ export const ArticleBannerList:React.FC<{
     editable?: boolean
   }> = ({data, className, editable = false}) => {
     return (
-      <div className={`flex flex-col ${className}`}>
+      <div className={`flex flex-col divide-y divide-light-gray ${className}`}>
           {
             data?.length === 0
             ? <p className="text-lg font-light text-gray">There are no articles yet.</p>

@@ -27,7 +27,7 @@ const TopicPage: React.FC<Props> = ({params}) => {
     }, [topic_name]);
 
     return (
-        <main className="page-content border">
+        <main className="page-content">
             <h1 className="text-4xl text-gray font-normal">Explore more from <strong className="uppercase font-medium">{params.topic_name}</strong></h1>
             <h2>Recommended</h2>
             <CardGrid data={articles} />

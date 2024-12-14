@@ -23,7 +23,7 @@ const SearchPage: React.FC = () => {
 
     return (
         <main className="page-content">
-            <h1>Search results for: {query}</h1>
+            <h1>Search results for: "{query}"</h1>
             <ArticleBannerList data={searchResults}/>
         </main>
     );
