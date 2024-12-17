@@ -27,7 +27,7 @@ export const Card: React.FC<{data: Article}> = ({data}) => {
                                 <UserIcon />
                                 <span className="font-semibold">{data.author?.name}</span>
                             </p>
-                            <span className="w-[3px] h-[3px] border inline-block bg-current rounded-full"/>
+                            <span className="divider-bullet"/>
                             <time dateTime={data.creationDate}>{format_date(data.creationDate)}</time>
                         </div>
                     </div>

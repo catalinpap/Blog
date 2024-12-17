@@ -4,3 +4,4 @@ export { Dropdown } from "./Dropdown/Dropdown";
 export { Header } from "./Header/Header";
 export { ArticleBanner } from './ArticleBanner/ArticleBanner';
 export { Carousel } from "./Carousel/Carousel";
+export { NavigateBackButton } from "./NavigateBackButton/NavigateBackButton";

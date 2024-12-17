@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,6 +38,7 @@ public class ArticlesController {
 	public ResponseEntity<String> getAll(
 		@RequestParam(value="page", required = false, defaultValue = Const.DEFAULT_PAGE_NUMBER) Integer page,
 		@RequestParam(value="size", required = false, defaultValue = Const.DEFAULT_PAGE_SIZE) Integer size,
+		@RequestParam(value= "sort", required = false, defaultValue = Const.DEFAULT_SORT) String sort,
 		@RequestParam(value="category", required = false) String category,
 		@RequestParam(value="keywords", required = false) List<String> keywords,
 		@RequestParam(value="authorId", required = false) Long authorId) {
@@ -46,7 +48,7 @@ public class ArticlesController {
 			.keywords(keywords)
 			.authorId(authorId);
 		
-		PageRequest pageRequest = PageRequest.of(page, size);
+		PageRequest pageRequest = PageRequest.of(page, size, computeSorting(sort));
 
 		Page<Article> articles = articlesService.getAll(filters, pageRequest);
 		String responseBody = new ApiResponseBody().data(articles).json();
@@ -151,4 +153,27 @@ public class ArticlesController {
             .contentType(MediaType.APPLICATION_JSON)
             .body(isBookmarked);
     }
+
+	private Sort computeSorting(String sortQuery) {
+		Sort sorting;
+		switch (sortQuery) {
+			case "recommended":
+				sorting = Sort.by(Sort.Direction.DESC, "creationDate");
+				break;
+			case "most-liked":
+				sorting = Sort.by(Sort.Direction.DESC, "likes");
+				break;
+			case "newest":
+				sorting = Sort.by(Sort.Direction.DESC, "creationDate");
+				break;
+			case "oldest":
+				sorting = Sort.by(Sort.Direction.ASC, "creationDate");
+				break;
+			default:
+				sorting = Sort.by(Sort.Direction.DESC, "creationDate");
+				break;
+		}
+
+		return sorting;
+	}
 }

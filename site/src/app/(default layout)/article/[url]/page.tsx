@@ -2,7 +2,7 @@
 
 import { TopicTag } from "@/components/common";
 import { ArticleBannerList, Comments, FloatPanel, PopularTopics } from "@/components";
-import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon } from "@/components/icons";
+import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon, UserIcon } from "@/components/icons";
 import { ApiResponse, Article, PaginatedApiResponse } from "@/types";
 import { format_date, markdownToHTML } from "@/utils/helpers";
 import { InteractControls } from "./components";
@@ -38,15 +38,17 @@ const ArticlePage: React.FC<Props> = async (props) => {
                         <InteractControls articleId={article.id}/>
                     </div>
                 </aside>
-                <article className="main-container article-formatted">
+                <article className="main-container article-formatted font-light tracking-wide">
                     <TopicTag href={article.topic}>{article.topic}</TopicTag>
-                    <h1>{article.title}</h1>
+                    <h1 className="text-4xl tracking-widest font-semibold">{article.title}</h1>
                     
                     <div className="flex flex-row justify-between mb-16">
-                        <div className="flex flex-row divide-x divide-black text-xs">
-                            <span className="pr-2 italic font-light">written by: 
+                        <div className="flex flex-row text-xs items-center">
+                            <span className="pr-2 italic font-light flex flex-row items-center gap-1">
+                                <UserIcon />
                                 <span className="font-medium non-italic"> {article.author.name}</span>
                             </span>
+                            <span className="divider-bullet"/>
                             <span className="pl-2 text-[#6C757D] font-light">{format_date(article.creationDate)}</span>
                         </div>
                         <div className="flex flex-row gap-x-3">
@@ -63,7 +65,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
                     </div>
                     
                     <section 
-                        className="article-formatted text-[#6C757D] font-light tracking-wide" 
+                        className="" 
                         dangerouslySetInnerHTML={{__html: markdownToHTML(article.content)}}>
                     </section>
 

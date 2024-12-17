@@ -9,10 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'black': '#212529',
-        'gray': '#6C757D',
-        'light': '#F8F9FA',
-        'light-gray': '#ECEDEE',
+        'accent': 'hsl(210, 11%, 15%)',
+        'black': 'hsl(210, 11%, 15%)',
+        'gray': 'hsl(210, 11%, 90%)',
+        'light': 'hsl(230, 7%, 99%)',
+        'light-gray': 'hsl(210, 11%, 95%)',
         'green': '#81B29A',
         'orange': '#E26D5C',
         'yellow': '#F2CD5C',

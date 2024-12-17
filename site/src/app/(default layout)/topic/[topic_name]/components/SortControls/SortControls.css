@@ -1,0 +1,11 @@
+@tailwind components;
+
+@layer components {
+    .sort-label {
+        @apply p-4;
+    }
+
+    .sort-label-active {
+        @apply bg-black text-light-gray;
+    }
+}

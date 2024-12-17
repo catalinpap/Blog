@@ -1,34 +1,37 @@
-'use client';
-
 import { ArticleBannerList, CardGrid } from "@/components";
+import { NavigateBackButton } from "@/components/common";
 import { Article, PaginatedApiResponse } from "@/types";
-import { useEffect, useState } from "react";
+import { SortControls } from "./components";
 
 type Props = {
     params: {
         topic_name: string
     },
-    searchParams: {}
-}
+    searchParams: {
+        sort: string
+    }
+};
 
-const TopicPage: React.FC<Props> = ({params}) => {
+const TopicPage: React.FC<Props> = async ({params, searchParams}) => {
     const { topic_name } = params;
-    const [articles, setArticles] = useState<Article[]>([]);
+    const { sort } = searchParams;
 
-    useEffect(() => {
-        const fetchArticlesByCategory = async () => {
-            const topic: PaginatedApiResponse = await fetch(`http://localhost:8080/api/articles?topic=${topic_name}`, {
-                method: 'GET'
-            }).then(response => response.json());
-            setArticles(topic.data.content as Article[]);
-        }
-
-        fetchArticlesByCategory();
-    }, [topic_name]);
+    const topic: PaginatedApiResponse = await fetch(`http://localhost:8080/api/articles?topic=${topic_name}&sort=${sort}`, {
+        method: 'GET'
+    }).then(response => response.json());
+     
+    const articles = topic.data.content as Article[];
 
     return (
         <main className="page-content">
-            <h1 className="text-4xl text-gray font-normal">Explore more from <strong className="uppercase font-medium">{params.topic_name}</strong></h1>
+            <NavigateBackButton />
+            <section className="flex justify-center items-center flex-col p-4 h-[33dvh] text-center bg-black text-light-gray">
+                <h1 className="text-4xl font-semibold uppercase tracking-widest">{topic_name}</h1>
+                <h2 className="text-2xl font-thin tracking-wide">Explore articles involving something.</h2>
+            </section>
+            <section className="w-full bg-light-gray flex divide-x divide-gray mb-2">
+                <SortControls />
+            </section>
             <h2>Recommended</h2>
             <CardGrid data={articles} />
             <h3>Latest</h3>
