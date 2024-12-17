@@ -2,25 +2,23 @@
 
 @layer components {
     .card-wrapper {
-        @apply relative flex flex-col justify-between shadow-md cursor-pointer hover:shadow-xl;
-    }
-    .card-wrapper p {
-        @apply m-0;
+        @apply w-full h-full relative flex flex-col justify-between cursor-pointer border-b border-neutral-200;
+        @apply duration-[400ms] hover:shadow-[0_12px_25px_rgba(0,0,0,0.35)] ease-[cubic-bezier(0.2,0.8,0.4,1)];
     }
     .card-thumbnail {
         @apply relative w-full aspect-[4/3] object-cover;
     }
     .card-title {
-        @apply text-base font-medium mb-4 text-[#212529] hover:underline;
+        @apply text-base font-medium text-black hover:underline;
     }
     .card-description {
         @apply text-xs font-light text-[#6C757D] !mb-3;
     }
     .card-info {
-        @apply text-xs font-light text-[#6C757D] text-left;
+        @apply text-xs font-light text-[#97989F] text-left mt-4;
     }
     .card-info::before {
-        @apply content-[""] block w-3.5 h-1 bg-[#CED4DA] mb-2 ;
+        @apply content-[""] block w-5 h-1 bg-[#CED4DA] mb-2 ;
     }
     .card-info b {
         @apply text-[#212529];
