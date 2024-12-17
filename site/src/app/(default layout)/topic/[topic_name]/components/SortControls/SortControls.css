@@ -2,10 +2,10 @@
 
 @layer components {
     .sort-label {
-        @apply p-4;
+        @apply p-4 text-base;
     }
 
     .sort-label-active {
-        @apply bg-black text-light-gray;
+        @apply bg-black text-light-gray font-medium;
     }
 }
