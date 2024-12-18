@@ -26,7 +26,7 @@ export const TopicDropdown: React.FC = () => {
             <Dropdown.Wrapper>
                 <Dropdown.Trigger key="category-dropdown-trigger">
                     <span className="navbar-link items-center gap-x-1 hidden lg:flex">
-                        Categories
+                        Topics
                         <ArrowDownIcon size={16} />
                     </span>
                 </Dropdown.Trigger>
