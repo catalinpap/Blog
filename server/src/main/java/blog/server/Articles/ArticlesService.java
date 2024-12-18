@@ -1,13 +1,11 @@
 package blog.server.Articles;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -16,6 +14,7 @@ import blog.server.Articles.exceptions.ArticleNotFoundException;
 import blog.server.Authors.Author;
 import blog.server.Authors.AuthorsService;
 import blog.server.Users.UsersService;
+import blog.server.utils.EntityUtils;
 
 @Service
 public class ArticlesService {
@@ -90,27 +89,9 @@ public class ArticlesService {
 		if(!isSameAuthor) throw new Exception("Current user has no rights to modify this article");
 	
 		// Merge properties from updateRequest and article
-		Article updatedArticle = applyUpdates(article, updateRequest);
+		Article updatedArticle = EntityUtils.applyUpdates(article, updateRequest);
 
 		return articlesRepository.save(updatedArticle);
-	}
-
-	// TODO: move it to the helpers package and make it generic, so it applies to any class
-	private Article applyUpdates(Article original, Article updates) {
-		Field[] fields = Article.class.getDeclaredFields();
-
-		for(Field field : fields) {
-			field.setAccessible(true);
-			try {
-				Object newValue = field.get(updates);
-				if(newValue != null) 
-					field.set(original, newValue);
-			} catch (IllegalAccessException e) {
-				throw new RuntimeException("Error updating field: " + field.getName(), e);
-			}
-		}
-
-		return original;
 	}
 
 	private boolean checkSameAuthor(Article article) throws Exception {

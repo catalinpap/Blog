@@ -15,7 +15,7 @@ public class ArticlesSpecs {
 
     public static Specification<Article> filterBy(ArticleFilter filter) {
         return Specification
-            .where(hasTopic(filter.getCategory()))
+            .where(hasTopic(filter.getTopic()))
             .and(hasKeywords(filter.getKeywords()))
             .and(hasAuthorId(filter.getAuthorId()));
     }

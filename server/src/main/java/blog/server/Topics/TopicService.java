@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import blog.server.Topics.exceptions.TopicNotFoundException;
+import blog.server.utils.EntityUtils;
 
 @Service
 public class TopicService {
@@ -52,12 +53,12 @@ public class TopicService {
         return deletedTopic;
     }
 
-    public Topic update(final Topic topic) throws Exception {
-        this.topicRepository
-            .findById(topic.getId())
-            .orElseThrow(() -> new TopicNotFoundException(topic.getId().toString()));
+    public Topic update(final Topic updateRequest) throws Exception {
+        Topic topic = this.topicRepository
+            .findById(updateRequest.getId())
+            .orElseThrow(() -> new TopicNotFoundException(updateRequest.getId().toString()));
 
-        return topicRepository.save(topic);
+        Topic updatedTopic = EntityUtils.applyUpdates(topic, updateRequest);
+        return topicRepository.save(updatedTopic);
     }
-
 }

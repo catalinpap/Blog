@@ -39,12 +39,12 @@ public class ArticlesController {
 		@RequestParam(value="page", required = false, defaultValue = Const.DEFAULT_PAGE_NUMBER) Integer page,
 		@RequestParam(value="size", required = false, defaultValue = Const.DEFAULT_PAGE_SIZE) Integer size,
 		@RequestParam(value= "sort", required = false, defaultValue = Const.DEFAULT_SORT) String sort,
-		@RequestParam(value="category", required = false) String category,
+		@RequestParam(value="topic", required = false) String topic,
 		@RequestParam(value="keywords", required = false) List<String> keywords,
 		@RequestParam(value="authorId", required = false) Long authorId) {
 
 		ArticleFilter filters = new ArticleFilter()
-			.category(category)
+			.topic(topic)
 			.keywords(keywords)
 			.authorId(authorId);
 		

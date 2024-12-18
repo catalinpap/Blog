@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleFilter {
-    private String category;
+    private String topic;
     private List<String> keywords;
     private Long authorId;
 
-    public String getCategory() {
-        return this.category;
+    public String getTopic() {
+        return this.topic;
     }
 
     public List<String> getKeywords() {
@@ -20,8 +20,8 @@ public class ArticleFilter {
         return this.authorId;
     }
 
-    public ArticleFilter category(String category) {
-        this.category = category;
+    public ArticleFilter topic(String topic) {
+        this.topic = topic;
         return this;
     }
 

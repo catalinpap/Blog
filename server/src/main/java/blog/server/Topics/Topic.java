@@ -20,6 +20,8 @@ public class Topic {
     @Column(unique = true)
     private String name;
 
+    private String description;
+
     // @OneToMany(mappedBy = "categoryId", fetch = FetchType.EAGER, targetEntity = Article.class)
     // private List<Article> articles;
 
@@ -35,6 +37,10 @@ public class Topic {
     //     return this.articles;
     // }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public Topic setId(final Long id) {
         this.id = id;
         return this;
@@ -42,6 +48,11 @@ public class Topic {
 
     public Topic setName(final String name) {
         this.name = name;
+        return this;
+    }
+
+    public Topic setDescription(final String description) {
+        this.description = description;
         return this;
     }
 

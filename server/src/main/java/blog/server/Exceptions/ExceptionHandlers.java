@@ -49,7 +49,7 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(TopicNotFoundException.class)
 	public ResponseEntity<String> handleTopicNotFound (TopicNotFoundException exception, WebRequest request ) {
 			ApiResponseBody responseBody = new ApiResponseBody()
-				.message(String.format("Category with name=%s does not exist!", exception.getMessage()));
+				.message(String.format("Topic with id=%s does not exist!", exception.getMessage()));
 			return ResponseEntity
 				.status(HttpStatus.NOT_FOUND)
 				.contentType(MediaType.APPLICATION_JSON)
