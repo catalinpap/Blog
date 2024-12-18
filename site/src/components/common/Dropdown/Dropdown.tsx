@@ -59,14 +59,18 @@ const DropdownTrigger:React.FC<{
 };
 
 const DropdownItems:React.FC<{
-    key: string
+    key?: string
     children: ReactElement | ReactElement[],
     isOpen?: boolean, 
     setIsOpen?: Dispatch<SetStateAction<boolean>>,
+    anchor?: "right" | "left",
     className?: string
-}> = ({key, children, isOpen, setIsOpen, className}) => {
+}> = ({key, children, isOpen, setIsOpen, anchor = "left", className}) => {
+    let anchorClasses = "";
+    if (anchor === "right") anchorClasses = "right-0";
+    else if (anchor === "left") anchorClasses = "left-0";
     return (
-        isOpen && <div className={`absolute flex flex-col top-full right-0 bg-light text-nowrap border border-light-gray shadow-sm shadow-black/20 p-1 text-black z-20 ${className}`}>
+        isOpen && <div className={`absolute flex flex-col top-full ${anchorClasses} bg-light text-nowrap border border-light-gray shadow-sm shadow-black/20 p-1 text-black z-20 ${className}`}>
             {children}
         </div>
     );

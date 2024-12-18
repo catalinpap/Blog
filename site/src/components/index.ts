@@ -9,3 +9,4 @@ export { AccountDropdown } from "./AccountDropdown/AccountDropdown";
 export { Comments } from "./Comments/Comments";
 export { EditableArticleBanner } from "./EditableArticleBanner/EditableArticleBanner";
 export { Search } from "./Search/Search";
+export { TopicDropdown } from "./TopicDropdown/TopicDropdown";

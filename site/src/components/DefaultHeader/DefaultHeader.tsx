@@ -1,7 +1,7 @@
 import './Header.css';
 import Link from "next/link";
 import { ArrowDownIcon, MenuIcon, WriteIcon } from "../icons";
-import { AccountDropdown, Search } from '..';
+import { AccountDropdown, TopicDropdown, Search } from '..';
 import { Header } from '../common';
 
 export const DefaultHeader = () => {
@@ -9,10 +9,7 @@ export const DefaultHeader = () => {
         <Header>
             <nav className="flex items-center h-full gap-x-4">
                 <Link href={'/'} className="navbar-logo">LOGO</Link>
-                <span className="navbar-link items-center gap-x-1 hidden lg:flex">
-                    Categories
-                    <ArrowDownIcon size={16} />
-                </span>
+                <TopicDropdown />
             </nav>
             
             <div className="flex items-center h-full gap-x-3">

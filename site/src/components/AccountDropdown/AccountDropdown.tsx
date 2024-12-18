@@ -42,7 +42,7 @@ export const AccountDropdown:React.FC = () => {
                 <Dropdown.Trigger key={"account-dropdown-trigger"}>
                     <UserIcon size={28} className="hidden lg:inline-block" />
                 </Dropdown.Trigger>
-                <Dropdown.Items key={"account-dropdown-items"} className="w-[280px] font-normal">
+                <Dropdown.Items key={"account-dropdown-items"} anchor="right"  className="w-[280px] font-normal">
                     {
                         user ? <AuthMenu/> : <Link href={'/authenticate'}>Sign in</Link> 
                     }
