@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { Article } from "@/types";
-import { TopicTag } from "..";
+import { ArticleInteractControls, TopicTag } from "..";
 import Image from "next/image";
 import { config } from "@/config";
-import { InteractControls } from "@/app/(default layout)/article/[url]/components";
 import { format_date } from "@/utils/helpers";
 
 export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {
@@ -29,7 +28,7 @@ export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {
             </section>
 
             <section className="flex bottom-0 gap-2 relative w-full">
-              <InteractControls articleId={data.id} size={20} />
+              <ArticleInteractControls articleId={data.id} size={20} />
               <p className="text-xs font-thin left-full">{format_date(data.creationDate)}</p>
             </section>
             

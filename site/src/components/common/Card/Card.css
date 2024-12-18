@@ -6,7 +6,7 @@
         @apply duration-[400ms] hover:shadow-[0_12px_25px_rgba(0,0,0,0.35)] ease-[cubic-bezier(0.2,0.8,0.4,1)];
     }
     .card-thumbnail {
-        @apply relative w-full aspect-[4/3] object-cover;
+        @apply relative h-[300px] object-cover rounded-lg p-6 sm:p-1;
     }
     .card-title {
         @apply text-base font-medium text-black tracking-wide mt-1;

@@ -5,7 +5,7 @@ import { ArticleBannerList, Comments, FloatPanel, PopularTopics } from "@/compon
 import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon, UserIcon } from "@/components/icons";
 import { ApiResponse, Article, PaginatedApiResponse } from "@/types";
 import { format_date, markdownToHTML } from "@/utils/helpers";
-import { InteractControls } from "./components";
+import { ArticleInteractControls } from "@/components/common";
 
 type Props = {
     params: {
@@ -31,14 +31,14 @@ const ArticlePage: React.FC<Props> = async (props) => {
 
     return (
         <>  
-            <main className="page-content flex flex-col 2xl:flex-row">
+            <main className="page-content flex flex-col">
                 {/* Tools sidepanel */}
-                <aside className="absolute h-full top-0 right-full mr-4 block">
-                    <div className="sticky top-20 flex-col gap-4 hidden lg:flex">
-                        <InteractControls articleId={article.id}/>
+                <aside className="absolute h-full top-0 left-0 mr-4 block">
+                    <div className="sticky top-24 flex-col gap-4 hidden lg:flex">
+                        <ArticleInteractControls articleId={article.id}/>
                     </div>
                 </aside>
-                <article className="main-container article-formatted font-light tracking-wide">
+                <article className="article-formatted font-light tracking-wide mx-auto">
                     <TopicTag href={article.topic}>{article.topic}</TopicTag>
                     <h1 className="text-4xl tracking-widest font-semibold">{article.title}</h1>
                     
@@ -85,12 +85,12 @@ const ArticlePage: React.FC<Props> = async (props) => {
                     <Comments articleId={article.id} comments={article.comments} />
 
                 </article>
-                <FloatPanel>
+                <section>
                     <PopularTopics className="mb-8"/>
 
                     <p className="text-base font-medium">More from this author:</p>
                     <ArticleBannerList data={articlesFromThisAuthor}/>
-                </FloatPanel>
+                </section>
             </main>
         </>
         

@@ -11,7 +11,7 @@ export const NavigateBackButton: React.FC<{className?: string}> = ({className}) 
     };
     
     return (
-        <button onClick={navigateBack} className={`flex items-center gap-1 mb-4 leading-snug font-light text-lg ${className}`}>
+        <button onClick={navigateBack} className={`flex items-center gap-1 mb-4 leading-snug font-light text-base lg:text-lg ${className}`}>
             <ArrowBackIcon /> 
             Go back
         </button>

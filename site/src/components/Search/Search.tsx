@@ -18,7 +18,7 @@ export const Search: React.FC = () => {
 
     return (
         <form className="flex items-center" onSubmit={performSearch}>
-            <input name={QUERY_FIELD_NAME} type="text" className="bg-transparent border-b border-gray outline-none p-1.5 text-gray" />
+            <input name={QUERY_FIELD_NAME} type="text" className="w-full bg-transparent border-b border-gray outline-none p-1.5 text-gray" />
             <button>
                 <SearchIcon size={28} />
             </button>   

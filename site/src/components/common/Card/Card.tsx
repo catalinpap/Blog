@@ -9,11 +9,11 @@ import { ArrowFrontIcon, CommentIcon, HeartEmptyIcon, UserIcon } from "@/compone
 
 export const Card: React.FC<{data: Article}> = ({data}) => {
     return (
-        <section className="w-full h-[360px] relative card-wrapper overflow-clip group">
+        <section className="w-full relative card-wrapper overflow-clip group">
             {/* <TopicTag href={data.topic} className="absolute top-3 right-3 z-10">{data.topic}</TopicTag> */}
             <Link href={`/article/${data.url}`} className="w-full">
                 <Image src={data.thumbnail || config.defaultThumbnail} 
-                    alt={""}
+                    alt={data.title || "Article thumbnail image"}
                     width={960}
                     height={600}
                     className="card-thumbnail"

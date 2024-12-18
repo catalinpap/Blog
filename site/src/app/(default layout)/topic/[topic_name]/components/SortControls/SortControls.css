@@ -2,7 +2,7 @@
 
 @layer components {
     .sort-label {
-        @apply p-4 text-base;
+        @apply  px-4 py-2 text-sm lg:text-base;
     }
 
     .sort-label-active {

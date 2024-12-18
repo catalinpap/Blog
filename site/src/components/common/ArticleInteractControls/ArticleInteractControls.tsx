@@ -56,7 +56,7 @@ const share = (event: MouseEvent) => {
     console.log('share');
 }
 
-export const InteractControls: React.FC<{articleId: number, size?: number}> = ({articleId, size = 28}) => {
+export const ArticleInteractControls: React.FC<{articleId: number, size?: number}> = ({articleId, size = 28}) => {
     const {user} = useContext(UserContext) as UserContextType;
     const [liked, setLiked] = useState(false);
     const [bookmarked, setBookmarked] = useState(false);

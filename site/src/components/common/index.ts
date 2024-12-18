@@ -5,3 +5,4 @@ export { Header } from "./Header/Header";
 export { ArticleBanner } from './ArticleBanner/ArticleBanner';
 export { Carousel } from "./Carousel/Carousel";
 export { NavigateBackButton } from "./NavigateBackButton/NavigateBackButton";
+export { ArticleInteractControls } from "./ArticleInteractControls/ArticleInteractControls";

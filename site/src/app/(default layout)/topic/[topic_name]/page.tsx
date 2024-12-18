@@ -30,10 +30,10 @@ const TopicPage: React.FC<Props> = async ({params, searchParams}) => {
         <main className="page-content">
             <NavigateBackButton />
             <section className="flex justify-center items-center flex-col p-4 h-[33dvh] text-center bg-black text-light-gray">
-                <h1 className="text-4xl font-semibold uppercase tracking-widest">{topic.name}</h1>
-                <h2 className="text-2xl font-thin tracking-wide">{topic.description}</h2>
+                <h1 className="text-xl lg:text-4xl font-semibold uppercase tracking-widest">{topic.name}</h1>
+                <h2 className="text-lg lg:text-2xl font-thin tracking-wide">{topic.description}</h2>
             </section>
-            <section className="w-full bg-light-gray flex divide-x divide-gray mb-2">
+            <section className="w-full bg-light-gray flex flex-col lg:flex-row divide-y lg:divide-x divide-gray mb-2">
                 <SortControls />
             </section>
             <h2>Recommended</h2>

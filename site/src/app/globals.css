@@ -25,12 +25,8 @@
     @apply text-black min-h-[100dvh] bg-light;
   }
 
-  .main-container {
-    @apply  w-full flex-shrink-0;
-  }
-
   .page-content {
-    @apply relative mt-14 mb-14 px-8 mx-auto max-w-[992px] flex-shrink-0;
+    @apply relative mt-4 lg:mt-14 mb-14 px-2 lg:px-8 mx-auto max-w-[992px];
   }
 
   /* .page-content h1 {
