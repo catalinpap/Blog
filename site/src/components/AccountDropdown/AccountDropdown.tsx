@@ -1,9 +1,10 @@
 'use client';
 
 import { Dropdown } from "../common";
-import { UserIcon } from "../icons";
+import { ArticleIcon, BookmarkIcon, HandWaveIcon, SignOutIcon, UserIcon } from "../icons";
 import Link from 'next/link';
 import { useAuth } from "@/hooks";
+import "./AccountDropdown.css";
 
 export const AccountDropdown:React.FC = () => {
     const { user, logout } = useAuth();
@@ -13,11 +14,26 @@ export const AccountDropdown:React.FC = () => {
     }
 
     const AuthMenu = () => <>
-        <p className="border-b border-light-gray w-full mb-2 p-2 text-wrap">Hello, {user && user.displayName}</p>
-        <p className="p-2 cursor-pointer hover:font-medium">Profile</p>
-        <Link href={'/me/articles'} className="p-2 cursor-pointer hover:font-medium">Articles</Link>
-        <Link href={'/me/bookmarks'} className="p-2 cursor-pointer hover:font-medium">Bookmarks</Link>
-        <p className="p-2 text-red-400  cursor-pointer hover:font-medium" onClick={logout_user}>Sign out</p>
+        <div className="border-b border-light-gray w-full mb-2 p-2 text-wrap flex items-center gap-1 font-light">
+            <p>Hello, <strong>{user && user.displayName}</strong></p> 
+            <HandWaveIcon />
+        </div>
+        <Link href={'#'} className="account-dropdown-item">
+            <UserIcon />
+            Profile
+        </Link>
+        <Link href={'/me/articles'} className="account-dropdown-item">
+            <ArticleIcon />
+            Articles
+        </Link>
+        <Link href={'/me/bookmarks'} className="account-dropdown-item">
+            <BookmarkIcon />
+            Bookmarks
+        </Link>
+        <button className="account-dropdown-item text-red-400 cursor-pointer" onClick={logout_user}>
+            <SignOutIcon />
+            Sign out
+        </button>
     </>;
     
     return (

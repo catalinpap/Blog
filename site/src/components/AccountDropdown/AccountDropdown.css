@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+    .account-dropdown-item {
+        @apply flex items-center gap-1 p-2 cursor-pointer font-extralight hover:font-normal;
+    }
+}

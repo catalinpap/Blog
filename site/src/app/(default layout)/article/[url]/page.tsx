@@ -1,8 +1,8 @@
 'use server';
 
 import { TopicTag } from "@/components/common";
-import { ArticleBannerList, Comments, FloatPanel, PopularTopics } from "@/components";
-import { BookmarkIcon, CommentIcon, HeartEmptyIcon, ShareIcon, UserIcon } from "@/components/icons";
+import { ArticleBannerList, Comments, PopularTopics } from "@/components";
+import { BookmarkIcon, CommentIcon, HeartEmptyIcon, UserIcon } from "@/components/icons";
 import { ApiResponse, Article, PaginatedApiResponse } from "@/types";
 import { format_date, markdownToHTML } from "@/utils/helpers";
 import { ArticleInteractControls } from "@/components/common";

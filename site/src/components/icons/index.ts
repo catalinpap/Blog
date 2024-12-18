@@ -20,7 +20,11 @@ export {
 export { 
     PiNotePencil as WriteIcon,
     PiUserLight as UserIcon,
-    PiTrash as TrashIcon
+    PiTrash as TrashIcon,
+    PiArticleLight as ArticleIcon,
+    PiSignOutLight as SignOutIcon,
+    PiSignInLight as SignInIcon,
+    PiHandWavingLight as HandWaveIcon
  } from "react-icons/pi";
 
 export { CgMenuGridO as MenuIcon } from "react-icons/cg";
