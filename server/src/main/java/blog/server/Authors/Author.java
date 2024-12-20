@@ -19,7 +19,7 @@ public class Author {
     private Long id;
     private String username;
     private String name;
-    private String bio;
+    private String about;
 
     // @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     // @JsonIgnoreProperties("author")
@@ -54,8 +54,8 @@ public class Author {
         return this.name;
     }
 
-    public String getBio() {
-        return this.bio;
+    public String getAbout() {
+        return this.about;
     }
 
     // public List<Article> getArticles() {
@@ -77,8 +77,8 @@ public class Author {
         return this;
     }
 
-    public Author setBio(final String bio) {
-        this.bio = bio;
+    public Author setAbout(final String about) {
+        this.about = about;
         return this;
     }
 

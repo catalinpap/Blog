@@ -4,6 +4,6 @@ export type Author = {
     id: number,
     username: string,
     name: string,
-    bio: string,
+    about: string,
     articles: Article[]
 }
