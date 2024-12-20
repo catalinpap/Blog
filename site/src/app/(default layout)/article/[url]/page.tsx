@@ -74,8 +74,12 @@ const ArticlePage: React.FC<Props> = async (props) => {
 
                     {/* Author */}
                     <section>
-                        <h2 className="text-lg font-medium mb-3">{article.author.name}</h2>
-                        <span className="text-sm font-light text-[#6C757D]">“Fifth Strategy” Book Author, Designer</span>
+                        <div className="flex items-center gap-1">
+                            <UserIcon />
+                            <h2 className="text-lg font-medium m-0">{article.author.name}</h2>
+                        </div>
+                        
+                        <span className="text-sm font-light text-[#6C757D]">{article.author.bio}</span>
                     </section>
 
                     {/* Separator */}
