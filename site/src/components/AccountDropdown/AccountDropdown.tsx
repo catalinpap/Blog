@@ -30,6 +30,9 @@ export const AccountDropdown:React.FC = () => {
             <BookmarkIcon />
             Bookmarks
         </Link>
+        <Link href={'/me/settings'} className="account-dropdown-item">
+            Settings
+        </Link>
         <button className="account-dropdown-item text-red-400 cursor-pointer" onClick={logout_user}>
             <SignOutIcon />
             Sign out

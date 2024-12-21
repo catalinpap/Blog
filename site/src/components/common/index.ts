@@ -6,3 +6,4 @@ export { ArticleBanner } from './ArticleBanner/ArticleBanner';
 export { Carousel } from "./Carousel/Carousel";
 export { NavigateBackButton } from "./NavigateBackButton/NavigateBackButton";
 export { ArticleInteractControls } from "./ArticleInteractControls/ArticleInteractControls";
+export { EditableField } from "./EditableField/EditableField";

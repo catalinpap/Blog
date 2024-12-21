@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import blog.server.Users.exceptions.UserNotFoundException;
+import blog.server.utils.EntityUtils;
 
 @Service
 public class UsersService implements UserDetailsService {
@@ -37,7 +39,6 @@ public class UsersService implements UserDetailsService {
     }
 
     public User add(User user) throws Exception {
-        System.out.println(passwordEncoder.encode(user.getPassword()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return usersRepository.save(user);
     }
@@ -52,10 +53,20 @@ public class UsersService implements UserDetailsService {
         return deletedUser;
     }
 
-    public User update(User updatedUser) throws Exception {
-        Long userId = updatedUser.getId();
+    public User update(User updateRequest) throws Exception {
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = this.getByUsername(username);
+
+        Long userId = updateRequest.getId();
+
+        if(userId != user.getId()) throw new Exception(String.format("Not allowed to modify user with id = %s", userId));
         
-        if(!usersRepository.existsById(userId)) throw new UserNotFoundException(userId.toString());
+        User originalUser = usersRepository
+            .findById(userId)
+            .orElseThrow(() -> new UserNotFoundException(userId.toString()));
+
+        User updatedUser = EntityUtils.applyUpdates(originalUser, updateRequest);
 
         return usersRepository.save(updatedUser);
     }

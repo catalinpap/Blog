@@ -11,9 +11,10 @@ const config: Config = {
       colors: {
         'accent': 'hsl(210, 11%, 15%)',
         'black': 'hsl(210, 11%, 15%)',
-        'gray': 'hsl(210, 11%, 90%)',
-        'light': 'hsl(230, 7%, 99%)',
+        'dark-gray': 'hsl(210, 11%, 40%)',
+        'gray': 'hsl(210, 11%, 60%)',
         'light-gray': 'hsl(210, 11%, 95%)',
+        'light': 'hsl(230, 7%, 99%)',
         'green': '#81B29A',
         'orange': '#E26D5C',
         'yellow': '#F2CD5C',
