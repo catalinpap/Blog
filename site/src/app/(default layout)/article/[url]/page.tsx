@@ -6,6 +6,7 @@ import { BookmarkIcon, CommentIcon, HeartEmptyIcon, UserIcon } from "@/component
 import { ApiResponse, Article, PaginatedApiResponse } from "@/types";
 import { format_date, markdownToHTML } from "@/utils/helpers";
 import { ArticleInteractControls } from "@/components/common";
+import Link from "next/link";
 
 type Props = {
     params: {
@@ -24,6 +25,8 @@ const ArticlePage: React.FC<Props> = async (props) => {
     const article: Article =  await fetch(`http://localhost:8080/api/articles/${article_id}`, {
         method: 'GET',
     }).then(response => response.json()).then((content: ApiResponse) => content.data as Article);
+
+    console.log(article.author);
 
     const articlesFromThisAuthor: Article[] = await fetch(`http://localhost:8080/api/articles?authorId=${article.authorId}`, {
         method: 'GET'
@@ -44,10 +47,11 @@ const ArticlePage: React.FC<Props> = async (props) => {
                     
                     <div className="flex flex-row justify-between mb-16">
                         <div className="flex flex-row text-xs items-center">
-                            <span className="pr-2 italic font-light flex flex-row items-center gap-1">
+                            <Link href={`/user/${article.author.username}`} 
+                                className="text-black no-underline pr-2 italic font-light flex flex-row items-center gap-1 hover:underline">
                                 <UserIcon />
                                 <span className="font-medium non-italic"> {article.author.name}</span>
-                            </span>
+                            </Link>
                             <span className="divider-bullet"/>
                             <span className="pl-2 text-[#6C757D] font-light">{format_date(article.creationDate)}</span>
                         </div>
@@ -74,10 +78,10 @@ const ArticlePage: React.FC<Props> = async (props) => {
 
                     {/* Author */}
                     <section>
-                        <div className="flex items-center gap-1">
+                        <Link href={`/user/${article.author.username}`} className="flex items-center gap-1 text-black no-underline hover:underline">
                             <UserIcon />
                             <h2 className="text-lg font-medium m-0">{article.author.name}</h2>
-                        </div>
+                        </Link>
                         
                         <span className="text-sm font-light text-[#6C757D]">{article.author.about}</span>
                     </section>

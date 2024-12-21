@@ -53,6 +53,8 @@ public class UsersService implements UserDetailsService {
         return deletedUser;
     }
 
+    // TODO: BUG: when an user is updated, its corresponding author entity (if it exists) is not updated
+    // Update the author too, or give up entirely on the author entity and stick only with the user
     public User update(User updateRequest) throws Exception {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();

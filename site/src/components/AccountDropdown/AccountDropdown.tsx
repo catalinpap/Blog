@@ -18,7 +18,7 @@ export const AccountDropdown:React.FC = () => {
             <p>Hello, <strong>{user && user.displayName}</strong></p> 
             <HandWaveIcon />
         </div>
-        <Link href={'#'} className="account-dropdown-item">
+        <Link href={`/user/${user!.username}`} className="account-dropdown-item">
             <UserIcon />
             Profile
         </Link>
