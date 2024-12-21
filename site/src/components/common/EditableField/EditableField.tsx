@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-type ValueType = string | number | undefined;
-
 type EditableFieldProps = {
     value: string,
     label?: string,

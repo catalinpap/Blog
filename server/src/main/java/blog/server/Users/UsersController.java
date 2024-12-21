@@ -52,6 +52,19 @@ public class UsersController {
             .body(responseBody);
     }
 
+    @GetMapping("/@{username}")
+    public ResponseEntity<String> get(@PathVariable String username) throws Exception {
+        User user = usersService.getByUsername(username);
+        String responseBody = new ApiResponseBody()
+            .data(user)
+            .json();
+
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(responseBody);
+    }
+
     @PostMapping("")
     public ResponseEntity<String> add(@RequestBody User user) throws Exception {
         User addedUser = usersService.add(user);
