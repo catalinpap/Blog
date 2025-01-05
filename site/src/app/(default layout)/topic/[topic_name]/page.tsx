@@ -2,6 +2,7 @@ import { ArticleBannerList, CardGrid } from "@/components";
 import { NavigateBackButton } from "@/components/common";
 import { ApiResponse, Article, PaginatedApiResponse, Topic } from "@/types";
 import { SortControls } from "./components";
+import { config } from "@/config";
 
 type Props = {
     params: {
@@ -16,11 +17,11 @@ const TopicPage: React.FC<Props> = async ({params, searchParams}) => {
     const { topic_name } = params;
     const { sort } = searchParams;
 
-    const articlesResponse: PaginatedApiResponse = await fetch(`http://localhost:8080/api/articles?topic=${topic_name}&sort=${sort}`, {
+    const articlesResponse: PaginatedApiResponse = await fetch(`${config.api_base_url}/articles?topic=${topic_name}&sort=${sort}`, {
         method: 'GET'
     }).then(response => response.json());
 
-    const topic: Topic = await fetch(`http://localhost:8080/api/topics/${topic_name}`, {
+    const topic: Topic = await fetch(`${config.api_base_url}/topics/${topic_name}`, {
         method: 'GET'
     }).then(response => response.json()).then((response: ApiResponse) => response.data as Topic);
      

@@ -1,5 +1,6 @@
 import { ArticleBannerList } from "@/components";
 import { UserIcon } from "@/components/icons";
+import { config } from "@/config";
 import { ApiResponse, Article, PaginatedApiResponse, User } from "@/types";
 
 type Props = {
@@ -14,11 +15,11 @@ type Props = {
 const UserPage: React.FC<Props> = async (props) => {
     const {username} = props.params;
 
-    const user: User = await fetch(`http://localhost:8080/api/users/@${username}`, {
+    const user: User = await fetch(`${config.api_base_url}/users/@${username}`, {
         method: 'GET'
     }).then(response => response.json()).then((response: ApiResponse) => response.data as User);
 
-    const userArticles: Article[] = await fetch(`http://localhost:8080/api/articles?authorId=${user.id}`, {
+    const userArticles: Article[] = await fetch(`${config.api_base_url}/articles?authorId=${user.id}`, {
         method: 'GET'
     }).then(response => response.json()).then((response: PaginatedApiResponse) => response.data.content as Article[]);
 

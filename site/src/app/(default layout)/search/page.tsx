@@ -1,6 +1,7 @@
 'use client';
 
 import { ArticleBannerList } from "@/components";
+import { config } from "@/config";
 import { Article } from "@/types";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,7 +14,7 @@ const SearchPage: React.FC = () => {
     useEffect(() => {
         // TODO: check the bug on stale data on useEffects and page refresh
         const fetchSearchResults = () => {
-            fetch(`http://localhost:8080/api/search?query=${query}`)
+            fetch(`${config.api_base_url}/search?query=${query}`)
             .then(response => response.json())
             .then((articles: Article[]) => setSearchResults(articles));
         };

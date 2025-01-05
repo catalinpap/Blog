@@ -1,5 +1,6 @@
 'use client';
 
+import { config } from "@/config";
 import { PaginatedApiResponse, Topic } from "@/types";
 import { useEffect, useState } from "react";
 
@@ -8,7 +9,7 @@ export const TopicSelect = () => {
 
     useEffect(() => {
         const fetchTopics = async () => {
-            const topicsResponse: PaginatedApiResponse = await fetch('http://localhost:8080/api/topics', {
+            const topicsResponse: PaginatedApiResponse = await fetch(`${config.api_base_url}/topics`, {
                 method: 'GET'
             })
             .then(response => response.json());

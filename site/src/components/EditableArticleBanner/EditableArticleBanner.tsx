@@ -7,9 +7,10 @@ import { getCookie } from "@/utils/helpers";
 import { useContext } from "react";
 import { ArticlesContext, ArticlesContextType } from "@/context/articles-context/articles-context";
 import { TrashIcon, WriteIcon } from "../icons";
+import { config } from "@/config";
 
 const deleteArticle = async (articleId: number, articles: Article[], setArticles: (newArticles: Article[]) => void) => {
-    const response = await fetch(`http://localhost:8080/api/articles/${articleId}`, {
+    const response = await fetch(`${config.api_base_url}/articles/${articleId}`, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',

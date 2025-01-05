@@ -5,13 +5,14 @@ import { Dropdown } from "../common";
 import { ArrowDownIcon } from "../icons";
 import { PaginatedApiResponse, Topic } from "@/types";
 import Link from "next/link";
+import { config } from "@/config";
 
 export const TopicDropdown: React.FC = () => {
     const [topics, setTopics] = useState<Topic[]>([]);
 
     useEffect(() => {
         const fetchTopics = async() => {
-            const topics = await fetch('http://localhost:8080/api/topics', { method: 'GET' })
+            const topics = await fetch(`${config.api_base_url}/topics`, { method: 'GET' })
             .then(response => response.json())
             .then((response: PaginatedApiResponse) => response.data.content as Topic[]);
 

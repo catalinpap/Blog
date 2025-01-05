@@ -2,17 +2,18 @@
 
 import { extractArticle, getCookie } from "@/utils/helpers";
 import { ArticleForm } from "./components";
+import { config } from "@/config";
 
 const WritePage:React.FC = () => {
     const publishArticle = async (formData: FormData) => {
         const article = extractArticle(formData);
 
-        const response = await fetch('http://localhost:8080/api/articles', {
+        const response = await fetch(`${config.api_base_url}/articles`, {
             method: 'POST',
             body: JSON.stringify(article),
             headers: {
-                'content-type': 'application/json',
-                'authorization': `basic ${getCookie('authToken')}`
+                'Content-Type': 'application/json',
+                'Authorization': `basic ${getCookie('authToken')}`
             }
         });
 

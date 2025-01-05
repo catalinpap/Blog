@@ -7,6 +7,7 @@ import { ApiResponse, Article, PaginatedApiResponse } from "@/types";
 import { format_date, markdownToHTML } from "@/utils/helpers";
 import { ArticleInteractControls } from "@/components/common";
 import Link from "next/link";
+import { config } from "@/config";
 
 type Props = {
     params: {
@@ -22,13 +23,13 @@ const ArticlePage: React.FC<Props> = async (props) => {
 
     const article_id = article_url.split('-').pop();
 
-    const article: Article =  await fetch(`http://localhost:8080/api/articles/${article_id}`, {
+    const article: Article =  await fetch(`${config.api_base_url}/articles/${article_id}`, {
         method: 'GET',
     }).then(response => response.json()).then((content: ApiResponse) => content.data as Article);
 
     console.log(article.author);
 
-    const articlesFromThisAuthor: Article[] = await fetch(`http://localhost:8080/api/articles?authorId=${article.authorId}`, {
+    const articlesFromThisAuthor: Article[] = await fetch(`${config.api_base_url}/articles?authorId=${article.authorId}`, {
         method: 'GET'
     }).then(response => response.json()).then((paged: PaginatedApiResponse) => paged.data.content as Article[]);
 
@@ -106,7 +107,7 @@ const ArticlePage: React.FC<Props> = async (props) => {
 };
 
 export async function generateStaticParams() {
-    const response: PaginatedApiResponse = await fetch('http://localhost:8080/api/articles', 
+    const response: PaginatedApiResponse = await fetch(`${config.api_base_url}/articles`, 
         {method:'GET'}
     ).then((response) => response.json());
 

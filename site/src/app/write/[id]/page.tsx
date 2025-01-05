@@ -4,6 +4,7 @@ import { ApiResponse, Article } from "@/types";
 import { ArticleForm } from "../components";
 import { useEffect, useState } from "react";
 import { extractArticle, getCookie } from "@/utils/helpers";
+import { config } from "@/config";
 
 type Props = {
     params: {
@@ -22,7 +23,7 @@ const EditPage: React.FC<Props> = (props) => {
     
     useEffect(() => {
         const fetchArticle = async () => {
-            const response = await fetch(`http://localhost:8080/api/articles/${id}`);
+            const response = await fetch(`${config.api_base_url}/articles/${id}`);
             const responseData: ApiResponse = await response.json();
             const {data, message} = responseData;
             if (!response.ok) alert(message);
@@ -41,7 +42,7 @@ const EditPage: React.FC<Props> = (props) => {
             id: article.id,
         };
 
-        const response = await fetch('http://localhost:8080/api/articles', {
+        const response = await fetch(`${config.api_base_url}/articles`, {
             method: 'PUT',
             body: JSON.stringify(articleData),
             headers: {

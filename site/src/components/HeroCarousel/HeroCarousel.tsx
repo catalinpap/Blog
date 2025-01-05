@@ -30,7 +30,7 @@ const ArticleCarouselItem:React.FC<{
 
 export const HeroCarousel: React.FC<{className?: string}> = async ({className}) => {
 
-    const articles: Article[] = await fetch('http://localhost:8080/api/articles?page=0&size=5', {
+    const articles: Article[] = await fetch(`${config.api_base_url}/articles?page=0&size=5`, {
         method: 'GET'
     }).then(response => response.json()).then(res => res.data.content);
 

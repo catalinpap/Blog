@@ -1,6 +1,7 @@
 'use client';
 
 import { EditableField } from "@/components/common";
+import { config } from "@/config";
 import { useAuth } from "@/hooks";
 import { User } from "@/types";
 import { getCookie } from "@/utils/helpers";
@@ -12,7 +13,7 @@ const SettingsPage: React.FC = () => {
         if (!user) return;
     
         try {
-            const response = await fetch(`http://localhost:8080/api/users`, {
+            const response = await fetch(`${config.api_base_url}/users`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

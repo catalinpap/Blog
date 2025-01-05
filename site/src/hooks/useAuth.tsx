@@ -2,12 +2,13 @@ import { ApiResponse, User } from "@/types";
 import { eraseCookie, getCookie } from "../utils/helpers";
 import { useContext } from "react";
 import { UserContext, UserContextType } from "@/context/user-context/user-context";
+import { config } from "@/config";
 
 const getUser = async () => {
     const authToken = getCookie('authToken');
     if (!authToken) return null;
     
-    const response = await fetch('http://localhost:8080/api/me', {
+    const response = await fetch(`${config.api_base_url}/me`, {
         method: 'POST',
         headers: {
             'authorization': `basic ${authToken}`
@@ -27,7 +28,7 @@ export const useAuth = () => {
      * @throws Error
      */
     const login = async (payload: Object) => {
-        const loginResponse = await fetch('http://localhost:8080/api/login', {
+        const loginResponse = await fetch(`${config.api_base_url}/login`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -51,7 +52,7 @@ export const useAuth = () => {
      * @throws Error
      */
     const register = async (payload: Object) => {
-        const registerResponse = await fetch('http://localhost:8080/api/users', {
+        const registerResponse = await fetch(`${config.api_base_url}/users`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

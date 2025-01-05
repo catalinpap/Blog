@@ -1,5 +1,6 @@
 'use client';
 
+import { config } from "@/config";
 import { User } from "@/types";
 import { getCookie } from "@/utils/helpers";
 import { createContext, ReactNode, useEffect, useState } from "react";
@@ -8,7 +9,7 @@ const getUser = async () => {
     const authToken = getCookie('authToken');
     if (!authToken) return null;
     
-    const response = await fetch('http://localhost:8080/api/me', {
+    const response = await fetch(`${config.api_base_url}/me`, {
         method: 'POST',
         headers: {
             'authorization': `basic ${authToken}`

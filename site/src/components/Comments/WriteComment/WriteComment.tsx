@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { getCookie } from "@/utils/helpers";
 import { Comment } from "@/types";
+import { config } from "@/config";
 
 export const WriteComment:React.FC<{
     articleId: number, 
@@ -10,7 +11,7 @@ export const WriteComment:React.FC<{
     const [isAuth, setIsAuth] = useState(false);
 
     const getUser = async () => {
-        const user = await fetch('http://localhost:8080/api/me', {
+        const user = await fetch(`${config.api_base_url}/me`, {
             method: 'POST',
             headers: {
                 'authorization': `basic ${getCookie('authToken')}`
@@ -34,7 +35,7 @@ export const WriteComment:React.FC<{
             articleId: articleId
         };
 
-        const response = await fetch('http://localhost:8080/api/comments', {
+        const response = await fetch(`${config.api_base_url}/comments`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

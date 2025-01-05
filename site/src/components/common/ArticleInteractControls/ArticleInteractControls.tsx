@@ -1,13 +1,14 @@
 'use client';
 
 import { BookmarkFillIcon, BookmarkIcon, HeartEmptyIcon, HeartIcon, ShareIcon } from "@/components/icons";
+import { config } from "@/config";
 import { UserContext, UserContextType } from "@/context/user-context/user-context";
 import { getCookie } from "@/utils/helpers";
 import { MouseEvent, useContext, useEffect, useState } from "react";
 
 
 const postLike = async (articleId: number) => {
-    const response = await fetch(`http://localhost:8080/api/articles/${articleId}/like`, {
+    const response = await fetch(`${config.api_base_url}/articles/${articleId}/like`, {
         method: 'POST',
         headers: {
             'AUTHORIZATION': `BASIC ${getCookie('authToken')}`
@@ -18,7 +19,7 @@ const postLike = async (articleId: number) => {
 };
 
 const removeLike = async (articleId: number) => {
-    const response = await fetch(`http://localhost:8080/api/articles/${articleId}/like`, {
+    const response = await fetch(`${config.api_base_url}/articles/${articleId}/like`, {
         method: 'DELETE',
         headers: {
             'AUTHORIZATION': `BASIC ${getCookie('authToken')}`
@@ -29,7 +30,7 @@ const removeLike = async (articleId: number) => {
 };
 
 const postBookmark = async (articleId: number) => {
-    const response = await fetch(`http://localhost:8080/api/articles/${articleId}/bookmark`, {
+    const response = await fetch(`${config.api_base_url}/articles/${articleId}/bookmark`, {
         method: 'POST',
         headers: {
             'AUTHORIZATION': `BASIC ${getCookie('authToken')}`
@@ -40,7 +41,7 @@ const postBookmark = async (articleId: number) => {
 };
 
 const removeBookmark = async (articleId: number) => {
-    const response = await fetch(`http://localhost:8080/api/articles/${articleId}/bookmark`, {
+    const response = await fetch(`${config.api_base_url}/articles/${articleId}/bookmark`, {
         method: 'DELETE',
         headers: {
             'AUTHORIZATION': `BASIC ${getCookie('authToken')}`
@@ -63,7 +64,7 @@ export const ArticleInteractControls: React.FC<{articleId: number, size?: number
 
     useEffect(() => {
         const checkAlreadyLiked = async () => {
-            await fetch(`http://localhost:8080/api/articles/${articleId}/like/check`, {
+            await fetch(`${config.api_base_url}/articles/${articleId}/like/check`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `basic ${getCookie('authToken')}`
@@ -74,7 +75,7 @@ export const ArticleInteractControls: React.FC<{articleId: number, size?: number
         };
 
         const checkAlreadyBookmarked = async () => {
-            await fetch(`http://localhost:8080/api/articles/${articleId}/bookmark/check`, {
+            await fetch(`${config.api_base_url}/articles/${articleId}/bookmark/check`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `basic ${getCookie('authToken')}`

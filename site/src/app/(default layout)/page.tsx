@@ -1,8 +1,9 @@
 import { ArticleBannerList, CardGrid, HeroCarousel, FloatPanel, PopularTopics } from "@/components";
+import { config } from "@/config";
 import { Article, PaginatedApiResponse } from "@/types";
 
 const fetchArticles = async () => {
-  const res = await fetch('http://localhost:8080/api/articles', {
+  const res = await fetch(`${config.api_base_url}/articles`, {
     method: 'GET'
   });
   return res.json();
