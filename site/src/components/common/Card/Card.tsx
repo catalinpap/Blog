@@ -12,7 +12,7 @@ export const Card: React.FC<{data: Article}> = ({data}) => {
         <section className="w-full relative card-wrapper overflow-clip group">
             {/* <TopicTag href={data.topic} className="absolute top-3 right-3 z-10">{data.topic}</TopicTag> */}
             <Link href={`/article/${data.url}`} className="w-full">
-                <Image src={data.thumbnail || config.defaultThumbnail} 
+                <Image src={data.thumbnail || config.default_thumbnail} 
                     alt={data.title || "Article thumbnail image"}
                     width={960}
                     height={600}

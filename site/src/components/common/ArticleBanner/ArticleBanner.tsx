@@ -6,12 +6,13 @@ import { config } from "@/config";
 import { format_date } from "@/utils/helpers";
 
 export const ArticleBanner:React.FC<{data: Article}> = ({data}) => {
+    // console.log("----------", WebConfig.defaultThumbnail);
     return (
         <Link href={`/article/${data.url}`} className="w-full cursor-pointer p-2 flex flex-row gap-2 text-black hover:bg-light-gray/40">
           <Image
             src={
               data.thumbnail ||
-              config.defaultThumbnail}
+              config.default_thumbnail}
             alt=""
             width={4 * 70}
             height={3 * 70}

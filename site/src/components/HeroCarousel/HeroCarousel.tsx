@@ -39,9 +39,9 @@ export const HeroCarousel: React.FC<{className?: string}> = async ({className}) 
             {articles.map(article => 
                 <ArticleCarouselItem 
                     key={`carousel-article-${article.id}`}
-                    thumbnail={article.thumbnail || config.defaultThumbnail}
+                    thumbnail={article.thumbnail || config.default_thumbnail}
                     title={article.title}
-                    category={article.category}
+                    category={article.topic}
                     url={article.url}
                 />
             )}
