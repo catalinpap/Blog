@@ -2,29 +2,33 @@ version: '3.9'
 
 services:
   postgres:
-    image: postgres:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: postgres_container
     environment:
-      POSTGRES_DB: blog_db
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: blogpass
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - my_network
+
   pgadmin:
     image: dpage/pgadmin4
+    container_name: pgadmin_container
     environment:
-        PGADMIN_DEFAULT_EMAIL: 'admin@blog.com'
-        PGADMIN_DEFAULT_PASSWORD: 'admin'
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
     ports:
-        - 16543:80
+      - "16543:80"
     volumes:
-        - ./servers.json:/pgadmin4/servers.json
+      - ./servers.json:/pgadmin4/servers.json
     networks:
-        - my_network
+      - my_network
 
 volumes:
   postgres_data:
